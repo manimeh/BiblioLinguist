@@ -1,27 +1,69 @@
 @startuml
-'https://plantuml.com/class-diagram
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+interface ReadingFactory
+{
++create(language: Language): Reading
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+interface DifficultyReadingFactory
+{
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel, numOfTries: Integer): Optional<Reading>
++{static} getReadingDifficulty(language: Language, reading: Reading): Double
 }
 
+class NewsReadingFactory
+{
+-newsRetriever: NewsRetrieverInterface
+
++setNewsRetriever(newsRetrieverInterface: NewsRetrieverInterface): void
++getNewsRetriever(): NewsRetrieverInterface
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel, numOfTries: Integer): Optional<Reading>
+}
+
+class WikiArticleReadingFactory
+{
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel, numOfTries: Integer): Optional<Reading>
+}
+
+class AIGeneratedStoryReadingFactory
+{
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel, numOfTries: Integer): Optional<Reading>
+}
+
+interface Reading
+{
++display(): ReadingDisplay
+}
+
+enum DifficultyLevel
+{
+BEGINNER
+INTERMEDIATE
+ADVANCED
+
+DifficultyLevel(name: String, minReadRange: Integer, maxReadRange: Integer)
+}
+
+enum Language
+{
+ENGLISH
+FRENCH
+SPANISH
+GERMAN
+
+Language(name: String, code: String, syllableCalculator: SyllableCalculator)
+}
+
+ReadingFactory <|-- DifficultyReadingFactory
+DifficultyReadingFactory <|.. NewsReadingFactory
+DifficultyReadingFactory <|.. WikiArticleReadingFactory
+DifficultyReadingFactory <|.. AIGeneratedStoryReadingFactory
+
+DifficultyLevel <.. DifficultyReadingFactory: <<uses as param>>
+Language <.. ReadingFactory: <<uses as param>>
+
+Reading <.. ReadingFactory: <<creates>>
 @enduml
