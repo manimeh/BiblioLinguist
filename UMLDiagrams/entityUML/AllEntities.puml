@@ -1,27 +1,198 @@
 @startuml
-'https://plantuml.com/class-diagram
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+interface Reading
+{
++display(): ReadingDisplay
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class News
+{
+-title: String
+-text: String
+-author: String
+
++display(): ReadingDisplay
++calculateDifficulty(): DifficultyLevel
 }
 
+class AIGeneratedStory
+{
+-title: String
+-text: String
+
++display(): ReadingDisplay
++calculateDifficulty(): DifficultyLevel
+}
+
+class WikiArticle
+{
+-title: String
+-extract: String
+
++display(): ReadingDisplay
++calculateDifficulty(): DifficultyLevel
+}
+
+class ReadingDisplay
+{
+-title: String
+-text: String
+-author: String
+
++getTitle(): String
++getText(): String
++getAuthor(): String
+}
+
+interface ReadingFactory
+{
++create(language: Language): Reading
+}
+
+interface DifficultyReadingFactory
+{
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel): Optional<Reading>
++{static} getReadingDifficulty(language: Language, reading: Reading): Double
+}
+
+class NewsReadingFactory
+{
+-newsRetriever: NewsRetrieverInterface
+
++setNewsRetriever(newsRetrieverInterface: NewsRetrieverInterface): void
++getNewsRetriever(): NewsRetrieverInterface
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel, numOfTries: Integer): Optional<Reading>
+}
+
+class WikiArticleReadingFactory
+{
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel): Optional<Reading>
+}
+
+class AIGeneratedStoryReadingFactory
+{
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel): Optional<Reading>
+}
+
+interface QuizFactory
+{
++create(reading: Reading, difficulty: DifficultyLevel, language: Language, numOfQuestions: Integer): QuizInterface
+}
+
+class MultipleChoiceQuizFactory
+{
++create(reading: Reading, difficulty: DifficultyLevel, language: Language, numOfQuestions: Integer): QuizInterface
+}
+
+interface QuizInterface
+{
++getScore(): Integer
++display(): QuizDisplay
++update(question: Integer, answer: Integer): void
++submit(): void
+}
+
+class MultipleChoiceQuiz
+{
+-questions: MultipleChoiceQuestion[]
+-score: Integer
+
++getScore(): Integer
++display(): QuizDisplay
++update(question: Integer, answer: Integer): void
++submit(): void
+}
+
+class QuizDisplay
+{
+-questions: String[]
+-choices: String[[]]
+
++getQuestions(): String[]
++getChoices(): String[[]]
+}
+
+class MultipleChoiceQuestion
+{
+-query: String
+-choices: String[]
+-answer: Integer
+-explanation: String
+
++getQuery(): String
++getChoices(): String[]
++getAnswer(): String
++getExplanation(): String
+}
+
+class User
+{
+-id: Integer
+-name: String
+-scores: Integer[[]]
+
++getId(): Integer
++getName(): String
++getAvgScores(): Float[]
+}
+
+enum DifficultyLevel
+{
+BEGINNER
+INTERMEDIATE
+ADVANCED
+
+DifficultyLevel(name: String, minReadRange: Integer, maxReadRange: Integer)
+}
+
+enum Language
+{
+ENGLISH
+FRENCH
+SPANISH
+GERMAN
+
+Language(name: String, code: String, syllableCalculator: SyllableCalculator)
+}
+
+interface SyllableCalculator
+{
++calculate(word: String): Integer
+}
+
+class LatinSyllableCalculator
+{
++calculate(word: String): Integer
+}
+
+SyllableCalculator <|.. LatinSyllableCalculator
+SyllableCalculator <.. Language: <<uses as param>>
+
+Reading <|.. News
+Reading <|.. WikiArticle
+Reading <|.. AIGeneratedStory
+
+ReadingDisplay <.. Reading: <<creates>>
+DifficultyLevel <.. Reading: <<creates>>
+
+ReadingFactory <|-- DifficultyReadingFactory
+DifficultyReadingFactory <|.. NewsReadingFactory
+DifficultyReadingFactory <|.. WikiArticleReadingFactory
+DifficultyReadingFactory <|.. AIGeneratedStoryReadingFactory
+
+Reading <.. ReadingFactory: <<creates>>
+DifficultyLevel <.. DifficultyReadingFactory: <<uses as param>>
+Language <.. ReadingFactory: <<uses as param>>
+
+QuizFactory <|.. MultipleChoiceQuizFactory
+QuizInterface <.. QuizFactory: <<creates>>
+DifficultyLevel <.. QuizFactory: <<uses as param>>
+Language <.. QuizFactory: <<uses as param>>
+
+QuizInterface <|.. MultipleChoiceQuiz
+MultipleChoiceQuiz *-- MultipleChoiceQuestion: private\nclass
+QuizDisplay <.. QuizInterface: <<creates>>
 @enduml

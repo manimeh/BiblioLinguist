@@ -1,27 +1,46 @@
 @startuml
-'https://plantuml.com/class-diagram
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+interface QuizInterface
+{
++getScore(): Integer
++display(): void
++update(question: Integer, answer: Integer): void
++submit(): void
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class MultipleChoiceQuiz
+{
+-questions: MultipleChoiceQuestion[]
+-score: Integer
+
++getScore(): Integer
++display(): void
++update(question: Integer, answer: Integer): void
++submit(): void
 }
 
+class MultipleChoiceQuestion
+{
+-query: String
+-choices: String[]
+-answer: Integer
+-explanation: String
+
++getQuery(): String
++getChoices(): String[]
++getAnswer(): String
++getExplanation(): String
+}
+
+class QuizDisplay
+{
+-questions: String[]
+-choices: String[[]]
+
++getQuestions(): String[]
++getChoices(): String[[]]
+}
+
+QuizDisplay <.. QuizInterface: <<creates>>
+QuizInterface <|.. MultipleChoiceQuiz
+MultipleChoiceQuiz *-- MultipleChoiceQuestion: private\nclass
 @enduml
