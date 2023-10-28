@@ -5,5 +5,5 @@ public interface QuizInterface
     ActiveQuizDisplay activeDisplay();
     SubmittedQuizDisplay submittedDisplay();
     void update(int questionNum, int answerNum);
-    void submit();
+    void submit() throws IncompleteQuizSubmissionException;
 }

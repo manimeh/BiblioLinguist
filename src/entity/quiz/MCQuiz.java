@@ -1,17 +1,14 @@
 package entity.quiz;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.IntFunction;
-import java.util.stream.Collectors;
 
 public class MCQuiz implements QuizInterface
 {
     private boolean submitted = false;
     private MCQuestion[] questions;
-    private int score;
+    private int score = 0;
 
     @Override
     public ActiveQuizDisplay activeDisplay() {
@@ -59,7 +56,12 @@ public class MCQuiz implements QuizInterface
     }
 
     @Override
-    public void submit() {
+    public void submit() throws IncompleteQuizSubmissionException {
+        for (MCQuestion question : questions)
+        {
+            if (question.getChosenChoice() == null) throw new IncompleteQuizSubmissionException();
+        }
+
         submitted = true;
     }
 
