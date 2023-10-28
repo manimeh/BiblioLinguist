@@ -59,7 +59,7 @@ public class MCQuiz implements QuizInterface
     public void submit() throws IncompleteQuizSubmissionException {
         for (MCQuestion question : questions)
         {
-            if (question.getChosenChoice() == null) throw new IncompleteQuizSubmissionException();
+            if (!question.isAnswered()) throw new IncompleteQuizSubmissionException();
         }
 
         submitted = true;
@@ -100,6 +100,11 @@ public class MCQuiz implements QuizInterface
 
         public void setChosenChoice(Integer chosenChoice) {
             this.chosenChoice = chosenChoice;
+        }
+
+        public boolean isAnswered()
+        {
+            return chosenChoice != null;
         }
     }
 }
