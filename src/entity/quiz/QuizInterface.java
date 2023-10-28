@@ -2,8 +2,8 @@ package entity.quiz;
 
 public interface QuizInterface
 {
-    int getScore();
-    QuizDisplay display();
+    ActiveQuizDisplay activeDisplay();
+    SubmittedQuizDisplay submittedDisplay();
     void update(int questionNum, int answerNum);
     void submit();
 }
