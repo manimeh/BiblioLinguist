@@ -5,7 +5,7 @@ import data_access.APIAccessors.WorldNewsRetriever;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;
-import entity.quiz.QuizDisplay;
+import entity.quiz.ActiveQuizDisplay;
 import entity.quiz.factory.MCQuizFactory;
 import entity.reading.News;
 import entity.reading.Reading;
@@ -18,8 +18,8 @@ public class Demo
 {
     public static void main(String[] args) {
         NewsReadingFactory newsFactory = new NewsReadingFactory(new WorldNewsRetriever());
-        Optional<Reading> newsOptional = newsFactory.create(Language.FRENCH, DifficultyLevel.BEGINNER);
-        News news = null;
+        Optional<Reading> newsOptional = newsFactory.create(Language.SPANISH, DifficultyLevel.INTERMEDIATE);
+        News news;
 
         if (newsOptional.isPresent())
         {
@@ -33,7 +33,7 @@ public class Demo
 
             MCQuizFactory quizFactory = new MCQuizFactory(new NovaAIMCQuizRetriever());
             MCQuiz quiz = (MCQuiz) quizFactory.create(news, DifficultyLevel.BEGINNER, Language.ENGLISH, 5);
-            QuizDisplay quizDisplay = quiz.display();
+            ActiveQuizDisplay quizDisplay = quiz.activeDisplay();
 
             for(int i = 0; i < quizDisplay.questions().length; i++)
             {
