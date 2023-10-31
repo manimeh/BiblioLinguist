@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface DifficultyReadingFactory extends ReadingFactory
 {
-    Optional<Reading> create(Language language, DifficultyLevel difficulty);
+    Optional<? extends Reading> create(Language language, DifficultyLevel difficulty);
 
     static double getReadingDifficulty(Language language, Reading reading)
     {
