@@ -20,7 +20,7 @@ public class NewsReadingFactory implements DifficultyReadingFactory
     }
 
     @Override
-    public Optional<Reading> create(Language language, DifficultyLevel difficulty)
+    public Optional<News> create(Language language, DifficultyLevel difficulty)
     {
         News[] allNewsList = newsRetriever.getNewsFromAPI(language, NUM_OF_TRIES);
         News suitableNews = null;
@@ -51,7 +51,7 @@ public class NewsReadingFactory implements DifficultyReadingFactory
     }
 
     @Override
-    public Reading create(Language language)
+    public News create(Language language)
     {
         return newsRetriever.getNewsFromAPI(language, 1)[0];
     }

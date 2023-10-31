@@ -18,7 +18,7 @@ public class Demo
 {
     public static void main(String[] args) {
         NewsReadingFactory newsFactory = new NewsReadingFactory(new WorldNewsRetriever());
-        Optional<Reading> newsOptional = newsFactory.create(Language.SPANISH, DifficultyLevel.INTERMEDIATE);
+        Optional<News> newsOptional = newsFactory.create(Language.SPANISH, DifficultyLevel.INTERMEDIATE);
         News news;
 
         if (newsOptional.isPresent())
