@@ -56,13 +56,15 @@ public class MCQuiz implements QuizInterface
     }
 
     @Override
-    public void submit() throws IncompleteQuizSubmissionException {
+    public boolean submit()
+    {
         for (MCQuestion question : questions)
         {
-            if (!question.isAnswered()) throw new IncompleteQuizSubmissionException();
+            if (!question.isAnswered()) return false;
         }
 
         submitted = true;
+        return true;
     }
 
     private <T> T[] getQuestionsArray(Function<MCQuestion, T> questionTFunction, IntFunction<T[]> arrayConstructor)
