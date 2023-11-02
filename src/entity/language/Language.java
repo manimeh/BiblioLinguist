@@ -9,9 +9,9 @@ public enum Language
 
     private final String name;
     private final String code;
-    private final SyllableCalculator syllableCalculator;
+    private final SyllableCalculatorInterface syllableCalculator;
 
-    Language(String name, String code, SyllableCalculator syllableCalculator) {
+    Language(String name, String code, SyllableCalculatorInterface syllableCalculator) {
         this.name = name;
         this.code = code;
         this.syllableCalculator = syllableCalculator;
@@ -25,7 +25,7 @@ public enum Language
         return code;
     }
 
-    public SyllableCalculator getSyllableCalculator() {
+    public SyllableCalculatorInterface getSyllableCalculator() {
         return syllableCalculator;
     }
 }

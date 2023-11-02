@@ -1,6 +1,6 @@
 package entity.language;
 
-public interface SyllableCalculator
+public interface SyllableCalculatorInterface
 {
     int calculate(String word);
 }

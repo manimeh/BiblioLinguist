@@ -3,7 +3,7 @@ package entity.language;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LatinSyllableCalculator implements SyllableCalculator
+public class LatinSyllableCalculator implements SyllableCalculatorInterface
 {
     @Override
     public int calculate(String word)

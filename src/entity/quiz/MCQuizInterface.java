@@ -1,6 +1,6 @@
 package entity.quiz;
 
-public interface QuizInterface
+public interface MCQuizInterface
 {
     /**
      * Creates and returns an ActiveQuizDisplay representation of this quiz if the quiz has not been submitted.

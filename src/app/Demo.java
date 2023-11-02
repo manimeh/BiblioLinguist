@@ -1,29 +1,26 @@
 package app;
 
-import data_access.APIAccessors.NovaAIMCQuizRetriever;
-import data_access.APIAccessors.WorldNewsRetriever;
+import data_access.APIAccessors.NovaAIRetriever;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;
 import entity.quiz.ActiveQuizDisplay;
 import entity.quiz.factory.MCQuizFactory;
-import entity.reading.News;
 import entity.reading.Reading;
 import entity.reading.ReadingDisplay;
-import entity.reading.factory.NewsReadingFactory;
+import entity.reading.ReadingType;
 
 import java.util.Optional;
 
 public class Demo
 {
     public static void main(String[] args) {
-        NewsReadingFactory newsFactory = new NewsReadingFactory(new WorldNewsRetriever());
-        Optional<News> newsOptional = newsFactory.create(Language.SPANISH, DifficultyLevel.INTERMEDIATE);
-        News news;
+        Optional<? extends Reading> newsOptional = ReadingType.NEWS.getDefaultReadingFactory().create(Language.FRENCH, DifficultyLevel.INTERMEDIATE);
+        Reading news;
 
         if (newsOptional.isPresent())
         {
-            news = (News) newsOptional.get();
+            news = newsOptional.get();
 
             ReadingDisplay newsDisplay = news.display();
             System.out.println("Title: " + newsDisplay.title() + "\nAuthor: " + newsDisplay.author() + "\n"
@@ -31,8 +28,8 @@ public class Demo
 
             System.out.println("\n");
 
-            MCQuizFactory quizFactory = new MCQuizFactory(new NovaAIMCQuizRetriever());
-            MCQuiz quiz = (MCQuiz) quizFactory.create(news, DifficultyLevel.BEGINNER, Language.ENGLISH, 5);
+            MCQuizFactory quizFactory = new MCQuizFactory(new NovaAIRetriever());
+            MCQuiz quiz = quizFactory.create(news, DifficultyLevel.BEGINNER, Language.ENGLISH, 5);
             ActiveQuizDisplay quizDisplay = quiz.activeDisplay();
 
             for(int i = 0; i < quizDisplay.questions().length; i++)

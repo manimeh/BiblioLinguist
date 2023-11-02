@@ -1,0 +1,59 @@
+@startuml
+class NewGameMenuView{}
+
+abstract ViewModel{}
+class NewGameMenuViewModel{}
+class NemGameMenuState{}
+class GameViewModel{}
+class GameState{}
+
+class GenerateReadingController{}
+
+class GenerateReadingInputData{}
+
+interface GenerateReadingInputBoundary{}
+
+class GenerateReadingInteractor{}
+
+class GenerateReadingOutputData{}
+
+interface GenerateReadingOutputBoundary{}
+
+class GenerateReadingPresenter{}
+
+interface ReadingRetrieverInterface{}
+
+interface GenerateReadingDataAccessInterface{}
+
+class ReadingEntities{}
+
+ViewModel <|-- NewGameMenuViewModel
+ViewModel <|-- GameViewModel
+NewGameMenuViewModel *-- NemGameMenuState
+GameViewModel *-- GameState
+
+NewGameMenuView o-- NewGameMenuViewModel
+NewGameMenuView o-- GenerateReadingController
+
+GenerateReadingController o-- GenerateReadingInputBoundary
+
+GenerateReadingController ..> GenerateReadingInputData
+
+GenerateReadingInputBoundary <|.. GenerateReadingInteractor
+
+GenerateReadingInteractor ..> GenerateReadingInputData
+GenerateReadingInteractor ..> GenerateReadingOutputData
+GenerateReadingInteractor ..> ReadingEntities
+
+GenerateReadingInteractor o-- GenerateReadingOutputBoundary
+GenerateReadingInteractor o-- GenerateReadingDataAccessInterface
+
+ReadingRetrieverInterface <|-- GenerateReadingDataAccessInterface
+
+GenerateReadingOutputBoundary <|.. GenerateReadingPresenter
+
+GenerateReadingPresenter ..> GenerateReadingOutputData
+
+GenerateReadingPresenter o-- NewGameMenuViewModel
+GenerateReadingPresenter o-- GameViewModel
+@enduml

@@ -16,7 +16,7 @@ public class WorldNewsRetriever implements NewsRetrieverInterface
     private static final String NEWS_API_TOKEN = System.getenv("NEWS_API_TOKEN");
 
     @Override
-    public News[] getNewsFromAPI(Language language, int numOfNews) {
+    public News[] getNewsListFromAPI(Language language, int numOfNews) {
         Gson gson = new Gson();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("https://api.worldnewsapi.com/search-news?number=%s" +
@@ -35,5 +35,11 @@ public class WorldNewsRetriever implements NewsRetrieverInterface
         {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public News getReadingFromAPI(Language language)
+    {
+        return getNewsListFromAPI(language, 1)[0];
     }
 }
