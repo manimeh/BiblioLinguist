@@ -1,7 +1,5 @@
 package entity.reading;
 
-import java.util.Arrays;
-
 public interface Reading
 {
     int IDEAL_WORD_COUNT = 120;

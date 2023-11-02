@@ -1,10 +1,8 @@
 package entity.reading.factory;
 
-import data_access.APIAccessors.APIResponseRetriever;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.AIGeneratedStory;
-import entity.reading.Reading;
 
 import java.util.Optional;
 
