@@ -4,10 +4,9 @@ import data_access.APIAccessors.MCQuizRetrieverInterface;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;
-import entity.quiz.QuizInterface;
 import entity.reading.Reading;
 
-public class MCQuizFactory implements QuizFactory
+public class MCQuizFactory implements MCQuizFactoryInterface
 {
     private final MCQuizRetrieverInterface quizRetriever;
 

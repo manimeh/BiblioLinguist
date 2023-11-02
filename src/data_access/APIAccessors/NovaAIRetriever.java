@@ -15,7 +15,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class NovaAIMCQuizRetriever implements MCQuizRetrieverInterface
+public class NovaAIRetriever implements MCQuizRetrieverInterface
 {
     private static final String NOVA_API_TOKEN = System.getenv("NOVA_API_TOKEN");
 

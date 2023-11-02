@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
-public class MCQuiz implements QuizInterface
+public class MCQuiz implements MCQuizInterface
 {
     private boolean submitted = false;
     private MCQuestion[] questions;

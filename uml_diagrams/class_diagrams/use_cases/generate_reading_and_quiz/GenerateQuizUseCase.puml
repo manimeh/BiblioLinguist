@@ -1,0 +1,59 @@
+@startuml
+class NewGameMenuView{}
+
+abstract ViewModel{}
+class NewGameMenuViewModel{}
+class NemGameMenuState{}
+class GameViewModel{}
+class GameState{}
+
+class GenerateQuizController{}
+
+class GenerateQuizInputData{}
+
+interface GenerateQuizInputBoundary{}
+
+class GenerateQuizInteractor{}
+
+class GenerateQuizOutputData{}
+
+interface GenerateQuizOutputBoundary{}
+
+class GenerateQuizPresenter{}
+
+interface MCQuizRetrieverInterface{}
+
+interface GenerateQuizDataAccessInterface{}
+
+class QuizEntities{}
+
+ViewModel <|-- NewGameMenuViewModel
+ViewModel <|-- GameViewModel
+NewGameMenuViewModel *-- NemGameMenuState
+GameViewModel *-- GameState
+
+NewGameMenuView o-- NewGameMenuViewModel
+NewGameMenuView o-- GenerateQuizController
+
+GenerateQuizController o-- GenerateQuizInputBoundary
+
+GenerateQuizController ..> GenerateQuizInputData
+
+GenerateQuizInputBoundary <|.. GenerateQuizInteractor
+
+GenerateQuizInteractor ..> GenerateQuizInputData
+GenerateQuizInteractor ..> GenerateQuizOutputData
+GenerateQuizInteractor ..> QuizEntities
+
+GenerateQuizInteractor o-- GenerateQuizOutputBoundary
+GenerateQuizInteractor o-- GenerateQuizDataAccessInterface
+
+MCQuizRetrieverInterface <|-- GenerateQuizDataAccessInterface
+
+GenerateQuizOutputBoundary <|.. GenerateQuizPresenter
+
+GenerateQuizPresenter ..> GenerateQuizOutputData
+
+GenerateQuizPresenter o-- NewGameMenuViewModel
+GenerateQuizPresenter o-- GameViewModel
+@enduml

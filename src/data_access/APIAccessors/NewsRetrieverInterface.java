@@ -3,7 +3,9 @@ package data_access.APIAccessors;
 import entity.language.Language;
 import entity.reading.News;
 
-public interface NewsRetrieverInterface extends APIResponseRetriever
+public interface NewsRetrieverInterface extends ReadingRetrieverInterface
 {
-    News[] getNewsFromAPI(Language language, int numOfNews);
+    @Override
+    News getReadingFromAPI(Language language);
+    News[] getNewsListFromAPI(Language language, int numOfNews);
 }

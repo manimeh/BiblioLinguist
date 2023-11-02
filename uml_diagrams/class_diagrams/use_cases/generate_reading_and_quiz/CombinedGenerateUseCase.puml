@@ -1,0 +1,83 @@
+@startuml
+class NewGameMenuView{}
+
+abstract ViewModel{}
+class NewGameMenuViewModel{}
+class NemGameMenuState{}
+class GameViewModel{}
+class GameState{}
+
+class GenerateReadingController{}
+class GenerateQuizController{}
+
+class GenerateReadingInputData{}
+class GenerateQuizInputData{}
+
+interface GenerateReadingInputBoundary{}
+interface GenerateQuizInputBoundary{}
+
+class GenerateReadingInteractor{}
+class GenerateQuizInteractor{}
+
+class GenerateReadingOutputData{}
+class GenerateQuizOutputData{}
+
+interface GenerateReadingOutputBoundary{}
+interface GenerateQuizOutputBoundary{}
+
+class GenerateQuizPresenter{}
+class GenerateReadingPresenter{}
+
+interface ReadingRetrieverInterface{}
+interface MCQuizRetrieverInterface{}
+
+interface GenerateQuizDataAccessInterface{}
+interface GenerateReadingDataAccessInterface{}
+
+class ReadingEntities{}
+class QuizEntities{}
+
+ViewModel <|-- NewGameMenuViewModel
+ViewModel <|-- GameViewModel
+NewGameMenuViewModel *-- NemGameMenuState
+GameViewModel *-- GameState
+
+NewGameMenuView o-- NewGameMenuViewModel
+NewGameMenuView o-- GenerateReadingController
+NewGameMenuView o-- GenerateQuizController
+
+GenerateReadingController o-- GenerateReadingInputBoundary
+GenerateQuizController o-- GenerateQuizInputBoundary
+
+GenerateReadingController ..> GenerateReadingInputData
+GenerateQuizController ..> GenerateQuizInputData
+
+GenerateReadingInputBoundary <|.. GenerateReadingInteractor
+GenerateQuizInputBoundary <|.. GenerateQuizInteractor
+
+GenerateReadingInteractor ..> GenerateReadingInputData
+GenerateQuizInteractor ..> GenerateQuizInputData
+GenerateReadingInteractor ..> GenerateReadingOutputData
+GenerateQuizInteractor ..> GenerateQuizOutputData
+GenerateReadingInteractor ..> ReadingEntities
+GenerateQuizInteractor ..> QuizEntities
+
+GenerateReadingInteractor o-- GenerateReadingOutputBoundary
+GenerateQuizInteractor o-- GenerateQuizOutputBoundary
+GenerateReadingInteractor o-- GenerateReadingDataAccessInterface
+GenerateQuizInteractor o-- GenerateQuizDataAccessInterface
+
+ReadingRetrieverInterface <|-- GenerateReadingDataAccessInterface
+MCQuizRetrieverInterface <|-- GenerateQuizDataAccessInterface
+
+GenerateReadingOutputBoundary <|.. GenerateReadingPresenter
+GenerateQuizOutputBoundary <|.. GenerateQuizPresenter
+
+GenerateReadingPresenter ..> GenerateReadingOutputData
+GenerateQuizPresenter ..> GenerateQuizOutputData
+
+GenerateReadingPresenter o-- NewGameMenuViewModel
+GenerateQuizPresenter o-- NewGameMenuViewModel
+GenerateReadingPresenter o-- GameViewModel
+GenerateQuizPresenter o-- GameViewModel
+@enduml
