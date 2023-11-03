@@ -1,12 +1,13 @@
 package data_access.APIAccessors;
 
-import com.google.gson.Gson;
+import data_access.APIAccessors.api_json_classes.AIStoryResponse;
 import data_access.APIAccessors.api_json_classes.ChatMessage;
 import data_access.APIAccessors.api_json_classes.ChatRequest;
 import data_access.APIAccessors.api_json_classes.ChatResponse;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;
+import entity.reading.AIGeneratedStory;
 import entity.reading.Reading;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class NovaAIRetriever implements MCQuizRetrieverInterface
+public class NovaAIRetriever implements MCQuizRetrieverInterface, AIGeneratedStoryRetriever
 {
     private static final String NOVA_API_TOKEN = System.getenv("NOVA_API_TOKEN");
 
@@ -32,7 +33,40 @@ public class NovaAIRetriever implements MCQuizRetrieverInterface
                 "number of the correct choice", numOfQuestions.toString(), reading.display().text(),
                 difficulty.getName(), language.getName());
 
-        Gson gson = new Gson();
+        ChatResponse chatAnswer = getAIAnswer(prompt);
+        return gson.fromJson(chatAnswer.getChoices()[0].getMessage().getContent(), MCQuiz.class);
+    }
+
+    @Override
+    public AIGeneratedStory retrieveReadingFromAPI(Language language)
+    {
+        return retrieveReadingFromAPI(language, DifficultyLevel.INTERMEDIATE);
+    }
+
+    @Override
+    public AIGeneratedStory retrieveReadingFromAPI(Language language, DifficultyLevel difficulty)
+    {
+        return retrieveListOfStoriesFromAPI(language, difficulty, 1)[0];
+    }
+
+    @Override
+    public AIGeneratedStory[] retrieveListOfStoriesFromAPI(Language language, DifficultyLevel difficulty, Integer numOfStories)
+    {
+        AIGeneratedStory.setAiBot("Nova oss");
+        String prompt = String.format("Give me %s short stories written in %s. The stories should be at %s reading level. " +
+                        "The word count of the stories should be roughly around %s words. The plot of the stories should " +
+                        "be entertaining. Return your answer entirely in the form of a JSON object. The JSON object should " +
+                        "have a key named 'stories' which is an array of stories. Each story should include a text and a " +
+                        "title. Don't include anything other than the JSON. The JSON properties of each story should be " +
+                        "'text' and 'title'", numOfStories.toString(), language.getName(), difficulty.getName(),
+                Reading.IDEAL_WORD_COUNT);
+
+        ChatResponse chatAnswer = getAIAnswer(prompt);
+        return gson.fromJson(chatAnswer.getChoices()[0].getMessage().getContent(), AIStoryResponse.class).getStories();
+    }
+
+    private ChatResponse getAIAnswer(String prompt)
+    {
         ChatRequest chatRequest = new ChatRequest();
         ChatMessage chatMessage = new ChatMessage();
 
@@ -50,13 +84,11 @@ public class NovaAIRetriever implements MCQuizRetrieverInterface
                 .build();
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response;
-        ChatResponse chatAnswer;
 
         try
         {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            chatAnswer = gson.fromJson(response.body(), ChatResponse.class);
-            return gson.fromJson(chatAnswer.getChoices()[0].getMessage().getContent(), MCQuiz.class);
+            return gson.fromJson(response.body(), ChatResponse.class);
         }
         catch (IOException | InterruptedException e)
         {

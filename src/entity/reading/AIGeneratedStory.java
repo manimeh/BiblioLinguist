@@ -2,12 +2,12 @@ package entity.reading;
 
 public class AIGeneratedStory implements Reading
 {
-    private String aiBot = "AIBot";
+    private static String aiBot = "AIBot";
     private String text;
     private String title;
 
-    public void setAiBot(String aiBot) {
-        this.aiBot = aiBot;
+    public static void setAiBot(String aiBot) {
+        AIGeneratedStory.aiBot = aiBot;
     }
 
     @Override
