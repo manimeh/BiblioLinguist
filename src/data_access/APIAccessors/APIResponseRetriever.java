@@ -1,3 +1,8 @@
 package data_access.APIAccessors;
 
-public interface APIResponseRetriever {}
+import com.google.gson.Gson;
+
+public interface APIResponseRetriever
+{
+    Gson gson = new Gson();
+}

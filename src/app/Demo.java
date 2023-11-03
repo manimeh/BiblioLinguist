@@ -1,6 +1,7 @@
 package app;
 
 import data_access.APIAccessors.NovaAIRetriever;
+import data_access.APIAccessors.ReadingFactoryBuilder;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;
@@ -14,22 +15,26 @@ import java.util.Optional;
 
 public class Demo
 {
-    public static void main(String[] args) {
-        Optional<? extends Reading> newsOptional = ReadingType.NEWS.getDefaultReadingFactory().create(Language.FRENCH, DifficultyLevel.INTERMEDIATE);
-        Reading news;
+    public static void main(String[] args)
+    {
+        ReadingType readingType = ReadingType.AI_GENERATED_STORY;
 
-        if (newsOptional.isPresent())
+        Optional<? extends Reading> readingOptional = new ReadingFactoryBuilder().getReadingFactory(readingType).
+                create(Language.ENGLISH, DifficultyLevel.ADVANCED);
+        Reading reading;
+
+        if (readingOptional.isPresent())
         {
-            news = newsOptional.get();
+            reading = readingOptional.get();
 
-            ReadingDisplay newsDisplay = news.display();
+            ReadingDisplay newsDisplay = reading.display();
             System.out.println("Title: " + newsDisplay.title() + "\nAuthor: " + newsDisplay.author() + "\n"
                     + "\n" + newsDisplay.text());
 
             System.out.println("\n");
 
             MCQuizFactory quizFactory = new MCQuizFactory(new NovaAIRetriever());
-            MCQuiz quiz = quizFactory.create(news, DifficultyLevel.BEGINNER, Language.ENGLISH, 5);
+            MCQuiz quiz = quizFactory.create(reading, DifficultyLevel.BEGINNER, Language.ENGLISH, 5);
             ActiveQuizDisplay quizDisplay = quiz.activeDisplay();
 
             for(int i = 0; i < quizDisplay.questions().length; i++)
@@ -44,7 +49,7 @@ public class Demo
         }
         else
         {
-            System.out.println("News of that difficult was not found!");
+            System.out.println("Reading of that difficulty was not found!");
         }
     }
 }
