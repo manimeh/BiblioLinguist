@@ -1,24 +1,24 @@
-package interface_adapter.view_scores;
+package interface_adapter.take_quiz;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class ScoresViewModel extends ViewModel {
-    private ScoresState state = new ScoresState();
+public class TakeQuizViewModel extends ViewModel {
+    private TakeQuizState state = new TakeQuizState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public ScoresViewModel() {
-        super("scores");
+    public TakeQuizViewModel() {
+        super("quiz");
     }
 
-    public ScoresState getState() {
+    public TakeQuizState getState() {
         return this.state;
     }
 
-    public void setState(ScoresState scoresState) {
-        this.state = scoresState;
+    public void setState(TakeQuizState quizState) {
+        this.state = quizState;
     }
 
     @Override

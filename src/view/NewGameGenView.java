@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class TitlePageView extends JPanel implements ActionListener, PropertyChangeListener {
+public class NewGameGenView extends JPanel implements ActionListener, PropertyChangeListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
