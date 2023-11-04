@@ -1,4 +1,4 @@
 package use_case.generate_quiz;
 
-public class GenQuizOutputData {
+public record GenQuizOutputData() {
 }
