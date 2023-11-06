@@ -6,14 +6,15 @@ import use_case.generate_reading.GenReadingOutputData;
 
 public class GenReadingPresenter implements GenReadingOutputBoundary {
     private final GenReadingViewModel genReadingViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
+
     public GenReadingPresenter(ViewManagerModel viewManagerModel, GenReadingViewModel genReadingViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.genReadingViewModel = genReadingViewModel;
     }
 
     @Override
-    public void prepareSuccessView(GenReadingOutputData users) {
+    public void prepareSuccessView(GenReadingOutputData outputData) {
         GenReadingState genReadingState = genReadingViewModel.getState();
         // Change state
         this.genReadingViewModel.setState(genReadingState);

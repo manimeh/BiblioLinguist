@@ -1,24 +1,24 @@
-package interface_adapter.answer_questions;
+package interface_adapter.view_scores;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class QuestionsViewModel extends ViewModel {
-    private QuestionsState state = new QuestionsState();
+public class ViewScoresViewModel extends ViewModel {
+    private ViewScoresState state = new ViewScoresState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public QuestionsViewModel() {
-        super("questions");
+    public ViewScoresViewModel() {
+        super("scores");
     }
 
-    public QuestionsState getState() {
+    public ViewScoresState getState() {
         return this.state;
     }
 
-    public void setState(QuestionsState questionsState) {
-        this.state = questionsState;
+    public void setState(ViewScoresState viewScoresState) {
+        this.state = viewScoresState;
     }
 
     @Override

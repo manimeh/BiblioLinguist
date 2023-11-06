@@ -1,4 +1,4 @@
 package use_case.generate_reading;
 
-public class GenReadingInputData {
+public record GenReadingInputData() {
 }
