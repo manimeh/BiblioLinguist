@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class GenQuizViewModel extends ViewModel {
+    public static final String CREATE_QUIZ_BUTTON_LABEL = "Create Quiz";
     private GenQuizState state = new GenQuizState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
