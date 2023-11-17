@@ -1,0 +1,121 @@
+Index: src/data_access/FileAccessors/UserScoresDataAccessObject.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package data_access.FileAccessors;\r\nimport com.opencsv.CSVReader;\r\nimport com.opencsv.CSVReader;\r\nimport com.opencsv.CSVWriter;\r\nimport com.opencsv.exceptions.CsvValidationException;\r\nimport entity.user.User;\r\n\r\nimport java.io.File;\r\nimport java.io.FileReader;\r\nimport java.io.FileWriter;\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class UserScoresDataAccessObject {\r\n    private final String FILE_PATH;\r\n    private final int MAX_SIZE = 10;\r\n    public UserScoresDataAccessObject(String csvPath) {\r\n\r\n        FILE_PATH = csvPath;\r\n\r\n        public void addToQueue(float number) {\r\n            List<float> queue = getQueue(); //Read the current queue from the CSV file\r\n\r\n            //Add said number to queue\r\n            if (queue.size() < MAX_SIZE) {\r\n                // If the queue is not full, add the new number\r\n                queue.add(0, number);\r\n            } else {\r\n                // If the queue is full, remove the oldest number and add the new number\r\n                queue.remove(MAX_SIZE - 1);\r\n                queue.add(0, number);\r\n            }\r\n        }\r\n\r\n\r\n        public ArrayList getLastTenScores() {\r\n\r\n        }\r\n\r\n        public List<Integer> getQueue() { //returns a queue in the form of an integer list\r\n            try (CSVReader reader = new CSVReader((new FileReader(FILE_PATH)))) {\r\n                String[] nextRecord;\r\n                List<Float> queue = new ArrayList<>();\r\n\r\n                while ((nextRecord = reader.readNext()) != null) {\r\n                    queue.add(Float.parseFloat(nextRecord[0]));\r\n                }\r\n            } catch (CsvValidationException | IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        }\r\n\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/data_access/FileAccessors/UserScoresDataAccessObject.java b/src/data_access/FileAccessors/UserScoresDataAccessObject.java
+--- a/src/data_access/FileAccessors/UserScoresDataAccessObject.java	
++++ b/src/data_access/FileAccessors/UserScoresDataAccessObject.java	
+@@ -4,52 +4,79 @@
+ import com.opencsv.CSVWriter;
+ import com.opencsv.exceptions.CsvValidationException;
+ import entity.user.User;
++import use_case.take_quiz.TakeQuizDataAccessInterface;
++import use_case.view_scores.ViewScoresDataAccessInterface;
+ 
+-import java.io.File;
+-import java.io.FileReader;
+-import java.io.FileWriter;
+-import java.io.IOException;
++import java.io.*;
+ import java.util.ArrayList;
++import java.util.LinkedList;
+ import java.util.List;
++import java.util.Queue;
+ 
+-public class UserScoresDataAccessObject {
+-    private final String FILE_PATH;
+-    private final int MAX_SIZE = 10;
+-    public UserScoresDataAccessObject(String csvPath) {
++public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface, TakeQuizDataAccessInterface {
++    private final File csvFile;
+ 
+-        FILE_PATH = csvPath;
++    public UserScoresDataAccessObject(String csvPath) throws IOException {
++        csvFile = new File(csvPath);
++    }
+ 
+-        public void addToQueue(float number) {
+-            List<float> queue = getQueue(); //Read the current queue from the CSV file
++    public boolean isEmpty() {
++        return csvFile.length() == 0;
++    }
+ 
+-            //Add said number to queue
+-            if (queue.size() < MAX_SIZE) {
+-                // If the queue is not full, add the new number
+-                queue.add(0, number);
++    @Override
++    public ArrayList<Float> getLastTenScores() {
++        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
++            if (isEmpty()) {
++                return new ArrayList<>();
++            } else {
++                ArrayList<Float> listOfScores = new ArrayList<>();
++                String[] scoresString = reader.readNext();
++                for (String score : scoresString) {
++                    listOfScores.add(Float.parseFloat(score));
++                }
++                return listOfScores;
++            }
++        } catch (CsvValidationException | IOException e) {
++            throw new RuntimeException(e);
++        }
++    }
++
++    @Override
++    public void saveScore(Float score) {
++        try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
++            // Convert CSV data into a linked list so the first element can be replaced
++            Queue<Float> scoresData = createLinkedList(reader.readLine());
++            if (scoresData.size() != 10) {
++                scoresData.add(score);
+             } else {
+-                // If the queue is full, remove the oldest number and add the new number
+-                queue.remove(MAX_SIZE - 1);
+-                queue.add(0, number);
++                scoresData.poll();
++                scoresData.add(score);
+             }
+-        }
++            // Convert linked list back into CSV data
++            rewriteFileWithScores(scoresData);
+ 
++        } catch (IOException e) {
++            throw new RuntimeException(e);
++        }
++    }
+ 
+-        public ArrayList getLastTenScores() {
++    private void rewriteFileWithScores(Queue<Float> scoresData) {
++        try (CSVWriter = new) {
+ 
+-        }
++        };
++    }
+ 
+-        public List<Integer> getQueue() { //returns a queue in the form of an integer list
+-            try (CSVReader reader = new CSVReader((new FileReader(FILE_PATH)))) {
+-                String[] nextRecord;
+-                List<Float> queue = new ArrayList<>();
+-
+-                while ((nextRecord = reader.readNext()) != null) {
+-                    queue.add(Float.parseFloat(nextRecord[0]));
+-                }
+-            } catch (CsvValidationException | IOException e) {
+-                throw new RuntimeException(e);
+-            }
++    private Queue<Float> createLinkedList() {
++        Queue<Float> floatQueue = new LinkedList<>();
++        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
++            String[] nextLine = reader.readNext();
++            for (String str : nextLine) {
++                floatQueue.add(Float.parseFloat(str));
++            }
++        } catch (CsvValidationException | IOException e) {
++            throw new RuntimeException(e);
+         }
+-
++        return floatQueue;
+     }
+ }
