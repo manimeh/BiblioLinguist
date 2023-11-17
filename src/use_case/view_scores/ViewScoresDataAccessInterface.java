@@ -1,5 +1,7 @@
 package use_case.view_scores;
 
-public interface ViewScoresDataAccessInterface {
+import java.util.ArrayList;
 
+public interface ViewScoresDataAccessInterface {
+    ArrayList<Float> getLastTenScores();
 }
