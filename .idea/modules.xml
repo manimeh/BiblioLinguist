@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BiblioLinguist.iml" filepath="$PROJECT_DIR$/BiblioLinguist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BiblioLinguist.iml" filepath="$PROJECT_DIR$/.idea/BiblioLinguist.iml" />
     </modules>
   </component>
 </project>
