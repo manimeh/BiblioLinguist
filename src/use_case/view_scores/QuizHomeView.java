@@ -1,5 +1,4 @@
 package use_case.view_scores;
-package view;
 
 import interface_adapter.view_scores.ViewScoresController;
 import interface_adapter.view_scores.ViewScoresViewModel;
@@ -44,7 +43,7 @@ public class QuizHomeView extends JPanel implements ActionListener, PropertyChan
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(viewScoresButton)) {
                             viewScoresController.execute();
-                            JOptionPane.showMessageDialog(); //TODO: fill out message dialog
+                            //JOptionPane.showMessageDialog(); //TODO: fill out message dialog
                         }
                     }
                 }
