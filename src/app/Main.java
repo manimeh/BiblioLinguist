@@ -1,10 +1,13 @@
 package app;
 
 import data_access.FileAccessors.GraphicsAccessObject;
+import data_access.FileAccessors.UserScoresDataAccessObject;
+import entity.user.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.start_new_game.StartNewGameViewModel;
 import interface_adapter.view_scores.ViewScoresViewModel;
+import interface_adapter.view_scores.ViewScoresPresenter;
 import view.HomePageView;
 import view.ViewManager;
 
@@ -22,6 +25,9 @@ public class Main
 
         CardLayout cardLayout = new CardLayout();
 
+        // Create a new UserScoresDataAccessObject
+        UserScoresDataAccessObject userScoresDataAccessObject = new UserScoresDataAccessObject(("./UserScores.csv"));
+
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
         application.add(views);
@@ -33,6 +39,9 @@ public class Main
         StartNewGameViewModel startNewGameViewModel = new StartNewGameViewModel();
         ViewScoresViewModel viewScoresViewModel = new ViewScoresViewModel();
         CreateQuizViewModel createQuizViewModel = new CreateQuizViewModel();
+
+        // Creates a Presenter for ViewScores
+        ViewScoresPresenter viewScoresPresenter = new ViewScoresPresenter(viewManagerModel, viewScoresViewModel);
 
         GraphicsAccessObject graphicsAccessObject;
         try {
@@ -47,7 +56,7 @@ public class Main
         application.setIconImage(graphicsAccessObject.getLogoImage());
 
         HomePageView homePageView = HomePageUseCaseFactory.create(viewManagerModel, startNewGameViewModel,
-                viewScoresViewModel, createQuizViewModel, graphicsAccessObject);
+                viewScoresViewModel, createQuizViewModel, graphicsAccessObject, userScoresDataAccessObject, viewScoresPresenter);
         views.add(homePageView);
 
         viewManagerModel.setActiveView(HomePageView.VIEW_NAME);
