@@ -1,18 +1,18 @@
-package interface_adapter.take_quiz;
+package interface_adapter.submit_quiz;
 
 import entity.quiz.MCQuiz;
 import entity.user.User;
 
-public class TakeQuizState {
+public class SubmitQuizState {
     private User user;
     private MCQuiz quiz;
 
-    public TakeQuizState(User user, MCQuiz quiz) {
+    public SubmitQuizState(User user, MCQuiz quiz) {
         this.user = user;
         this.quiz = quiz;
     }
 
-    public TakeQuizState() {}
+    public SubmitQuizState() {}
 
     // Getting functions
     public User getUser() {

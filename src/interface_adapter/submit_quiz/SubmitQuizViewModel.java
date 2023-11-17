@@ -1,23 +1,23 @@
-package interface_adapter.take_quiz;
+package interface_adapter.submit_quiz;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class TakeQuizViewModel extends ViewModel {
-    private TakeQuizState state = new TakeQuizState();
+public class SubmitQuizViewModel extends ViewModel {
+    private SubmitQuizState state = new SubmitQuizState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public TakeQuizViewModel() {
+    public SubmitQuizViewModel() {
         super("quiz");
     }
 
-    public TakeQuizState getState() {
+    public SubmitQuizState getState() {
         return this.state;
     }
 
-    public void setState(TakeQuizState quizState) {
+    public void setState(SubmitQuizState quizState) {
         this.state = quizState;
     }
 
