@@ -4,52 +4,76 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import entity.user.User;
+import use_case.take_quiz.TakeQuizDataAccessInterface;
+import use_case.view_scores.ViewScoresDataAccessInterface;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
-public class UserScoresDataAccessObject {
-    private final String FILE_PATH;
-    private final int MAX_SIZE = 10;
+public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface, TakeQuizDataAccessInterface {
+    private final File csvFile;
     public UserScoresDataAccessObject(String csvPath) {
+        csvFile = new File(csvPath);
+    }
 
-        FILE_PATH = csvPath;
+    public boolean isEmpty() {
+        return csvFile.length() == 0;
+    }
+    @Override
+    public void saveScore(Float score) {
+        Queue<Float> scoresQueue = generateScoresQueue();
+        if (scoresQueue.size() != 10) {
+            scoresQueue.add(score);
+        } else {
+            scoresQueue.poll();
+            scoresQueue.add(score);
+        }
+        writeQueueToFile(scoresQueue);
+    }
 
-        public void addToQueue(float number) {
-            List<float> queue = getQueue(); //Read the current queue from the CSV file
+    private Queue<Float> generateScoresQueue() {
+        Queue<Float> floatQueue = new LinkedList<>();
 
-            //Add said number to queue
-            if (queue.size() < MAX_SIZE) {
-                // If the queue is not full, add the new number
-                queue.add(0, number);
+        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
+            String[] nextLine = reader.readNext();
+
+            for (String str : nextLine) {
+                floatQueue.add(Float.parseFloat(str));
+            }
+        } catch (CsvValidationException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return floatQueue;
+    }
+
+    private void writeQueueToFile(Queue<Float> scoresQueue) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(csvFile))) {
+            writer.writeNext(scoresQueue.stream().map(String::valueOf).toArray(String[]::new));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<Float> getLastTenScores() {
+        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
+            if (isEmpty()) {
+                return new ArrayList<>();
             } else {
-                // If the queue is full, remove the oldest number and add the new number
-                queue.remove(MAX_SIZE - 1);
-                queue.add(0, number);
-            }
-        }
-
-
-        public ArrayList getLastTenScores() {
-
-        }
-
-        public List<Integer> getQueue() { //returns a queue in the form of an integer list
-            try (CSVReader reader = new CSVReader((new FileReader(FILE_PATH)))) {
-                String[] nextRecord;
-                List<Float> queue = new ArrayList<>();
-
-                while ((nextRecord = reader.readNext()) != null) {
-                    queue.add(Float.parseFloat(nextRecord[0]));
+                ArrayList<Float> listOfScores = new ArrayList<>();
+                String[] scoresString = reader.readNext();
+                for (String score : scoresString) {
+                    listOfScores.add(Float.parseFloat(score));
                 }
-            } catch (CsvValidationException | IOException e) {
-                throw new RuntimeException(e);
+                return listOfScores;
             }
+        } catch (CsvValidationException | IOException e) {
+            throw new RuntimeException(e);
         }
-
     }
 }
