@@ -16,9 +16,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class NovaAIRetriever implements MCQuizRetrieverInterface, AIGeneratedStoryRetriever
+public class ChatGPTRetriever implements MCQuizRetrieverInterface, AIGeneratedStoryRetriever
 {
-    private static final String NOVA_API_TOKEN = System.getenv("NOVA_API_TOKEN");
+    private static final String OPEN_API_TOKEN = System.getenv("OPEN_API_TOKEN");
 
     @Override
     public MCQuiz getQuizFromAPI(Reading reading, DifficultyLevel difficulty, Language language, Integer numOfQuestions)
@@ -52,7 +52,7 @@ public class NovaAIRetriever implements MCQuizRetrieverInterface, AIGeneratedSto
     @Override
     public AIGeneratedStory[] retrieveListOfStoriesFromAPI(Language language, DifficultyLevel difficulty, Integer numOfStories)
     {
-        AIGeneratedStory.setAiBot("Nova oss");
+        AIGeneratedStory.setAiBot("Chat_GPT 3.5");
         String prompt = String.format("Give me %s short stories written in %s. The stories should be at %s reading level. " +
                         "The word count of the stories should be roughly around %s words. The plot of the stories should " +
                         "be entertaining. Return your answer entirely in the form of a JSON object. The JSON object should " +
@@ -77,9 +77,9 @@ public class NovaAIRetriever implements MCQuizRetrieverInterface, AIGeneratedSto
         chatRequest.setMessages(new ChatMessage[]{chatMessage});
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.nova-oss.com/v1/chat/completions"))
+                .uri(URI.create("https://api.openai.com/v1/chat/completions"))
                 .header("Content-Type", "application/json")
-                .header("Authorization", String.format("Bearer %s", NOVA_API_TOKEN))
+                .header("Authorization", String.format("Bearer %s", OPEN_API_TOKEN))
                 .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(chatRequest)))
                 .build();
         HttpClient client = HttpClient.newHttpClient();
