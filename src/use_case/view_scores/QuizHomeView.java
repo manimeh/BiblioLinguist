@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+
+//I think all of this code is in the HomePageView class now. So this class is not needed now, right?
 public class QuizHomeView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final GenQuizController genQuizController;
