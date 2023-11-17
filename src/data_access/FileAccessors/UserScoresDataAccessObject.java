@@ -1,17 +1,13 @@
 package data_access.FileAccessors;
 import com.opencsv.CSVReader;
-import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
-import entity.user.User;
 import use_case.take_quiz.TakeQuizDataAccessInterface;
 import use_case.view_scores.ViewScoresDataAccessInterface;
 
 import java.io.*;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface, TakeQuizDataAccessInterface {
