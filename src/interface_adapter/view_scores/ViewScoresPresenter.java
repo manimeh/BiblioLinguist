@@ -12,8 +12,17 @@ public class ViewScoresPresenter implements ViewScoresOutputBoundary {
 
     @Override
     public void prepareScoreView(ViewScoresOutputData response) {
-        ViewScoresState viewScoresState = viewScoresViewModel.getState();
-        viewScoresState.setViewableScores("Your last 10 scores: " + String.join("," response) + "\nAverage from your last 10 scores: ");
+        if (response.getScoresArray().isEmpty()) {
+            ViewScoresState viewScoresState = viewScoresViewModel.getState();
+            viewScoresState.setViewScoresMessage("You have no scores!");
+        } else {
+            Float sumOfScores = 0.0F;
+            for (Float i: response.getScoresArray()) {
+                sumOfScores += i;
+            }
+            ViewScoresState viewScoresState = viewScoresViewModel.getState();
+            viewScoresState.setViewScoresMessage("Your last 10 scores: " + String.join(",", response.getScoresArray().toString().substring(1, )) + "\nAverage from your last 10 scores: ");
 
+        }
     }
 }
