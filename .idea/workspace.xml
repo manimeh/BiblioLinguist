@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1900cfa5-b6c2-47f9-b62e-e001e5226c08" name="Changes" comment="Reverting file changes" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="starterFiles(Franco2)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="starterFiles" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2XUNVcVbZR6Njb4hWPnRDC131RC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "20",
+    "last_opened_file_path": "C:/Users/fmava/IdeaProjects/valenc97/week5ca",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.14648438",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Demo" type="Application" factoryName="Application" activateToolWindowBeforeRun="false">
+      <envs>
+        <env name="NOVA_API_TOKEN" value="nv2-Y7SMV4EksFhcRmibY5wd_NOVA_v2_eZI8HzJwv0G0sqjjPh5y " />
+        <env name="NEWS_API_TOKEN" value="23703ee3aa174c0e9914058016128817" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="app.Demo" />
+      <module name="BiblioLinguist" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1900cfa5-b6c2-47f9-b62e-e001e5226c08" name="Changes" comment="" />
+      <created>1698679724653</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698679724653</updated>
+      <workItem from="1698679728963" duration="4420000" />
+      <workItem from="1698709797499" duration="641000" />
+      <workItem from="1698712473609" duration="2000" />
+      <workItem from="1698948806391" duration="1169000" />
+      <workItem from="1699892228080" duration="259000" />
+      <workItem from="1699892904734" duration="113000" />
+      <workItem from="1699893807145" duration="733000" />
+      <workItem from="1699924130189" duration="646000" />
+      <workItem from="1699925721096" duration="9554000" />
+      <workItem from="1700186068400" duration="13207000" />
+    </task>
+    <task id="LOCAL-00001" summary="Need to create a data access object for modifying and storing last 10 user scores">
+      <option name="closed" value="true" />
+      <created>1699926711200</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699926711200</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Unimplemented methods for UserScoresDataAccessObject">
+      <option name="closed" value="true" />
+      <created>1699927356568</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699927356568</updated>
+    </task>
+    <task id="LOCAL-00003" summary="UserScoresDataAccessObject needs a method to obtain a queue list from the csv file. TODO: rewrite a csv file with a given queue">
+      <option name="closed" value="true" />
+      <created>1699928517135</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1699928517135</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated GenQuizViewModel to include a label for the createQuizButton">
+      <option name="closed" value="true" />
+      <created>1700152314070</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1700152314070</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updated GenQuizViewModel to include a label for the viewScoresButton">
+      <option name="closed" value="true" />
+      <created>1700152716566</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1700152716566</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Renamed ViewViewScoresPresenter to ViewScoresPresenter; also created a ViewScoresState class to save the ViewScores message">
+      <option name="closed" value="true" />
+      <created>1700155652551</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1700155652551</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Initially started working on a view for the ViewScores button, but I will later combine this with the GenQuizView.">
+      <option name="closed" value="true" />
+      <created>1700189493686</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1700189493686</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Implemented ViewScores Boundary and Data">
+      <option name="closed" value="true" />
+      <created>1700189513371</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1700189513371</updated>
+    </task>
+    <task id="LOCAL-00009" summary="The TakeQuizDAI corresponds to a method that adds a score to the CSV">
+      <option name="closed" value="true" />
+      <created>1700189553033</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1700189553033</updated>
+    </task>
+    <task id="LOCAL-00010" summary="The ViewScoresDAI corresponds to a method that retrieves all the scores from the CSV">
+      <option name="closed" value="true" />
+      <created>1700189574172</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1700189574172</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Different return messages depending on whether the CSV is empty or not">
+      <option name="closed" value="true" />
+      <created>1700191600375</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1700191600375</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added an instantiation method and execute method">
+      <option name="closed" value="true" />
+      <created>1700191617273</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1700191617273</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Implemented methods in UserScoresDataAccessObject for adding scores and retrieving scores">
+      <option name="closed" value="true" />
+      <created>1700193714500</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1700193714500</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Changed parameters in HomePageUseCaseFactory so that ViewScoresPresenter and ViewScoresInteractor are properly instantiated">
+      <option name="closed" value="true" />
+      <created>1700194448785</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1700194448785</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Created methods in UserScoresDataAccessObject to retrieve scores, as well as add a score">
+      <option name="closed" value="true" />
+      <created>1700194482548</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1700194482548</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added ViewManagerModel in ViewScoresPresenter as a variable">
+      <option name="closed" value="true" />
+      <created>1700194519608</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1700194519608</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Implemented ViewScoresState to store and retrieve a success message">
+      <option name="closed" value="true" />
+      <created>1700194712513</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1700194712513</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Removed unnecessary import statements">
+      <option name="closed" value="true" />
+      <created>1700194756688</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1700194756688</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Updated Main.java to account for proper class construction">
+      <option name="closed" value="true" />
+      <created>1700195391538</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1700195391538</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Updated Main.java to account for proper class construction">
+      <option name="closed" value="true" />
+      <created>1700198328189</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1700198328189</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Updated Main.java to account for proper class construction">
+      <option name="closed" value="true" />
+      <created>1700198429777</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1700198429777</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Updated Main.java to account for proper class construction">
+      <option name="closed" value="true" />
+      <created>1700198971756</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1700198971756</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updated Main.java to account for proper class construction">
+      <option name="closed" value="true" />
+      <created>1700199170864</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1700199170864</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Reverting file changes">
+      <option name="closed" value="true" />
+      <created>1700199316514</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1700199316514</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Reverting file changes">
+      <option name="closed" value="true" />
+      <created>1700199331001</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1700199331001</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="starterFiles(Franco)" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Need to create a data access object for modifying and storing last 10 user scores" />
+    <MESSAGE value="Unimplemented methods for UserScoresDataAccessObject" />
+    <MESSAGE value="UserScoresDataAccessObject needs a method to obtain a queue list from the csv file. TODO: rewrite a csv file with a given queue" />
+    <MESSAGE value="Updated GenQuizViewModel to include a label for the createQuizButton" />
+    <MESSAGE value="Updated GenQuizViewModel to include a label for the viewScoresButton" />
+    <MESSAGE value="Renamed ViewViewScoresPresenter to ViewScoresPresenter; also created a ViewScoresState class to save the ViewScores message" />
+    <MESSAGE value="Initially started working on a view for the ViewScores button, but I will later combine this with the GenQuizView." />
+    <MESSAGE value="Implemented ViewScores Boundary and Data" />
+    <MESSAGE value="The TakeQuizDAI corresponds to a method that adds a score to the CSV" />
+    <MESSAGE value="The ViewScoresDAI corresponds to a method that retrieves all the scores from the CSV" />
+    <MESSAGE value="Different return messages depending on whether the CSV is empty or not" />
+    <MESSAGE value="Added an instantiation method and execute method" />
+    <MESSAGE value="Implemented methods in UserScoresDataAccessObject for adding scores and retrieving scores" />
+    <MESSAGE value="Changed parameters in HomePageUseCaseFactory so that ViewScoresPresenter and ViewScoresInteractor are properly instantiated" />
+    <MESSAGE value="Created methods in UserScoresDataAccessObject to retrieve scores, as well as add a score" />
+    <MESSAGE value="Added ViewManagerModel in ViewScoresPresenter as a variable" />
+    <MESSAGE value="Implemented ViewScoresState to store and retrieve a success message" />
+    <MESSAGE value="Removed unnecessary import statements" />
+    <MESSAGE value="Updated Main.java to account for proper class construction" />
+    <MESSAGE value="Reverting file changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reverting file changes" />
+  </component>
+</project>
