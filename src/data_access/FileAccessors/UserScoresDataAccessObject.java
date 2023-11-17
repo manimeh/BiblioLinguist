@@ -36,6 +36,10 @@ public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface
     }
 
     private Queue<Float> generateScoresQueue() {
+        return getFloats();
+    }
+
+    private Queue<Float> getFloats() {
         Queue<Float> floatQueue = new LinkedList<>();
 
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
