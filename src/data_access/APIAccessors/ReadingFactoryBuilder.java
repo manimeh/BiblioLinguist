@@ -17,7 +17,7 @@ public class ReadingFactoryBuilder
             }
             case AI_GENERATED_STORY ->
             {
-                return new AIGeneratedStoryReadingFactory(new NovaAIRetriever());
+                return new AIGeneratedStoryReadingFactory(new ChatGPTRetriever());
             }
 
             default -> throw new UnsupportedOperationException("There are no API retrievers implemented for this reading type");

@@ -1,6 +1,6 @@
 package app;
 
-import data_access.APIAccessors.NovaAIRetriever;
+import data_access.APIAccessors.ChatGPTRetriever;
 import data_access.APIAccessors.ReadingFactoryBuilder;
 import entity.DifficultyLevel;
 import entity.language.Language;
@@ -20,7 +20,7 @@ public class Demo
         ReadingType readingType = ReadingType.AI_GENERATED_STORY;
 
         Optional<? extends Reading> readingOptional = new ReadingFactoryBuilder().getReadingFactory(readingType).
-                create(Language.ENGLISH, DifficultyLevel.ADVANCED);
+                create(Language.FRENCH, DifficultyLevel.BEGINNER);
         Reading reading;
 
         if (readingOptional.isPresent())
@@ -33,7 +33,7 @@ public class Demo
 
             System.out.println("\n");
 
-            MCQuizFactory quizFactory = new MCQuizFactory(new NovaAIRetriever());
+            MCQuizFactory quizFactory = new MCQuizFactory(new ChatGPTRetriever());
             MCQuiz quiz = quizFactory.create(reading, DifficultyLevel.BEGINNER, Language.ENGLISH, 5);
             ActiveQuizDisplay quizDisplay = quiz.activeDisplay();
 
