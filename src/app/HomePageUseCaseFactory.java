@@ -1,6 +1,6 @@
 package app;
 
-import data_access.FileAccessors.GraphicsAccessInterface;
+import data_access.FileAccessors.HomePageGraphicsAccessInterface;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.start_new_game.StartNewGameController;
@@ -27,7 +27,7 @@ public class HomePageUseCaseFactory
 
     public static HomePageView create(
             ViewManagerModel viewManagerModel, StartNewGameViewModel startNewGameViewModel, ViewScoresViewModel viewScoresViewModel,
-            CreateQuizViewModel createQuizViewModel, GraphicsAccessInterface graphicsAccessInterface) {
+            CreateQuizViewModel createQuizViewModel, HomePageGraphicsAccessInterface graphicsAccessInterface) {
 
         try
         {
@@ -46,7 +46,7 @@ public class HomePageUseCaseFactory
     private static StartNewGameController createStartNewGameUseCase(ViewManagerModel viewManagerModel,
                                                                     StartNewGameViewModel startNewGameViewModel,
                                                                     CreateQuizViewModel createQuizViewModel,
-                                                                    GraphicsAccessInterface graphicsAccessInterface)
+                                                                    HomePageGraphicsAccessInterface graphicsAccessInterface)
     {
         StartNewGameOutputBoundary startNewGameOutputBoundary = new StartNewGamePresenter(viewManagerModel,
                 startNewGameViewModel, createQuizViewModel);

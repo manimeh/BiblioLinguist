@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class GraphicsAccessObject implements GraphicsAccessInterface
+public class GraphicsAccessObject implements ApplicationGraphicsAccessInterface, HomePageGraphicsAccessInterface
 {
     private Image homePageBackgroundImage;
     private Image logoImage;
