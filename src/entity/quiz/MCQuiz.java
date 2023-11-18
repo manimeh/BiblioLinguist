@@ -8,7 +8,7 @@ public class MCQuiz implements MCQuizInterface
 {
     private boolean submitted = false;
     private MCQuestion[] questions;
-    private float score = 0;
+    private int score;
 
     @Override
     public ActiveQuizDisplay activeDisplay() {
@@ -28,7 +28,7 @@ public class MCQuiz implements MCQuizInterface
     {
         if ((questions != null) && (submitted))
         {
-            return new SubmittedQuizDisplay(score,
+            return new SubmittedQuizDisplay((float) score/questions.length,
                     getQuestionsArray(MCQuestion::getQuery, String[]::new),
                     getQuestionsArray(MCQuestion::getChoices, String[][]::new),
                     getQuestionsArray(MCQuestion::getAnswer, Integer[]::new),
