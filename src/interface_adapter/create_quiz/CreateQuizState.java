@@ -2,44 +2,45 @@ package interface_adapter.create_quiz;
 
 import entity.DifficultyLevel;
 import entity.language.Language;
-import entity.reading.Reading;
+import entity.reading.ReadingType;
 
-public class CreateQuizState {
-    private Language language;
-    private Reading reading;
-    private DifficultyLevel difficultyLevel;
+public class CreateQuizState
+{
+    private Language readingLanguage;
+    private DifficultyLevel readingDifficulty;
+    private ReadingType readingType;
 
-    public CreateQuizState(Language language, Reading reading, DifficultyLevel difficultyLevel) {
-        this.language = language;
-        this.reading = reading;
-        this.difficultyLevel = difficultyLevel;
+    public CreateQuizState(CreateQuizState copy) {
+        readingLanguage = copy.readingLanguage;
+        readingDifficulty = copy.readingDifficulty;
+        readingType = copy.readingType;
     }
 
-    public CreateQuizState() {}
-
-    // Getting functions
-    public Language getLanguage() {
-        return this.language;
+    // Because of the previous copy constructor, the default constructor must be explicit.
+    public CreateQuizState() {
     }
 
-    public Reading getReading() {
-        return this.reading;
+    public Language getReadingLanguage() {
+        return readingLanguage;
     }
 
-    public DifficultyLevel getDifficultyLevel() {
-        return this.difficultyLevel;
+    public void setReadingLanguage(Language readingLanguage) {
+        this.readingLanguage = readingLanguage;
     }
 
-    // Setting functions
-    public void setLanguage(Language language) {
-        this.language = language;
+    public DifficultyLevel getReadingDifficulty() {
+        return readingDifficulty;
     }
 
-    public void setReading(Reading reading) {
-        this.reading = reading;
+    public void setReadingDifficulty(DifficultyLevel readingDifficulty) {
+        this.readingDifficulty = readingDifficulty;
     }
 
-    public void setDifficultyLevel(DifficultyLevel difficultyLevel) {
-        this.difficultyLevel = difficultyLevel;
+    public ReadingType getReadingType() {
+        return readingType;
+    }
+
+    public void setReadingType(ReadingType readingType) {
+        this.readingType = readingType;
     }
 }
