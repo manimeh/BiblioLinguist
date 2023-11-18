@@ -31,19 +31,12 @@ public class HomePageUseCaseFactory
             CreateQuizViewModel createQuizViewModel, GraphicsAccessInterface graphicsAccessInterface,
             ViewScoresDataAccessInterface viewScoresDataAccessObject) {
 
-        try
-        {
-            StartNewGameController startNewGameController = createStartNewGameUseCase(viewManagerModel, startNewGameViewModel,
-                    createQuizViewModel);
-            ViewScoresController viewScoresController = createViewScoresUseCase(viewManagerModel, viewScoresViewModel,
-                    viewScoresDataAccessObject);
-            return new HomePageView(startNewGameViewModel, viewScoresViewModel, startNewGameController, viewScoresController,
-                    graphicsAccessInterface.getHomePageBackgroundImage());
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Could not open user data file.");
-        }
-
-        return null;
+        StartNewGameController startNewGameController = createStartNewGameUseCase(viewManagerModel, startNewGameViewModel,
+                createQuizViewModel);
+        ViewScoresController viewScoresController = createViewScoresUseCase(viewManagerModel, viewScoresViewModel,
+                viewScoresDataAccessObject);
+        return new HomePageView(startNewGameViewModel, viewScoresViewModel, startNewGameController, viewScoresController,
+                graphicsAccessInterface.getHomePageBackgroundImage());
     }
 
     private static StartNewGameController createStartNewGameUseCase(ViewManagerModel viewManagerModel,
@@ -58,7 +51,7 @@ public class HomePageUseCaseFactory
 
     private static ViewScoresController createViewScoresUseCase(ViewManagerModel viewManagerModel,
                                                                 ViewScoresViewModel viewScoresViewModel,
-                                                                ViewScoresDataAccessInterface viewScoresDataAccessObject) throws IOException {
+                                                                ViewScoresDataAccessInterface viewScoresDataAccessObject) {
         //The presenter should be initialized here not in the main
         ViewScoresOutputBoundary viewScoresOutputBoundary = new ViewScoresPresenter(viewManagerModel, viewScoresViewModel);
         ViewScoresInputBoundary viewScoresInputBoundary = new ViewScoresInteractor(viewScoresDataAccessObject, viewScoresOutputBoundary);
