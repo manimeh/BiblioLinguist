@@ -1,24 +1,24 @@
-package interface_adapter.generate_reading;
+package interface_adapter.create_quiz;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class GenReadingViewModel extends ViewModel {
-    private GenReadingState state = new GenReadingState();
+public class CreateQuizViewModel extends ViewModel {
+    private CreateQuizState state = new CreateQuizState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public GenReadingViewModel() {
-        super("genReading");
+    public CreateQuizViewModel() {
+        super("create quiz");
     }
 
-    public GenReadingState getState() {
+    public CreateQuizState getState() {
         return this.state;
     }
 
-    public void setState(GenReadingState genReadingState) {
-        this.state = genReadingState;
+    public void setState(CreateQuizState createQuizState) {
+        this.state = createQuizState;
     }
 
     @Override
