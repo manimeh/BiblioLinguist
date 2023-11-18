@@ -7,6 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class ScoresView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final String viewName = "Scores View";
     @Override
     public void actionPerformed(ActionEvent e) {
 

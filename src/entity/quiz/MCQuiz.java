@@ -8,7 +8,7 @@ public class MCQuiz implements MCQuizInterface
 {
     private boolean submitted = false;
     private MCQuestion[] questions;
-    private int score = 0;
+    private float score = 0;
 
     @Override
     public ActiveQuizDisplay activeDisplay() {
