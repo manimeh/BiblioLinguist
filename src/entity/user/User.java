@@ -64,14 +64,7 @@ public class User
 
     public void addScore(float score, DifficultyLevel difficulty)
     {
-        int difficultyNum = 0; // Set to beginner by default
-
-        if (difficulty.getName().equals("Intermediate")) {
-            difficultyNum = 1;
-        }
-        else if (difficulty.getName().equals("Advanced")) {
-            difficultyNum = 2;
-        }
+        int difficultyNum = difficulty.getIndex();
 
         float[] newArray = new float[this.scores[difficultyNum].length + 1];
 
