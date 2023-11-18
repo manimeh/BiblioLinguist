@@ -16,8 +16,8 @@ public class SubmitQuizInteractor implements SubmitQuizInputBoundary {
 
     @Override
     public void execute(SubmitQuizInputData submitQuizInputData) {
-        MCQuiz quiz = submitQuizInputData.getQuiz();
-        User user = submitQuizInputData.getUser();
+        MCQuiz quiz = submitQuizInputData.quiz();
+        User user = submitQuizInputData.user();
 
         boolean submitted = quiz.submit();
         if (submitted) {
