@@ -1,6 +1,7 @@
 package entity.quiz;
 
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
@@ -42,29 +43,37 @@ public class MCQuiz implements MCQuizInterface
     }
 
     @Override
-    public void update(int questionNum, int answerNum) {
-        if ((questionNum < 0 || questionNum >= questions.length)
-        || (answerNum < 0 || answerNum >= questions[questionNum].getChoices().length))
-        {
-            throw new IndexOutOfBoundsException("Invalid question number or answer choice number");
-        }
-        else
-        {
-            questions[questionNum].setChosenChoice(answerNum);
-            score += (questions[questionNum].getAnswer() == answerNum) ? 1 : 0;
-        }
-    }
-
-    @Override
-    public boolean submit()
+    public boolean submit(Integer[] answers)
     {
-        for (MCQuestion question : questions)
+        if (answers.length != questions.length)
         {
-            if (!question.isAnswered()) return false;
+            throw new IndexOutOfBoundsException("Invalid number of answers");
+        }
+        else if (Set.of(answers).contains(null))
+        {
+            return false;
+        }
+
+        for (int i = 0; i < questions.length; i++)
+        {
+            answerQuestion(i, answers[i]);
         }
 
         submitted = true;
         return true;
+    }
+
+    private void answerQuestion(int questionNum, Integer choiceNum)
+    {
+        if (choiceNum < 0 || choiceNum >= questions[questionNum].getChoices().length)
+        {
+            throw new IndexOutOfBoundsException("Invalid choice number for question " + questionNum);
+        }
+        else
+        {
+            questions[questionNum].setChosenChoice(choiceNum);
+            score += questions[questionNum].getAnswer().equals(choiceNum) ? 1 : 0;
+        }
     }
 
     private <T> T[] getQuestionsArray(Function<MCQuestion, T> questionTFunction, IntFunction<T[]> arrayConstructor)
