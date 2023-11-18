@@ -1,24 +1,24 @@
-package interface_adapter.take_quiz;
+package interface_adapter.return_home;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class TakeQuizViewModel extends ViewModel {
-    private TakeQuizState state = new TakeQuizState();
+public class ReturnHomeViewModel extends ViewModel {
+    private ReturnHomeState state = new ReturnHomeState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public TakeQuizViewModel() {
-        super("quiz");
+    public ReturnHomeViewModel() {
+        super("return home");
     }
 
-    public TakeQuizState getState() {
+    public ReturnHomeState getState() {
         return this.state;
     }
 
-    public void setState(TakeQuizState quizState) {
-        this.state = quizState;
+    public void setState(ReturnHomeState returnHomeState) {
+        this.state = returnHomeState;
     }
 
     @Override

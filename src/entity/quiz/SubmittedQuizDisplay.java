@@ -1,6 +1,6 @@
 package entity.quiz;
 
-public record SubmittedQuizDisplay(Integer score, String[] questions, String[][] choices, Integer[] answers,
+public record SubmittedQuizDisplay(Float score, String[] questions, String[][] choices, Integer[] answers,
                                    Integer[] chosenChoices, String[] explanations)
 {
     public SubmittedQuizDisplay {

@@ -1,15 +1,15 @@
 package interface_adapter.create_quiz;
 
-import use_case.generate_quiz.GenQuizInputBoundary;
+import use_case.create_quiz.CreateQuizInputBoundary;
 
 public class CreateQuizController {
-    private final GenQuizInputBoundary genQuizUseCaseInteractor;
+    private final CreateQuizInputBoundary createQuizUseCaseInteractor;
 
-    public CreateQuizController(GenQuizInputBoundary genQuizUseCaseInteractor) {
-        this.genQuizUseCaseInteractor = genQuizUseCaseInteractor;
+    public CreateQuizController(CreateQuizInputBoundary createQuizUseCaseInteractor) {
+        this.createQuizUseCaseInteractor = createQuizUseCaseInteractor;
     }
 
     public void execute() {
-        genQuizUseCaseInteractor.execute();
+        createQuizUseCaseInteractor.execute();
     }
 }

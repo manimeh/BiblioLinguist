@@ -1,24 +1,24 @@
-package interface_adapter.generate_quiz;
+package interface_adapter.submit_quiz;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class GenQuizViewModel extends ViewModel {
-    private GenQuizState state = new GenQuizState();
+public class SubmitQuizViewModel extends ViewModel {
+    private SubmitQuizState state = new SubmitQuizState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public GenQuizViewModel() {
-        super("genQuiz");
+    public SubmitQuizViewModel() {
+        super("submit quiz");
     }
 
-    public GenQuizState getState() {
+    public SubmitQuizState getState() {
         return this.state;
     }
 
-    public void setState(GenQuizState genQuizState) {
-        this.state = genQuizState;
+    public void setState(SubmitQuizState quizState) {
+        this.state = quizState;
     }
 
     @Override

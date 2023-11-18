@@ -1,10 +1,10 @@
 package interface_adapter.create_quiz;
 
 import interface_adapter.ViewManagerModel;
-import use_case.generate_quiz.GenQuizOutputBoundary;
-import use_case.generate_quiz.GenQuizOutputData;
+import use_case.create_quiz.CreateQuizOutputBoundary;
+import use_case.create_quiz.CreateQuizOutputData;
 
-public class CreateQuizPresenter implements GenQuizOutputBoundary {
+public class CreateQuizPresenter implements CreateQuizOutputBoundary {
     private final CreateQuizViewModel createQuizViewModel;
     private final ViewManagerModel viewManagerModel;
 
@@ -14,7 +14,7 @@ public class CreateQuizPresenter implements GenQuizOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(GenQuizOutputData outputData) {
+    public void prepareSuccessView(CreateQuizOutputData outputData) {
         CreateQuizState createQuizState = createQuizViewModel.getState();
         // Change state
         this.createQuizViewModel.setState(createQuizState);
