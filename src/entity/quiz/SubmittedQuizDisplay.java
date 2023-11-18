@@ -11,8 +11,4 @@ public record SubmittedQuizDisplay(Float score, String[] questions, String[][] c
                     "and explanations does not all match");
         }
     }
-
-    public float getScore() {
-        return this.score;
-    }
 }

@@ -20,10 +20,10 @@ public class SubmitQuizPresenter implements SubmitQuizOutputBoundary {
         SubmitQuizState quizState = quizViewModel.getState();
 
         // Update state with the given output data
-        SubmittedQuizDisplay quizDisplay = outputData.getQuizDisplay();
+        SubmittedQuizDisplay quizDisplay = outputData.quizDisplay();
         User user = quizState.getUser();
 
-        user.addScore(quizDisplay.getScore());
+        user.addScore(quizDisplay.score());
         this.quizViewModel.setState(quizState);
 
         viewManager.setActiveView("Results View");
