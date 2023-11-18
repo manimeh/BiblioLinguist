@@ -10,7 +10,7 @@ public class CreateQuizViewModel extends ViewModel {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public CreateQuizViewModel() {
-        super("createQuiz");
+        super("create quiz");
     }
 
     public CreateQuizState getState() {
