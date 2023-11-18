@@ -1,24 +1,24 @@
-package interface_adapter.generate_quiz;
+package interface_adapter.return_home;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class GenQuizViewModel extends ViewModel {
-    private GenQuizState state = new GenQuizState();
+public class ReturnHomeViewModel extends ViewModel {
+    private ReturnHomeState state = new ReturnHomeState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public GenQuizViewModel() {
-        super("genQuiz");
+    public ReturnHomeViewModel() {
+        super("return home");
     }
 
-    public GenQuizState getState() {
+    public ReturnHomeState getState() {
         return this.state;
     }
 
-    public void setState(GenQuizState genQuizState) {
-        this.state = genQuizState;
+    public void setState(ReturnHomeState returnHomeState) {
+        this.state = returnHomeState;
     }
 
     @Override
