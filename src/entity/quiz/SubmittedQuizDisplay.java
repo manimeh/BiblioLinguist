@@ -1,6 +1,6 @@
 package entity.quiz;
 
-public record SubmittedQuizDisplay(Integer score, String[] questions, String[][] choices, Integer[] answers,
+public record SubmittedQuizDisplay(Float score, String[] questions, String[][] choices, Integer[] answers,
                                    Integer[] chosenChoices, String[] explanations)
 {
     public SubmittedQuizDisplay {
@@ -10,5 +10,9 @@ public record SubmittedQuizDisplay(Integer score, String[] questions, String[][]
             throw new IllegalArgumentException("The length of questions, choices, answers, chosen choices," +
                     "and explanations does not all match");
         }
+    }
+
+    public float getScore() {
+        return this.score;
     }
 }
