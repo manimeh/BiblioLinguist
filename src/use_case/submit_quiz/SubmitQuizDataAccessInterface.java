@@ -4,5 +4,5 @@ import entity.quiz.MCQuiz;
 import entity.user.User;
 
 public interface SubmitQuizDataAccessInterface {
-    void addScoresData(MCQuiz quiz, User user);
+    void addScoresData(Float score, User user);
 }
