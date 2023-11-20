@@ -3,7 +3,6 @@ package interface_adapter.start_new_game;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_quiz.CreateQuizState;
 import interface_adapter.create_quiz.CreateQuizViewModel;
-import interface_adapter.generate_quiz.GenQuizState;
 import use_case.start_new_game.StartNewGameOutputBoundary;
 import use_case.start_new_game.StartNewGameOutputData;
 

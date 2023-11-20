@@ -13,8 +13,8 @@ public class SubmitQuizController {
         this.takeQuizUseCaseInteractor = takeQuizUseCaseInteractor;
     }
 
-    public void execute(MCQuiz quiz, Reading reading, User user) {
-        SubmitQuizInputData inputData = new SubmitQuizInputData(quiz, reading, user);
+    public void execute(MCQuiz quiz, Integer[] answers, User user) {
+        SubmitQuizInputData inputData = new SubmitQuizInputData(quiz, answers, user);
         takeQuizUseCaseInteractor.execute(inputData);
     }
 }
