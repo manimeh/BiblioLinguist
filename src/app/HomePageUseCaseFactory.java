@@ -52,7 +52,6 @@ public class HomePageUseCaseFactory
     private static ViewScoresController createViewScoresUseCase(ViewManagerModel viewManagerModel,
                                                                 ViewScoresViewModel viewScoresViewModel,
                                                                 ViewScoresDataAccessInterface viewScoresDataAccessObject) {
-        //The presenter should be initialized here not in the main
         ViewScoresOutputBoundary viewScoresOutputBoundary = new ViewScoresPresenter(viewManagerModel, viewScoresViewModel);
         ViewScoresInputBoundary viewScoresInputBoundary = new ViewScoresInteractor(viewScoresDataAccessObject, viewScoresOutputBoundary);
         return new ViewScoresController(viewScoresInputBoundary);

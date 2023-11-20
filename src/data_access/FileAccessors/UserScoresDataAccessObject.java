@@ -10,20 +10,6 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 
 public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface, SubmitQuizDataAccessInterface {
-    //You should read in the file in the initializer and keep the scores as a float array instead
-    //That way if there are any IO exceptions, you can catch them at the initialization, instead of catching them
-    //in the middle of the program
-
-    //Also I think it's better to read the files using BufferedReader and BufferedWriter. These classes our built into
-    //Java as opposed to CSVReader and Writer
-    //Also, when I tried adding the dependencies to the Maven file, InteliJ told me that it
-    // "Provides transitive vulnerable dependency". So it's probably better to avoid com.opencsv all toghether and use
-    //BufferedReader and BufferedWriter instead
-
-    //I also didn't know why you where reading the file over and over again. Once to get ArrayList and once to get
-    //the queue. You could just read it once for the queue and just convert that to an ArrayList. You want to minimize
-    //file reading and writing as much as possible, as it is the most error-prone part of the application
-
     private final File csvFile;
     private final Queue<Float> queueOfScores = new LinkedList<>();
 
