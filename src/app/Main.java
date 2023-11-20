@@ -1,6 +1,7 @@
 package app;
 
 import data_access.FileAccessors.GraphicsAccessObject;
+import data_access.FileAccessors.UserScoresDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.start_new_game.StartNewGameViewModel;
@@ -22,11 +23,9 @@ public class Main
 
         CardLayout cardLayout = new CardLayout();
 
-        // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
         application.add(views);
 
-        // This keeps track of and manages which view is currently showing.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
@@ -35,6 +34,8 @@ public class Main
         CreateQuizViewModel createQuizViewModel = new CreateQuizViewModel();
 
         GraphicsAccessObject graphicsAccessObject;
+        UserScoresDataAccessObject userScoresDataAccessObject;
+
         try {
             graphicsAccessObject = new GraphicsAccessObject.Builder()
                     .setHomePageBackgroundImage("./src/graphics/HomePageBG2.png")
@@ -44,10 +45,16 @@ public class Main
             throw new RuntimeException(e);
         }
 
+        try {
+            userScoresDataAccessObject = new UserScoresDataAccessObject(("./UserScores.csv"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         application.setIconImage(graphicsAccessObject.getLogoImage());
 
         HomePageView homePageView = HomePageUseCaseFactory.create(viewManagerModel, startNewGameViewModel,
-                viewScoresViewModel, createQuizViewModel, graphicsAccessObject);
+                viewScoresViewModel, createQuizViewModel, graphicsAccessObject, userScoresDataAccessObject);
         views.add(homePageView);
 
         viewManagerModel.setActiveView(HomePageView.VIEW_NAME);

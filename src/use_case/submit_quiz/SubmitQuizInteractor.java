@@ -19,11 +19,12 @@ public class SubmitQuizInteractor implements SubmitQuizInputBoundary {
         MCQuiz quiz = submitQuizInputData.quiz();
         User user = submitQuizInputData.user();
 
-        boolean submitted = quiz.submit();
+        boolean submitted = quiz.submit(submitQuizInputData.answers());
         if (submitted) {
-            submitQuizDataAccessObject.addScoresData(quiz, user);
-
             SubmittedQuizDisplay quizDisplay = quiz.submittedDisplay();
+
+            submitQuizDataAccessObject.saveScore(quizDisplay.score(), user);
+
             SubmitQuizOutputData submitQuizOutputData = new SubmitQuizOutputData(quizDisplay, false);
             submitQuizPresenter.prepareSuccessView(submitQuizOutputData);
         }
