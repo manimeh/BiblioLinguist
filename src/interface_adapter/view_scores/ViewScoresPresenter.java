@@ -4,6 +4,10 @@ import interface_adapter.ViewManagerModel;
 import use_case.view_scores.ViewScoresOutputBoundary;
 import use_case.view_scores.ViewScoresOutputData;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 public class ViewScoresPresenter implements ViewScoresOutputBoundary {
     private final ViewScoresViewModel viewScoresViewModel;
     private final ViewManagerModel viewManagerModel;
@@ -14,18 +18,19 @@ public class ViewScoresPresenter implements ViewScoresOutputBoundary {
     }
 
     @Override
-    public void prepareScoreView(ViewScoresOutputData response) {
-        if (response.getScoresArray().isEmpty()) {
-            ViewScoresState viewScoresState = viewScoresViewModel.getState();
-            viewScoresState.setViewScoresMessage("You have no scores!");
-        } else {
-            Float sumOfScores = 0.0F;
-            for (Float i: response.getScoresArray()) {
-                sumOfScores += i;
-            }
-            ViewScoresState viewScoresState = viewScoresViewModel.getState();
-            viewScoresState.setViewScoresMessage("Your last 10 scores: " + String.join(",", response.getScoresArray().toString().substring(1, response.getScoresArray().size() - 1)) + "\nAverage from your last 10 scores: ");
+    public void prepareSuccessView(ViewScoresOutputData response) {
+        ArrayList<Float> scoresArray = new ArrayList<>(response.scoresArray());
+        Collections.reverse(scoresArray);
+        ViewScoresState viewScoresState = viewScoresViewModel.getState();
 
+        if (scoresArray.isEmpty()) {
+            viewScoresState.setViewScoresMessage("You have no scores!");
+        }
+        else {
+            float sumOfScores = (float) scoresArray.stream().mapToDouble(Float::floatValue).sum();
+            viewScoresState.setViewScoresMessage("Your last 10 scores: " +
+                    scoresArray.stream().map(String::valueOf).collect(Collectors.joining("%, "))
+                    + "%\nAverage from your last 10 scores: " + String.format("%.2f", sumOfScores/scoresArray.size()) + "%");
         }
     }
 }

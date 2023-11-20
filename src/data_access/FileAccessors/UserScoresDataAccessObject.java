@@ -1,7 +1,4 @@
 package data_access.FileAccessors;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
-import com.opencsv.exceptions.CsvValidationException;
 import use_case.take_quiz.TakeQuizDataAccessInterface;
 import use_case.view_scores.ViewScoresDataAccessInterface;
 
@@ -9,70 +6,69 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface, TakeQuizDataAccessInterface {
+    //You should read in the file in the initializer and keep the scores as a float array instead
+    //That way if there are any IO exceptions, you can catch them at the initialization, instead of catching them
+    //in the middle of the program
+
+    //Also I think it's better to read the files using BufferedReader and BufferedWriter. These classes our built into
+    //Java as opposed to CSVReader and Writer
+    //Also, when I tried adding the dependencies to the Maven file, InteliJ told me that it
+    // "Provides transitive vulnerable dependency". So it's probably better to avoid com.opencsv all toghether and use
+    //BufferedReader and BufferedWriter instead
+
+    //I also didn't know why you where reading the file over and over again. Once to get ArrayList and once to get
+    //the queue. You could just read it once for the queue and just convert that to an ArrayList. You want to minimize
+    //file reading and writing as much as possible, as it is the most error-prone part of the application
+
     private final File csvFile;
-    public UserScoresDataAccessObject(String csvPath) {
+    private final Queue<Float> queueOfScores = new LinkedList<>();
+
+    public UserScoresDataAccessObject(String csvPath) throws IOException {
         csvFile = new File(csvPath);
+
+        if (isEmpty())
+        {
+            save();
+        }
+        else
+        {
+            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+                String[] scoresString = reader.readLine().split(",");
+                for (String score : scoresString) {
+                    queueOfScores.add(Float.parseFloat(score));
+                }
+            }
+        }
     }
 
     public boolean isEmpty() {
         return csvFile.length() == 0;
     }
+
     @Override
     public void saveScore(Float score) {
-        Queue<Float> scoresQueue = generateScoresQueue();
-        if (scoresQueue.size() != 10) {
-            scoresQueue.add(score);
+        if (queueOfScores.size() != 10) {
+            queueOfScores.add(score);
         } else {
-            scoresQueue.poll();
-            scoresQueue.add(score);
+            queueOfScores.poll();
+            queueOfScores.add(Math.round(score * 100f)/100f);
         }
-        writeQueueToFile(scoresQueue);
-    }
-
-    private Queue<Float> generateScoresQueue() {
-        return getFloats();
-    }
-
-    private Queue<Float> getFloats() {
-        Queue<Float> floatQueue = new LinkedList<>();
-
-        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
-            String[] nextLine = reader.readNext();
-
-            for (String str : nextLine) {
-                floatQueue.add(Float.parseFloat(str));
-            }
-        } catch (CsvValidationException | IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return floatQueue;
-    }
-
-    private void writeQueueToFile(Queue<Float> scoresQueue) {
-        try (CSVWriter writer = new CSVWriter(new FileWriter(csvFile))) {
-            writer.writeNext(scoresQueue.stream().map(String::valueOf).toArray(String[]::new));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        save();
     }
 
     @Override
     public ArrayList<Float> getLastTenScores() {
-        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
-            if (isEmpty()) {
-                return new ArrayList<>();
-            } else {
-                ArrayList<Float> listOfScores = new ArrayList<>();
-                String[] scoresString = reader.readNext();
-                for (String score : scoresString) {
-                    listOfScores.add(Float.parseFloat(score));
-                }
-                return listOfScores;
-            }
-        } catch (CsvValidationException | IOException e) {
+        return new ArrayList<>(queueOfScores);
+    }
+
+    private void save()
+    {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
+            writer.write(queueOfScores.stream().map(String::valueOf).collect(Collectors.joining(",")));
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
