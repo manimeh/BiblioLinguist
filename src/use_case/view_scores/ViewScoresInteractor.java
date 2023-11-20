@@ -1,7 +1,6 @@
 package use_case.view_scores;
 
 public class ViewScoresInteractor implements ViewScoresInputBoundary {
-    //Should be made private
     private final ViewScoresDataAccessInterface viewScoresDataAccessObject;
     private final ViewScoresOutputBoundary viewScoresPresenter;
 
