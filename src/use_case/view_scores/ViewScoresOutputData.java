@@ -1,4 +1,5 @@
 package use_case.view_scores;
 
-public record ViewScoresOutputData() {
-}
+import java.util.ArrayList;
+
+public record ViewScoresOutputData(ArrayList<Float> scoresArray) {}

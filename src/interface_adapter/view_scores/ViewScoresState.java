@@ -3,21 +3,20 @@ package interface_adapter.view_scores;
 import entity.user.User;
 
 public class ViewScoresState {
-    private User user;
+    private String viewScoresMessage = null;
 
-    public ViewScoresState(User user) {
-        this.user = user;
+    public ViewScoresState(ViewScoresState copy) {
+        viewScoresMessage = copy.viewScoresMessage;
     }
 
-    public ViewScoresState() {}
-
-    // Getting functions
-    public User getUser() {
-        return this.user;
+    public ViewScoresState() {
     }
 
-    // Setting functions
-    public void setUser(User user) {
-        this.user = user;
+    public void setViewScoresMessage(String s) {
+        this.viewScoresMessage = s;
+    }
+
+    public String getViewScoresMessage() {
+        return viewScoresMessage;
     }
 }

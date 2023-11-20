@@ -7,6 +7,7 @@ import java.beans.PropertyChangeSupport;
 
 public class SubmitQuizViewModel extends ViewModel {
     private SubmitQuizState state = new SubmitQuizState();
+
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public SubmitQuizViewModel() {
