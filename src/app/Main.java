@@ -7,7 +7,6 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.start_new_game.StartNewGameViewModel;
 import interface_adapter.view_scores.ViewScoresViewModel;
-import interface_adapter.view_scores.ViewScoresPresenter;
 import view.HomePageView;
 import view.ViewManager;
 
@@ -25,8 +24,8 @@ public class Main
 
         CardLayout cardLayout = new CardLayout();
 
-        // Create a new UserScoresDataAccessObject
-        UserScoresDataAccessObject userScoresDataAccessObject = new UserScoresDataAccessObject(("./UserScores.csv"));
+        //It's cleaner to initialize all the data assess objects toghther. Also, the creation of all data access
+        //objects should be done in a try catch block
 
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
@@ -40,10 +39,11 @@ public class Main
         ViewScoresViewModel viewScoresViewModel = new ViewScoresViewModel();
         CreateQuizViewModel createQuizViewModel = new CreateQuizViewModel();
 
-        // Creates a Presenter for ViewScores
-        ViewScoresPresenter viewScoresPresenter = new ViewScoresPresenter(viewManagerModel, viewScoresViewModel);
+        // The presenter should be initialized in the HomePageUseCaseFactory, not in the Main
 
         GraphicsAccessObject graphicsAccessObject;
+        UserScoresDataAccessObject userScoresDataAccessObject;
+
         try {
             graphicsAccessObject = new GraphicsAccessObject.Builder()
                     .setHomePageBackgroundImage("./src/graphics/HomePageBG2.png")
@@ -53,10 +53,17 @@ public class Main
             throw new RuntimeException(e);
         }
 
+        try {
+            // Create a new UserScoresDataAccessObject
+            userScoresDataAccessObject = new UserScoresDataAccessObject(("./UserScores.csv"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         application.setIconImage(graphicsAccessObject.getLogoImage());
 
         HomePageView homePageView = HomePageUseCaseFactory.create(viewManagerModel, startNewGameViewModel,
-                viewScoresViewModel, createQuizViewModel, graphicsAccessObject, userScoresDataAccessObject, viewScoresPresenter);
+                viewScoresViewModel, createQuizViewModel, graphicsAccessObject, userScoresDataAccessObject);
         views.add(homePageView);
 
         viewManagerModel.setActiveView(HomePageView.VIEW_NAME);
