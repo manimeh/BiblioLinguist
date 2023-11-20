@@ -12,7 +12,10 @@ import interface_adapter.view_scores.ViewScoresPresenter;
 import use_case.start_new_game.StartNewGameInputBoundary;
 import use_case.start_new_game.StartNewGameInteractor;
 import use_case.start_new_game.StartNewGameOutputBoundary;
-import use_case.view_scores.*;
+import use_case.view_scores.ViewScoresDataAccessInterface;
+import use_case.view_scores.ViewScoresInputBoundary;
+import use_case.view_scores.ViewScoresInteractor;
+import use_case.view_scores.ViewScoresOutputBoundary;
 import view.HomePageView;
 
 import javax.swing.*;
@@ -26,26 +29,19 @@ public class HomePageUseCaseFactory
     public static HomePageView create(
             ViewManagerModel viewManagerModel, StartNewGameViewModel startNewGameViewModel, ViewScoresViewModel viewScoresViewModel,
             CreateQuizViewModel createQuizViewModel, GraphicsAccessInterface graphicsAccessInterface,
-            ViewScoresDataAccessInterface viewScoresDataAccessObject, ViewScoresOutputBoundary viewScoresPresenter) {
+            ViewScoresDataAccessInterface viewScoresDataAccessObject) {
 
-        try
-        {
-            StartNewGameController startNewGameController = createStartNewGameUseCase(viewManagerModel, startNewGameViewModel,
-                    createQuizViewModel, graphicsAccessInterface);
-            ViewScoresController viewScoresController = createViewScoresUseCase(viewManagerModel, viewScoresViewModel, viewScoresDataAccessObject, viewScoresPresenter);
-            return new HomePageView(startNewGameViewModel, viewScoresViewModel, startNewGameController, viewScoresController,
-                    graphicsAccessInterface.getHomePageBackgroundImage());
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Could not open user data file.");
-        }
-
-        return null;
+        StartNewGameController startNewGameController = createStartNewGameUseCase(viewManagerModel, startNewGameViewModel,
+                createQuizViewModel);
+        ViewScoresController viewScoresController = createViewScoresUseCase(viewManagerModel, viewScoresViewModel,
+                viewScoresDataAccessObject);
+        return new HomePageView(startNewGameViewModel, viewScoresViewModel, startNewGameController, viewScoresController,
+                graphicsAccessInterface.getHomePageBackgroundImage());
     }
 
     private static StartNewGameController createStartNewGameUseCase(ViewManagerModel viewManagerModel,
                                                                     StartNewGameViewModel startNewGameViewModel,
-                                                                    CreateQuizViewModel createQuizViewModel,
-                                                                    GraphicsAccessInterface graphicsAccessInterface)
+                                                                    CreateQuizViewModel createQuizViewModel)
     {
         StartNewGameOutputBoundary startNewGameOutputBoundary = new StartNewGamePresenter(viewManagerModel,
                 startNewGameViewModel, createQuizViewModel);
@@ -55,11 +51,10 @@ public class HomePageUseCaseFactory
 
     private static ViewScoresController createViewScoresUseCase(ViewManagerModel viewManagerModel,
                                                                 ViewScoresViewModel viewScoresViewModel,
-                                                                ViewScoresDataAccessInterface viewScoresDataAccessObject,
-                                                                ViewScoresOutputBoundary viewScoresPresenter) throws IOException {
-
+                                                                ViewScoresDataAccessInterface viewScoresDataAccessObject) {
+        //The presenter should be initialized here not in the main
         ViewScoresOutputBoundary viewScoresOutputBoundary = new ViewScoresPresenter(viewManagerModel, viewScoresViewModel);
-        ViewScoresInputBoundary viewScoresInputBoundary = new ViewScoresInteractor(viewScoresDataAccessObject, viewScoresPresenter);
+        ViewScoresInputBoundary viewScoresInputBoundary = new ViewScoresInteractor(viewScoresDataAccessObject, viewScoresOutputBoundary);
         return new ViewScoresController(viewScoresInputBoundary);
     }
 }

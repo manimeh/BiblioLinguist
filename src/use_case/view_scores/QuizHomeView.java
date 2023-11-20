@@ -1,5 +1,4 @@
 package use_case.view_scores;
-package view;
 
 import interface_adapter.view_scores.ViewScoresController;
 import interface_adapter.view_scores.ViewScoresViewModel;
@@ -12,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+
+//I think all of this code is in the HomePageView class now. So this class is not needed now, right?
 public class QuizHomeView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final GenQuizController genQuizController;
@@ -44,7 +45,7 @@ public class QuizHomeView extends JPanel implements ActionListener, PropertyChan
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(viewScoresButton)) {
                             viewScoresController.execute();
-                            JOptionPane.showMessageDialog(); //TODO: fill out message dialog
+                            //JOptionPane.showMessageDialog(); //TODO: fill out message dialog
                         }
                     }
                 }
