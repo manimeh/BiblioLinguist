@@ -15,7 +15,7 @@ public interface DifficultyReadingFactory extends ReadingFactory
     static double getReadingDifficulty(Language language, Reading reading)
     {
         String text = reading.display().text();
-        String[] words = text.replaceAll("[\\p{Punct}&&[^']]|(' )|( ')", " ").split("\\s+");
+        String[] words = text.replaceAll("\\p{Punct}&&[^']|'\\s|\\s'|'$|^'", " ").split("\\s+");
 
         int totalSyllabusCount = 0;
         for (String word: words)
