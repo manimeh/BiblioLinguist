@@ -1,0 +1,51 @@
+@startuml
+interface Reading
+{
++display(): ReadingDisplay
+}
+
+class News
+{
+-title: String
+-text: String
+-author: String
+
++display(): ReadingDisplay
++calculateDifficulty(): DifficultyLevel
+}
+
+class AIGeneratedStory
+{
+-title: String
+-text: String
+
++display(): ReadingDisplay
++calculateDifficulty(): DifficultyLevel
+}
+
+class WikiArticle
+{
+-title: String
+-extract: String
+
++display(): ReadingDisplay
++calculateDifficulty(): DifficultyLevel
+}
+
+class ReadingDisplay
+{
+-title: String
+-text: String
+-author: String
+
++getTitle(): String
++getText(): String
++getAuthor(): String
+}
+
+Reading <|.. News
+Reading <|.. WikiArticle
+Reading <|.. AIGeneratedStory
+
+ReadingDisplay <.. Reading: <<creates>>
+@enduml
