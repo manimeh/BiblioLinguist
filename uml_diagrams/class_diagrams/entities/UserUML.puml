@@ -1,0 +1,12 @@
+@startuml
+class User
+{
+-id: Integer
+-name: String
+-scores: Integer[[]]
+
++getId(): Integer
++getName(): String
++getAvgScores(): Float[]
+}
+@enduml
