@@ -9,8 +9,8 @@ import use_case.create_quiz.CreateQuizInputData;
 public class CreateQuizController {
     private final CreateQuizInputBoundary interactor;
 
-    public CreateQuizController(CreateQuizInputBoundary interactor) {
-        this.interactor = interactor;
+    public CreateQuizController(CreateQuizInputBoundary createQuizInputBoundary) {
+        this.interactor = createQuizInputBoundary;
     }
 
     public void execute(Language language, DifficultyLevel difficultyLevel, ReadingType readingType)

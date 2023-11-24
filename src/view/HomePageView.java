@@ -15,8 +15,6 @@ import java.beans.PropertyChangeListener;
 public class HomePageView extends BackgroundImagePanel implements ActionListener, PropertyChangeListener {
     public final static String VIEW_NAME = "home page";
 
-    private final StartNewGameViewModel startNewGameViewModel;
-    private final ViewScoresViewModel viewScoresViewModel;
     private final StartNewGameController startNewGameController;
     private final ViewScoresController viewScoresController;
 
@@ -28,8 +26,6 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
                         Image backgroundImage)
     {
         super(backgroundImage);
-        this.startNewGameViewModel = startNewGameViewModel;
-        this.viewScoresViewModel = viewScoresViewModel;
         this.startNewGameController = startNewGameController;
         this.viewScoresController = viewScoresController;
         startNewGameViewModel.addPropertyChangeListener(this);
@@ -93,5 +89,13 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {}
+    public void propertyChange(PropertyChangeEvent evt)
+    {
+        if (evt.getSource() == viewScoresController)
+        {
+            viewScoresPropertyChange(evt);
+        }
+    }
+
+    private void viewScoresPropertyChange(PropertyChangeEvent evt) {}
 }
