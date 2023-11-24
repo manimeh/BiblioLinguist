@@ -15,7 +15,7 @@ public class StartNewGameInteractor implements StartNewGameInputBoundary
     @Override
     public void execute()
     {
-        StartNewGameOutputData outputData = new StartNewGameOutputData(Language.FRENCH, DifficultyLevel.BEGINNER,
+        StartNewGameOutputData outputData = new StartNewGameOutputData(Language.FRENCH, DifficultyLevel.INTERMEDIATE,
                 ReadingType.NEWS);
         presenter.prepareSuccessView(outputData);
     }

@@ -1,6 +1,6 @@
 package app;
 
-import data_access.FileAccessors.HomePageGraphicsAccessInterface;
+import data_access.file_accessors.graphics.HomePageGraphicsAccessInterface;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.start_new_game.StartNewGameController;
@@ -18,9 +18,6 @@ import use_case.view_scores.ViewScoresInteractor;
 import use_case.view_scores.ViewScoresOutputBoundary;
 import view.HomePageView;
 
-import javax.swing.*;
-import java.io.IOException;
-
 public class HomePageUseCaseFactory
 {
     /** Prevent instantiation. */
@@ -31,7 +28,7 @@ public class HomePageUseCaseFactory
             CreateQuizViewModel createQuizViewModel, HomePageGraphicsAccessInterface graphicsAccessInterface,
             ViewScoresDataAccessInterface viewScoresDataAccessObject) {
 
-        StartNewGameController startNewGameController = createStartNewGameUseCase(viewManagerModel, startNewGameViewModel,
+        StartNewGameController startNewGameController = createStartNewGameUseCase(viewManagerModel,
                 createQuizViewModel);
         ViewScoresController viewScoresController = createViewScoresUseCase(viewManagerModel, viewScoresViewModel,
                 viewScoresDataAccessObject);
@@ -40,11 +37,9 @@ public class HomePageUseCaseFactory
     }
 
     private static StartNewGameController createStartNewGameUseCase(ViewManagerModel viewManagerModel,
-                                                                    StartNewGameViewModel startNewGameViewModel,
                                                                     CreateQuizViewModel createQuizViewModel)
     {
-        StartNewGameOutputBoundary startNewGameOutputBoundary = new StartNewGamePresenter(viewManagerModel,
-                startNewGameViewModel, createQuizViewModel);
+        StartNewGameOutputBoundary startNewGameOutputBoundary = new StartNewGamePresenter(viewManagerModel, createQuizViewModel);
         StartNewGameInputBoundary startNewGameInputBoundary = new StartNewGameInteractor(startNewGameOutputBoundary);
         return new StartNewGameController(startNewGameInputBoundary);
     }

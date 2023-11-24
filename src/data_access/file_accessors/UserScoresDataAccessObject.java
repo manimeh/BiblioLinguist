@@ -1,4 +1,4 @@
-package data_access.FileAccessors;
+package data_access.file_accessors;
 import entity.user.User;
 import use_case.submit_quiz.SubmitQuizDataAccessInterface;
 import use_case.view_scores.ViewScoresDataAccessInterface;

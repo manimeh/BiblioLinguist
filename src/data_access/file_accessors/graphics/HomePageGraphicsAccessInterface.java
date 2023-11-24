@@ -1,4 +1,4 @@
-package data_access.FileAccessors;
+package data_access.file_accessors.graphics;
 
 import java.awt.*;
 

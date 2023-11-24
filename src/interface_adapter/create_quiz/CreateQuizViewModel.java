@@ -6,6 +6,11 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class CreateQuizViewModel extends ViewModel {
+    public final static String LANGUAGE_DROPDOWN_LABEL = "Language:";
+    public final static String DIFFICULTY_DROPDOWN_LABEL = "Difficulty:";
+    public final static String READING_TYPE_DROPDOWN_LABEL = "Reading Type:";
+    public final static String TAKE_QUIZ_BUTTON_LABEL = "Take Quiz";
+
     private CreateQuizState state = new CreateQuizState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 

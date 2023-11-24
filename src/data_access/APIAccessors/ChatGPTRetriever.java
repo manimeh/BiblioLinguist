@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 
 public class ChatGPTRetriever implements MCQuizRetrieverInterface, AIGeneratedStoryRetriever
 {
-    private static final String OPEN_API_TOKEN = System.getenv("OPEN_API_TOKEN");
+    private static final String OPEN_API_TOKEN = System.getenv("OPEN_AI_API_TOKEN");
 
     @Override
     public MCQuiz getQuizFromAPI(Reading reading, DifficultyLevel difficulty, Language language, Integer numOfQuestions)

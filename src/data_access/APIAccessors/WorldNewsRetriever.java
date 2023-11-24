@@ -1,6 +1,5 @@
 package data_access.APIAccessors;
 
-import com.google.gson.Gson;
 import data_access.APIAccessors.api_json_classes.NewsResponse;
 import entity.language.Language;
 import entity.reading.News;

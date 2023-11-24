@@ -30,6 +30,8 @@ public class CreateQuizInteractor implements CreateQuizInputBoundary
     @Override
     public void execute(CreateQuizInputData inputData)
     {
+        dataAccessor.savePreference(inputData.readingType(), inputData.language(), inputData.difficultyLevel());
+
         readingGenerator = readingGeneratorBuilder.setReadingType(inputData.readingType())
                 .setDifficultyLevel(inputData.difficultyLevel())
                 .setLanguage(inputData.language())
