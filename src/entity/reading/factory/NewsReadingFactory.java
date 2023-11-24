@@ -27,7 +27,7 @@ public class NewsReadingFactory implements DifficultyReadingFactory
     public Optional<News> create(Language language, DifficultyLevel difficulty)
     {
         News[] newsList = newsRetriever.getNewsListFromAPI(language, NUM_OF_TRIES);
-        return DifficultyReadingFactory.standardDifficultReadingCreator(language, difficulty, newsList);
+        return DifficultyReadingFactory.standardDifficultyReadingCreator(language, difficulty, newsList);
     }
 
     @Override

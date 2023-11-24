@@ -1,12 +1,15 @@
-package data_access.APIAccessors;
+package data_access.APIAccessors.FactoryBuilders;
 
+import data_access.APIAccessors.ChatGPTRetriever;
+import data_access.APIAccessors.WorldNewsRetriever;
 import entity.reading.ReadingType;
 import entity.reading.factory.AIGeneratedStoryReadingFactory;
 import entity.reading.factory.DifficultyReadingFactory;
 import entity.reading.factory.NewsReadingFactory;
 
-public class ReadingFactoryBuilder
+public class ReadingFactoryBuilder implements ReadingFactoryBuilderInterface
 {
+    @Override
     public DifficultyReadingFactory getReadingFactory(ReadingType readingType)
     {
         switch (readingType)
