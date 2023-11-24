@@ -1,4 +1,6 @@
 package use_case.create_quiz;
 
-public record CreateQuizOutputData() {
-}
+import entity.quiz.MCQuizInterface;
+import entity.reading.Reading;
+
+public record CreateQuizOutputData(Reading reading, MCQuizInterface mcQuiz) {}

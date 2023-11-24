@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ReadingSelectionView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final String viewName = "Reading Selection View";
+public class CreateQuizView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final String VIEW_NAME = "create quiz";
     @Override
     public void actionPerformed(ActionEvent e) {
 
