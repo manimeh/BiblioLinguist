@@ -1,6 +1,7 @@
 package app;
 
 import data_access.file_accessors.graphics.CreateQuizGraphicsAccessInterface;
+import data_access.file_accessors.graphics.LoadingScreenGraphicsAccessInterface;
 import entity.Pair;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.create_quiz.CreateQuizController;
@@ -23,15 +24,18 @@ public class CreateQuizUseCaseFactory {
             CreateQuizViewModel createQuizViewModel,
             LoadingScreenViewModel loadingScreenViewModel,
             SubmitQuizViewModel submitQuizViewModel,
-            CreateQuizGraphicsAccessInterface graphicsAccessInterface) {
+            CreateQuizGraphicsAccessInterface createQuizGraphicsAccessInterface,
+            LoadingScreenGraphicsAccessInterface loadingScreenGraphicsAccessInterface) {
 
         CreateQuizController createQuizController = createCreateQuizController(createQuizDataAccessInterface,
                 createQuizFactoryRetrieverInterface, viewManagerModel, createQuizViewModel, loadingScreenViewModel,
                 submitQuizViewModel);
+
         return new Pair<>(new CreateQuizView(createQuizController, createQuizViewModel,
-                graphicsAccessInterface.getCreateQuizBackgroundImage(),
-                graphicsAccessInterface.getCreateQuizHeaderImage()
-                ), new LoadingScreenView());
+                createQuizGraphicsAccessInterface.getCreateQuizBackgroundImage(),
+                createQuizGraphicsAccessInterface.getCreateQuizHeaderImage()
+                ), new LoadingScreenView(loadingScreenViewModel,
+                loadingScreenGraphicsAccessInterface.getLoadingAnimationGifs()));
     }
 
     private static CreateQuizController createCreateQuizController(CreateQuizDataAccessInterface createQuizDataAccessInterface,

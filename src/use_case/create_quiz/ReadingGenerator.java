@@ -5,6 +5,8 @@ import entity.language.Language;
 import entity.reading.Reading;
 import entity.reading.ReadingType;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Optional;
 
 public class ReadingGenerator extends Thread
@@ -14,8 +16,9 @@ public class ReadingGenerator extends Thread
     private final Language language;
     private final DifficultyLevel difficultyLevel;
 
-    private Reading reading;
-    private Boolean isSuccessful;
+    private final State state = new State();
+
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     private ReadingGenerator(CreateQuizFactoryRetrieverInterface factoryRetriever, ReadingType readingType,
                             Language language, DifficultyLevel difficultyLevel) {
@@ -30,16 +33,39 @@ public class ReadingGenerator extends Thread
         Optional<? extends Reading> optionalReading = factoryRetriever.getReadingFactory(readingType)
                 .create(language, difficultyLevel);
 
-        isSuccessful = optionalReading.isPresent();
-        optionalReading.ifPresent(value -> reading = value);
+        state.setSuccessful(optionalReading.isPresent());
+        optionalReading.ifPresent(state::setReading);
+        firePropertyChanged();
     }
 
-    public Reading getReading() {
-        return reading;
+    public void firePropertyChanged() {
+        support.firePropertyChange("state", null, this.state);
     }
 
-    public Boolean getSuccessful() {
-        return isSuccessful;
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+    public final static class State
+    {
+        private Boolean isSuccessful;
+        private Reading reading;
+
+        public Boolean getSuccessful() {
+            return isSuccessful;
+        }
+
+        public void setSuccessful(Boolean successful) {
+            isSuccessful = successful;
+        }
+
+        public Reading getReading() {
+            return reading;
+        }
+
+        public void setReading(Reading reading) {
+            this.reading = reading;
+        }
     }
 
     public static class Builder

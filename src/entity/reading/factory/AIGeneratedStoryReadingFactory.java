@@ -1,6 +1,6 @@
 package entity.reading.factory;
 
-import data_access.APIAccessors.AIGeneratedStoryRetriever;
+import data_access.api_accessors.AIGeneratedStoryRetriever;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.AIGeneratedStory;

@@ -1,8 +1,9 @@
 package app;
 
-import data_access.APIAccessors.FactoryBuilders.FactoryRetriever;
-import data_access.APIAccessors.FactoryBuilders.QuizFactoryBuilder;
-import data_access.APIAccessors.FactoryBuilders.ReadingFactoryBuilder;
+import data_access.api_accessors.FactoryBuilders.FactoryRetriever;
+import data_access.api_accessors.FactoryBuilders.QuizFactoryBuilder;
+import data_access.api_accessors.FactoryBuilders.ReadingFactoryBuilder;
+import data_access.file_accessors.InvalidHeaderException;
 import data_access.file_accessors.graphics.GraphicsAccessObject;
 import data_access.file_accessors.UserPreferenceDataAccessObject;
 import data_access.file_accessors.UserScoresDataAccessObject;
@@ -50,12 +51,23 @@ public class Main
         UserPreferenceDataAccessObject userPreferenceDataAccessObject;
         FactoryRetriever factoryRetriever = new FactoryRetriever(new ReadingFactoryBuilder(), new QuizFactoryBuilder());
 
+        //TODO (At the end): Handle the exceptions in a more user friendly way. So, instead of throwing a RuntimeException(e),
+        // we can maybe do a pop-up window
+
+        //TODO (At the end): Deal with the exceptions thrown by our API calls. Right now, if the API response is not successful
+        // the program stops. We can instead read in the error message in the API response and display it in a user
+        // friendly pop-up window
+
         try {
             graphicsAccessObject = new GraphicsAccessObject.Builder()
                     .setImage(ImageType.HOME_PAGE_BG, "./src/graphics/HomePageBG2.png")
                     .setImage(ImageType.LOGO, "./src/graphics/Logo2.png")
-                    .setImage(ImageType.CREATE_QUIZ_BG, "./src/graphics/CreateQuizBG.png")
+                    .setImage(ImageType.CREATE_QUIZ_BG, "./src/graphics/CreateQuizBG2.png")
                     .setImage(ImageType.CREATE_QUIZ_HEADER, "./src/graphics/CreateQuizHeader.png")
+                    .setLoadingAnimations(new String[]{"./src/graphics/LoadingAnimation2.gif",
+                            "./src/graphics/LoadingAnimation1.gif",
+                            "./src/graphics/LoadingAnimation3.gif",
+                            "./src/graphics/LoadingAnimation4.gif"})
                     .Build();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -69,19 +81,22 @@ public class Main
 
         try {
             userPreferenceDataAccessObject = new UserPreferenceDataAccessObject("./UserPreference.csv");
-        } catch (IOException e) {
+        } catch (IOException | InvalidHeaderException e) {
             throw new RuntimeException(e);
         }
+
 
         application.setIconImage(graphicsAccessObject.getLogoImage());
 
         HomePageView homePageView = HomePageUseCaseFactory.create(viewManagerModel, startNewGameViewModel,
-                viewScoresViewModel, createQuizViewModel, graphicsAccessObject, userScoresDataAccessObject);
+                viewScoresViewModel, createQuizViewModel, graphicsAccessObject, userPreferenceDataAccessObject,
+                userScoresDataAccessObject);
         views.add(homePageView, HomePageView.VIEW_NAME);
 
         Pair<CreateQuizView, LoadingScreenView> createQuizViewUseCaseViews =
                 CreateQuizUseCaseFactory.create(userPreferenceDataAccessObject, factoryRetriever, viewManagerModel,
-                        createQuizViewModel, loadingScreenViewModel, submitQuizViewModel, graphicsAccessObject);
+                        createQuizViewModel, loadingScreenViewModel, submitQuizViewModel, graphicsAccessObject,
+                        graphicsAccessObject);
         views.add(createQuizViewUseCaseViews.first(), CreateQuizView.VIEW_NAME);
         views.add(createQuizViewUseCaseViews.second(), LoadingScreenView.VIEW_NAME);
 

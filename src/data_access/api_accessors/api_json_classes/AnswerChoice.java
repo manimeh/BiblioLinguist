@@ -1,4 +1,4 @@
-package data_access.APIAccessors.api_json_classes;
+package data_access.api_accessors.api_json_classes;
 
 public class AnswerChoice {
     private ChatMessage message;

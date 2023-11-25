@@ -1,7 +1,7 @@
 package app;
 
-import data_access.APIAccessors.ChatGPTRetriever;
-import data_access.APIAccessors.FactoryBuilders.ReadingFactoryBuilder;
+import data_access.api_accessors.ChatGPTRetriever;
+import data_access.api_accessors.FactoryBuilders.ReadingFactoryBuilder;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;

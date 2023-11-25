@@ -4,7 +4,10 @@ import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.Reading;
 
-public class CreateQuizInteractor implements CreateQuizInputBoundary
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class CreateQuizInteractor implements CreateQuizInputBoundary, PropertyChangeListener
 {
     private final CreateQuizDataAccessInterface dataAccessor;
     private final CreateQuizOutputBoundary presenter;
@@ -36,40 +39,58 @@ public class CreateQuizInteractor implements CreateQuizInputBoundary
                 .setDifficultyLevel(inputData.difficultyLevel())
                 .setLanguage(inputData.language())
                 .build();
+        readingGenerator.addPropertyChangeListener(this);
+
         readingGenerator.start();
         presenter.prepareLoadView();
     }
 
     @Override
-    public void update() {
-        if ((readingGenerator != null) && (!readingGenerator.isAlive()))
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getSource() == readingGenerator)
         {
-            if (readingGenerator.getSuccessful())
-            {
-                reading = readingGenerator.getReading();
-
-                quizGenerator = quizGeneratorBuilder.setReading(reading)
-                        .setDifficultyLevel(DifficultyLevel.INTERMEDIATE)
-                        .setLanguage(Language.ENGLISH)
-                        .setNumOfQuestions(5)
-                        .build();
-                quizGenerator.start();
-            }
-            else
-            {
-                presenter.prepareFailView("The reading was not successfully generated. Please try again!");
-            }
+            processGeneratedReading(evt);
         }
-        else if ((quizGenerator != null) && (!quizGenerator.isAlive()))
+        else if (evt.getSource() == quizGenerator)
         {
-            if (quizGenerator.getSuccessful())
-            {
-                presenter.prepareSuccessView(new CreateQuizOutputData(reading, quizGenerator.getQuiz()));
-            }
-            else
-            {
-                presenter.prepareFailView("The quiz was not successfully generated. Please try again!");
-            }
+            processGeneratedQuiz(evt);
+        }
+    }
+
+    private void processGeneratedReading(PropertyChangeEvent evt)
+    {
+        ReadingGenerator.State state = (ReadingGenerator.State) evt.getNewValue();
+
+        if (state.getSuccessful())
+        {
+            reading = state.getReading();
+
+            quizGenerator = quizGeneratorBuilder.setReading(reading)
+                    .setDifficultyLevel(DifficultyLevel.INTERMEDIATE)
+                    .setLanguage(Language.ENGLISH)
+                    .setNumOfQuestions(5)
+                    .build();
+            quizGenerator.addPropertyChangeListener(this);
+
+            quizGenerator.start();
+        }
+        else
+        {
+            presenter.prepareFailView("The reading was not successfully generated. Please try again!");
+        }
+    }
+
+    private void processGeneratedQuiz(PropertyChangeEvent evt)
+    {
+        QuizGenerator.State state = (QuizGenerator.State) evt.getNewValue();
+
+        if (state.getSuccessful())
+        {
+            presenter.prepareSuccessView(new CreateQuizOutputData(reading, state.getQuiz()));
+        }
+        else
+        {
+            presenter.prepareFailView("The quiz was not successfully generated. Please try again!");
         }
     }
 }
