@@ -1,9 +1,8 @@
-package data_access.APIAccessors;
+package data_access.api_accessors;
 
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.AIGeneratedStory;
-import entity.reading.Reading;
 
 public interface AIGeneratedStoryRetriever extends ReadingRetrieverInterface
 {

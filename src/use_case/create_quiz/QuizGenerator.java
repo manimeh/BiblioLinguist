@@ -5,16 +5,19 @@ import entity.language.Language;
 import entity.quiz.MCQuizInterface;
 import entity.reading.Reading;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class QuizGenerator extends Thread {
     private final CreateQuizFactoryRetrieverInterface factoryRetriever;
     private final Reading reading;
     private final Language language;
     private final DifficultyLevel difficultyLevel;
-
     private final int numOfQuestions;
 
-    private MCQuizInterface quiz;
-    private Boolean isSuccessful;
+    private final State state = new State();
+
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     private QuizGenerator(CreateQuizFactoryRetrieverInterface factoryRetriever, Reading reading,
                              Language language, DifficultyLevel difficultyLevel, int numOfQuestions) {
@@ -25,26 +28,41 @@ public class QuizGenerator extends Thread {
         this.numOfQuestions = numOfQuestions;
     }
 
-    public MCQuizInterface getQuiz() {
-        return quiz;
-    }
-
-    public Boolean getIsSuccessful() {
-        return isSuccessful;
-    }
-
     @Override
     public void run() {
-        quiz = factoryRetriever.getQuizFactory().create(reading, difficultyLevel, language, numOfQuestions);
-        isSuccessful = quiz == null;
+        state.setQuiz(factoryRetriever.getQuizFactory().create(reading, difficultyLevel, language, numOfQuestions));
+        state.setSuccessful();
+        firePropertyChanged();
     }
 
-    public Reading getReading() {
-        return reading;
+    public void firePropertyChanged() {
+        support.firePropertyChange("state", null, this.state);
     }
 
-    public Boolean getSuccessful() {
-        return isSuccessful;
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+    public final static class State
+    {
+        private Boolean isSuccessful;
+        private MCQuizInterface quiz;
+
+        public Boolean getSuccessful() {
+            return isSuccessful;
+        }
+
+        public void setSuccessful() {
+            isSuccessful = quiz != null;
+        }
+
+        public MCQuizInterface getQuiz() {
+            return quiz;
+        }
+
+        public void setQuiz(MCQuizInterface quiz) {
+            this.quiz = quiz;
+        }
     }
 
     public static class Builder

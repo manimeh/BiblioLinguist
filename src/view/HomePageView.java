@@ -32,16 +32,14 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
         viewScoresViewModel.addPropertyChangeListener(this);
 
         ButtonsPanel buttonsPanel = new ButtonsPanel();
-        String buttonFont = "SansSerif";
         Color buttonBackgroundColor1 = new Color(228, 215, 159);
         Color buttonBackgroundColor2 = new Color(215, 159, 228);
-        int buttonCurvature = 25;
 
         newGame = buttonsPanel.addGradientButton(StartNewGameViewModel.NEW_GAME_BUTTON_LABEL,
-                buttonFont, buttonBackgroundColor1, Color.BLACK, buttonCurvature);
+                ViewManager.BUTTON_FONT, buttonBackgroundColor1, Color.BLACK, ViewManager.BUTTON_CURVATURE);
         buttonsPanel.addSpacer();
         viewScores = buttonsPanel.addGradientButton(StartNewGameViewModel.VIEW_SCORES_BUTTON_LABEL,
-                buttonFont, buttonBackgroundColor2, Color.BLACK, buttonCurvature);
+                ViewManager.BUTTON_FONT, buttonBackgroundColor2, Color.BLACK, ViewManager.BUTTON_CURVATURE);
 
         newGame.addActionListener(
                 evt -> {

@@ -6,7 +6,6 @@ import entity.reading.ReadingType;
 import interface_adapter.create_quiz.CreateQuizController;
 import interface_adapter.create_quiz.CreateQuizState;
 import interface_adapter.create_quiz.CreateQuizViewModel;
-import interface_adapter.start_new_game.StartNewGameViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,9 +36,7 @@ public class CreateQuizView extends BackgroundImagePanel implements ActionListen
         createQuizViewModel.addPropertyChangeListener(this);
 
         ButtonsPanel buttonPanel = new ButtonsPanel();
-        String buttonFont = "SansSerif";
         Color buttonBackgroundColor = new Color(144, 172, 245);
-        int buttonCurvature = 25;
 
         JLabel title = new JLabel(new ImageIcon(headerImage));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -60,7 +57,7 @@ public class CreateQuizView extends BackgroundImagePanel implements ActionListen
                 readingTypeDropdown);
 
         takeQuiz = buttonPanel.addGradientButton(CreateQuizViewModel.TAKE_QUIZ_BUTTON_LABEL,
-                buttonFont, buttonBackgroundColor, Color.BLACK, buttonCurvature);
+                ViewManager.BUTTON_FONT, buttonBackgroundColor, Color.BLACK, ViewManager.BUTTON_CURVATURE);
         buttonPanel.addSpacer();
         buttonPanel.addSpacer();
 
@@ -129,7 +126,7 @@ public class CreateQuizView extends BackgroundImagePanel implements ActionListen
     private JLabel createJLabel(String labelName)
     {
         JLabel label = new JLabel(labelName);
-        label.setFont(new Font("Monospaced", Font.BOLD, 16));
+        label.setFont(new Font("Monospaced", Font.BOLD, 18));
         label.setForeground(Color.WHITE);
         return label;
     }
@@ -143,7 +140,7 @@ public class CreateQuizView extends BackgroundImagePanel implements ActionListen
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        JOptionPane.showConfirmDialog(this, "action not implemented yet.");
     }
 
     @Override
@@ -160,6 +157,12 @@ public class CreateQuizView extends BackgroundImagePanel implements ActionListen
 
         if (state.getReadingType() != null) {
             readingTypeDropdown.setSelectedItem(createQuizViewModel.getState().getReadingType().getName());
+        }
+
+        if (state.isNewError())
+        {
+            JOptionPane.showMessageDialog(this, state.getErrorMessage());
+            state.dealtWithError();
         }
     }
 }

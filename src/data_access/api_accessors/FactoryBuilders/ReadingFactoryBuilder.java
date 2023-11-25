@@ -1,7 +1,7 @@
-package data_access.APIAccessors.FactoryBuilders;
+package data_access.api_accessors.FactoryBuilders;
 
-import data_access.APIAccessors.ChatGPTRetriever;
-import data_access.APIAccessors.WorldNewsRetriever;
+import data_access.api_accessors.ChatGPTRetriever;
+import data_access.api_accessors.WorldNewsRetriever;
 import entity.reading.ReadingType;
 import entity.reading.factory.AIGeneratedStoryReadingFactory;
 import entity.reading.factory.DifficultyReadingFactory;

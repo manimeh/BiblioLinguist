@@ -6,6 +6,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class LoadingScreenViewModel extends ViewModel {
+    public static final String LOADING_LABEL = "Loading...";
+
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public LoadingScreenViewModel() {

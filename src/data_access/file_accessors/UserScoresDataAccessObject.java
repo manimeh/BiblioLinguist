@@ -25,7 +25,7 @@ public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String[] scoresString = reader.readLine().split(",");
                 for (String score : scoresString) {
-                    queueOfScores.add(Float.parseFloat(score));
+                    queueOfScores.offer(Float.parseFloat(score));
                 }
             }
         }
@@ -38,10 +38,10 @@ public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface
     @Override
     public void saveScore(Float score, User user) {
         if (queueOfScores.size() != 10) {
-            queueOfScores.add(score);
+            queueOfScores.offer(score);
         } else {
             queueOfScores.poll();
-            queueOfScores.add(Math.round(score * 100f)/100f);
+            queueOfScores.offer(Math.round(score * 100f)/100f);
         }
         save();
     }

@@ -1,9 +1,9 @@
-package data_access.APIAccessors;
+package data_access.api_accessors;
 
-import data_access.APIAccessors.api_json_classes.AIStoryResponse;
-import data_access.APIAccessors.api_json_classes.ChatMessage;
-import data_access.APIAccessors.api_json_classes.ChatRequest;
-import data_access.APIAccessors.api_json_classes.ChatResponse;
+import data_access.api_accessors.api_json_classes.AIStoryResponse;
+import data_access.api_accessors.api_json_classes.ChatMessage;
+import data_access.api_accessors.api_json_classes.ChatRequest;
+import data_access.api_accessors.api_json_classes.ChatResponse;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;

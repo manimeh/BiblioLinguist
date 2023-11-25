@@ -1,6 +1,6 @@
 package entity.reading.factory;
 
-import data_access.APIAccessors.NewsRetrieverInterface;
+import data_access.api_accessors.NewsRetrieverInterface;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.News;

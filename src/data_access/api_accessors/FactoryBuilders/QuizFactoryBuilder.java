@@ -1,6 +1,6 @@
-package data_access.APIAccessors.FactoryBuilders;
+package data_access.api_accessors.FactoryBuilders;
 
-import data_access.APIAccessors.ChatGPTRetriever;
+import data_access.api_accessors.ChatGPTRetriever;
 import entity.quiz.factory.MCQuizFactory;
 import entity.quiz.factory.MCQuizFactoryInterface;
 
