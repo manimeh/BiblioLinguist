@@ -1,7 +1,6 @@
 package interface_adapter.submit_quiz;
 
-import entity.quiz.MCQuiz;
-import entity.reading.Reading;
+import entity.quiz.MCQuizInterface;
 import entity.user.User;
 import use_case.submit_quiz.SubmitQuizInputBoundary;
 import use_case.submit_quiz.SubmitQuizInputData;
@@ -13,7 +12,7 @@ public class SubmitQuizController {
         this.takeQuizUseCaseInteractor = takeQuizUseCaseInteractor;
     }
 
-    public void execute(MCQuiz quiz, Integer[] answers, User user) {
+    public void execute(MCQuizInterface quiz, Integer[] answers, User user) {
         SubmitQuizInputData inputData = new SubmitQuizInputData(quiz, answers, user);
         takeQuizUseCaseInteractor.execute(inputData);
     }
