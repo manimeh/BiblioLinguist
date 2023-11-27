@@ -8,6 +8,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class ViewManager implements PropertyChangeListener {
+    public final static String BUTTON_FONT = "SansSerif";
+    public final static int BUTTON_CURVATURE = 25;
+
     private final CardLayout cardLayout;
     private final JPanel views;
 

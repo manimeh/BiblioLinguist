@@ -50,6 +50,7 @@ public class SubmitQuizState {
         this.answers = new Integer[quiz.activeDisplay().choices().length];
     }
 
+
     public void setSubmitQuizError(String error) {
         this.submitQuizError = error;
     }
