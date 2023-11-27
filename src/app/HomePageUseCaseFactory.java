@@ -1,7 +1,7 @@
 package app;
 
 import data_access.file_accessors.graphics.HomePageGraphicsAccessInterface;
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.start_new_game.StartNewGameController;
 import interface_adapter.start_new_game.StartNewGamePresenter;
@@ -25,31 +25,31 @@ public class HomePageUseCaseFactory
     private HomePageUseCaseFactory() {}
 
     public static HomePageView create(
-            ViewManagerModel viewManagerModel, StartNewGameViewModel startNewGameViewModel, ViewScoresViewModel viewScoresViewModel,
+            ViewModelManager viewModelManager, StartNewGameViewModel startNewGameViewModel, ViewScoresViewModel viewScoresViewModel,
             CreateQuizViewModel createQuizViewModel, HomePageGraphicsAccessInterface graphicsAccessInterface,
             StartNewGameDataAccessInterface startNewGameDataAccessObject, ViewScoresDataAccessInterface viewScoresDataAccessObject) {
 
-        StartNewGameController startNewGameController = createStartNewGameUseCase(viewManagerModel, createQuizViewModel,
+        StartNewGameController startNewGameController = createStartNewGameUseCase(viewModelManager, createQuizViewModel,
                 startNewGameDataAccessObject);
-        ViewScoresController viewScoresController = createViewScoresUseCase(viewManagerModel, viewScoresViewModel,
+        ViewScoresController viewScoresController = createViewScoresUseCase(viewModelManager, viewScoresViewModel,
                 viewScoresDataAccessObject);
         return new HomePageView(startNewGameViewModel, viewScoresViewModel, startNewGameController, viewScoresController,
                 graphicsAccessInterface.getHomePageBackgroundImage());
     }
 
-    private static StartNewGameController createStartNewGameUseCase(ViewManagerModel viewManagerModel,
+    private static StartNewGameController createStartNewGameUseCase(ViewModelManager viewModelManager,
                                                                     CreateQuizViewModel createQuizViewModel,
                                                                     StartNewGameDataAccessInterface startNewGameDataAccessObject)
     {
-        StartNewGameOutputBoundary startNewGameOutputBoundary = new StartNewGamePresenter(viewManagerModel, createQuizViewModel);
+        StartNewGameOutputBoundary startNewGameOutputBoundary = new StartNewGamePresenter(viewModelManager, createQuizViewModel);
         StartNewGameInputBoundary startNewGameInputBoundary = new StartNewGameInteractor(startNewGameDataAccessObject, startNewGameOutputBoundary);
         return new StartNewGameController(startNewGameInputBoundary);
     }
 
-    private static ViewScoresController createViewScoresUseCase(ViewManagerModel viewManagerModel,
+    private static ViewScoresController createViewScoresUseCase(ViewModelManager viewModelManager,
                                                                 ViewScoresViewModel viewScoresViewModel,
                                                                 ViewScoresDataAccessInterface viewScoresDataAccessObject) {
-        ViewScoresOutputBoundary viewScoresOutputBoundary = new ViewScoresPresenter(viewManagerModel, viewScoresViewModel);
+        ViewScoresOutputBoundary viewScoresOutputBoundary = new ViewScoresPresenter(viewModelManager, viewScoresViewModel);
         ViewScoresInputBoundary viewScoresInputBoundary = new ViewScoresInteractor(viewScoresDataAccessObject, viewScoresOutputBoundary);
         return new ViewScoresController(viewScoresInputBoundary);
     }
