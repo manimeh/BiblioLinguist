@@ -1,15 +1,21 @@
 package interface_adapter.create_quiz;
 
+import entity.DifficultyLevel;
+import entity.language.Language;
+import entity.reading.ReadingType;
 import use_case.create_quiz.CreateQuizInputBoundary;
+import use_case.create_quiz.CreateQuizInputData;
 
 public class CreateQuizController {
-    private final CreateQuizInputBoundary createQuizUseCaseInteractor;
+    private final CreateQuizInputBoundary interactor;
 
-    public CreateQuizController(CreateQuizInputBoundary createQuizUseCaseInteractor) {
-        this.createQuizUseCaseInteractor = createQuizUseCaseInteractor;
+    public CreateQuizController(CreateQuizInputBoundary createQuizInputBoundary) {
+        this.interactor = createQuizInputBoundary;
     }
 
-    public void execute() {
-        createQuizUseCaseInteractor.execute();
+    public void execute(Language language, DifficultyLevel difficultyLevel, ReadingType readingType)
+    {
+        CreateQuizInputData inputData = new CreateQuizInputData(language, difficultyLevel, readingType);
+        interactor.execute(inputData);
     }
 }

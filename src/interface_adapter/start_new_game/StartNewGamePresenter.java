@@ -8,15 +8,12 @@ import use_case.start_new_game.StartNewGameOutputData;
 
 public class StartNewGamePresenter implements StartNewGameOutputBoundary
 {
-    private final StartNewGameViewModel startNewGameViewModel;
     private final CreateQuizViewModel createQuizViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public StartNewGamePresenter(ViewManagerModel viewManagerModel,
-                                 StartNewGameViewModel startNewGameViewModel,
                                  CreateQuizViewModel createQuizViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.startNewGameViewModel = startNewGameViewModel;
         this.createQuizViewModel = createQuizViewModel;
     }
 
@@ -27,7 +24,6 @@ public class StartNewGamePresenter implements StartNewGameOutputBoundary
         createQuizStateState.setReadingLanguage(outputData.defaultLanguage());
         createQuizStateState.setReadingDifficulty(outputData.defaultDifficultyLevel());
         createQuizStateState.setReadingType(outputData.defaultReadingType());
-        this.createQuizViewModel.setState(createQuizStateState);
         createQuizViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveView(createQuizViewModel.getViewName());

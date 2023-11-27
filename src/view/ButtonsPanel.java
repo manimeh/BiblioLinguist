@@ -3,12 +3,11 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ButtonsPanel extends JButton
+public class ButtonsPanel extends JPanel
 {
     public ButtonsPanel()
     {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBackground(new Color(0,0,0,0));
         this.setBorder(null);
         this.setOpaque(false);
     }
@@ -17,16 +16,7 @@ public class ButtonsPanel extends JButton
                                      Color foregroundColor, int curvature)
     {
         GradientButton button = new GradientButton(text, curvature);
-
-        button.setFont(new Font(fontName, Font.BOLD, 18));
-        button.setPreferredSize(new Dimension(100, 50));
-        button.setMaximumSize(new Dimension(300, 70));
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        button.setBackground(backgroundColor);
-        button.setForeground(foregroundColor);
-        this.add(button);
-
+        addButton(button, fontName, backgroundColor, foregroundColor);
         return button;
     }
 
@@ -51,7 +41,7 @@ public class ButtonsPanel extends JButton
     }
 
     public static class GradientButton extends JButton {
-        int curvature = 0;
+        int curvature;
 
         public GradientButton(String text, int curvature)
         {
