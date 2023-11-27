@@ -9,11 +9,15 @@ public class CreateQuizState
     private Language readingLanguage;
     private DifficultyLevel readingDifficulty;
     private ReadingType readingType;
+    private String errorMessage;
+    private boolean newError;
 
     public CreateQuizState(CreateQuizState copy) {
         readingLanguage = copy.readingLanguage;
         readingDifficulty = copy.readingDifficulty;
         readingType = copy.readingType;
+        errorMessage = copy.errorMessage;
+        newError = copy.newError;
     }
 
     // Because of the previous copy constructor, the default constructor must be explicit.
@@ -22,6 +26,21 @@ public class CreateQuizState
 
     public Language getReadingLanguage() {
         return readingLanguage;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public boolean isNewError() {
+        return newError;
+    }
+
+    public void dealtWithError() {newError = false;}
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+        newError = true;
     }
 
     public void setReadingLanguage(Language readingLanguage) {
