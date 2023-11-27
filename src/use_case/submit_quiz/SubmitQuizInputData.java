@@ -1,6 +1,6 @@
 package use_case.submit_quiz;
 
-import entity.quiz.MCQuiz;
+import entity.quiz.MCQuizInterface;
 import entity.user.User;
 
-public record SubmitQuizInputData(MCQuiz quiz, Integer[] answers, User user) {}
+public record SubmitQuizInputData(MCQuizInterface quiz, Integer[] answers, User user) {}

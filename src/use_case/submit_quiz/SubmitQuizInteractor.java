@@ -1,6 +1,7 @@
 package use_case.submit_quiz;
 
 import entity.quiz.MCQuiz;
+import entity.quiz.MCQuizInterface;
 import entity.quiz.SubmittedQuizDisplay;
 import entity.user.User;
 
@@ -16,7 +17,7 @@ public class SubmitQuizInteractor implements SubmitQuizInputBoundary {
 
     @Override
     public void execute(SubmitQuizInputData submitQuizInputData) {
-        MCQuiz quiz = submitQuizInputData.quiz();
+        MCQuizInterface quiz = submitQuizInputData.quiz();
         User user = submitQuizInputData.user();
 
         boolean submitted = quiz.submit(submitQuizInputData.answers());

@@ -15,10 +15,9 @@ import java.beans.PropertyChangeListener;
 public class HomePageView extends BackgroundImagePanel implements ActionListener, PropertyChangeListener {
     public final static String VIEW_NAME = "home page";
 
-    private final StartNewGameViewModel startNewGameViewModel;
-    private final ViewScoresViewModel viewScoresViewModel;
     private final StartNewGameController startNewGameController;
     private final ViewScoresController viewScoresController;
+    private final ViewScoresViewModel viewScoresViewModel;
 
     private final JButton newGame;
     private final JButton viewScores;
@@ -28,24 +27,21 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
                         Image backgroundImage)
     {
         super(backgroundImage);
-        this.startNewGameViewModel = startNewGameViewModel;
-        this.viewScoresViewModel = viewScoresViewModel;
         this.startNewGameController = startNewGameController;
         this.viewScoresController = viewScoresController;
+        this.viewScoresViewModel = viewScoresViewModel;
         startNewGameViewModel.addPropertyChangeListener(this);
         viewScoresViewModel.addPropertyChangeListener(this);
 
         ButtonsPanel buttonsPanel = new ButtonsPanel();
-        String buttonFont = "SansSerif";
         Color buttonBackgroundColor1 = new Color(228, 215, 159);
         Color buttonBackgroundColor2 = new Color(215, 159, 228);
-        int buttonCurvature = 25;
 
         newGame = buttonsPanel.addGradientButton(StartNewGameViewModel.NEW_GAME_BUTTON_LABEL,
-                buttonFont, buttonBackgroundColor1, Color.BLACK, buttonCurvature);
+                ViewManager.BUTTON_FONT, buttonBackgroundColor1, Color.BLACK, ViewManager.BUTTON_CURVATURE);
         buttonsPanel.addSpacer();
         viewScores = buttonsPanel.addGradientButton(StartNewGameViewModel.VIEW_SCORES_BUTTON_LABEL,
-                buttonFont, buttonBackgroundColor2, Color.BLACK, buttonCurvature);
+                ViewManager.BUTTON_FONT, buttonBackgroundColor2, Color.BLACK, ViewManager.BUTTON_CURVATURE);
 
         newGame.addActionListener(
                 evt -> {
@@ -59,6 +55,7 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
                 evt -> {
                     if (evt.getSource().equals(viewScores)) {
                         HomePageView.this.viewScoresController.execute();
+                        JOptionPane.showMessageDialog(this,viewScoresViewModel.getState().getViewScoresMessage());
                     }
                 }
         );
@@ -93,5 +90,14 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {}
+    public void propertyChange(PropertyChangeEvent evt)
+    {
+        if (evt.getSource() == viewScoresViewModel)
+        {
+            viewScoresPropertyChange(evt);
+        }
+    }
+
+    private void viewScoresPropertyChange(PropertyChangeEvent evt) {
+    }
 }

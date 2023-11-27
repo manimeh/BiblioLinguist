@@ -2,7 +2,6 @@ package entity.reading.factory;
 
 import entity.DifficultyLevel;
 import entity.language.Language;
-import entity.reading.AIGeneratedStory;
 import entity.reading.Reading;
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,7 +26,9 @@ public interface DifficultyReadingFactory extends ReadingFactory
                 84.6 * ((double) totalSyllabusCount / words.length);
     }
 
-    static <T extends Reading> Optional<T> standardDifficultReadingCreator(Language language, DifficultyLevel difficulty, T[] listOfReading)
+    static <T extends Reading> Optional<T> standardDifficultyReadingCreator(Language language,
+                                                                            DifficultyLevel difficulty,
+                                                                            T[] listOfReading)
     {
         T suitableReading = null;
 
