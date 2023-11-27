@@ -17,6 +17,7 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
 
     private final StartNewGameController startNewGameController;
     private final ViewScoresController viewScoresController;
+    private final ViewScoresViewModel viewScoresViewModel;
 
     private final JButton newGame;
     private final JButton viewScores;
@@ -28,6 +29,7 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
         super(backgroundImage);
         this.startNewGameController = startNewGameController;
         this.viewScoresController = viewScoresController;
+        this.viewScoresViewModel = viewScoresViewModel;
         startNewGameViewModel.addPropertyChangeListener(this);
         viewScoresViewModel.addPropertyChangeListener(this);
 
@@ -53,6 +55,7 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
                 evt -> {
                     if (evt.getSource().equals(viewScores)) {
                         HomePageView.this.viewScoresController.execute();
+                        JOptionPane.showMessageDialog(this,viewScoresViewModel.getState().getViewScoresMessage());
                     }
                 }
         );
@@ -89,11 +92,12 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
     @Override
     public void propertyChange(PropertyChangeEvent evt)
     {
-        if (evt.getSource() == viewScoresController)
+        if (evt.getSource() == viewScoresViewModel)
         {
             viewScoresPropertyChange(evt);
         }
     }
 
-    private void viewScoresPropertyChange(PropertyChangeEvent evt) {}
+    private void viewScoresPropertyChange(PropertyChangeEvent evt) {
+    }
 }
