@@ -1,23 +1,21 @@
 package interface_adapter.return_home;
 
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
+import interface_adapter.start_new_game.StartNewGameViewModel;
 import use_case.return_home.ReturnHomeOutputBoundary;
-import use_case.return_home.ReturnHomeOutputData;
 
 public class ReturnHomePresenter implements ReturnHomeOutputBoundary {
-    private final ReturnHomeViewModel returnHomeViewModel;
-    private final ViewManagerModel viewManagerModel;
+    private final StartNewGameViewModel startNewGameViewModel;
+    private final ViewModelManager viewModelManager;
 
-    public ReturnHomePresenter(ViewManagerModel viewManagerModel, ReturnHomeViewModel returnHomeViewModel) {
-        this.viewManagerModel = viewManagerModel;
-        this.returnHomeViewModel = returnHomeViewModel;
+    public ReturnHomePresenter(ViewModelManager viewModelManager, StartNewGameViewModel startNewGameViewModel) {
+        this.viewModelManager = viewModelManager;
+        this.startNewGameViewModel = startNewGameViewModel;
     }
 
     @Override
-    public void prepareSuccessView(ReturnHomeOutputData outputData) {
-        ReturnHomeState returnHomeState = returnHomeViewModel.getState();
-        // Change state
-        this.returnHomeViewModel.setState(returnHomeState);
-        returnHomeViewModel.firePropertyChanged();
+    public void prepareSuccessView() {
+        viewModelManager.setActiveView(startNewGameViewModel.getViewName());
+        viewModelManager.firePropertyChanged();
     }
 }
