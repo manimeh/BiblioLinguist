@@ -1,6 +1,6 @@
 package entity.reading.factory;
 
-import data_access.APIAccessors.AIGeneratedStoryRetriever;
+import data_access.api_accessors.AIGeneratedStoryRetriever;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.AIGeneratedStory;
@@ -34,7 +34,7 @@ public class AIGeneratedStoryReadingFactory implements DifficultyReadingFactory
     public Optional<AIGeneratedStory> create(Language language, DifficultyLevel difficulty)
     {
         AIGeneratedStory[] stories = storyRetriever.retrieveListOfStoriesFromAPI(language, difficulty, NUM_OF_TRIES);
-        return DifficultyReadingFactory.standardDifficultReadingCreator(language, difficulty, stories);
+        return DifficultyReadingFactory.standardDifficultyReadingCreator(language, difficulty, stories);
     }
 
     @Override

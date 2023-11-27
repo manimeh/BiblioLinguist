@@ -44,6 +44,7 @@ public class SubmitQuizState {
         this.quiz = quiz;
     }
 
+
     public void setSubmitQuizError(String error) {
         this.submitQuizError = error;
     }

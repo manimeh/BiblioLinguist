@@ -1,6 +1,6 @@
 package entity.quiz.factory;
 
-import data_access.APIAccessors.MCQuizRetrieverInterface;
+import data_access.api_accessors.MCQuizRetrieverInterface;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;
