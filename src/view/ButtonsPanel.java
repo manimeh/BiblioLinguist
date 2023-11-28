@@ -5,11 +5,12 @@ import java.awt.*;
 
 public class ButtonsPanel extends JPanel
 {
-    public ButtonsPanel()
+    public ButtonsPanel(int axis)
     {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(null);
-        this.setOpaque(false);
+        setLayout(new BoxLayout(this, axis));
+        setAlignmentX(Component.CENTER_ALIGNMENT);
+        setBorder(null);
+        setOpaque(false);
     }
 
     public JButton addGradientButton(String text, String fontName, Color backgroundColor,
