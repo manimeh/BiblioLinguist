@@ -3,11 +3,14 @@ package view;
 import interface_adapter.submit_quiz.SubmitQuizViewModel;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class QuestionPanel extends JPanel {
 
     public QuestionPanel(String question, String[] choices, SubmitQuizViewModel viewModel, Integer questionIndex)
     {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Set layout to vertical
+
         JLabel questionLabel = new JLabel(question);
         this.add(questionLabel);
 
@@ -20,7 +23,7 @@ public class QuestionPanel extends JPanel {
             choice.addActionListener(evt -> {
                 if (evt.getSource().equals(choice)) {
                     answers[questionIndex] = finalI;
-                    System.out.println(answers);
+                    System.out.println(Arrays.toString(answers));
                 }
             });
             buttonGroup.add(choice);
