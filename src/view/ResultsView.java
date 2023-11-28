@@ -10,7 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class ResultsView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final static String VIEW_NAME = "Results View";
+    public static final String VIEW_NAME = "Results View";
 
     public ResultsView(ReturnHomeViewModel returnHomeViewModel, ReturnHomeController returnHomeController)
     {
