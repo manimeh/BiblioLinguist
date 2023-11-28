@@ -1,16 +1,12 @@
-package use_case.start_new_game;
+package use_case;
 
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.ReadingType;
 import use_case.create_quiz.CreateQuizDataAccessInterface;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import use_case.start_new_game.StartNewGameDataAccessInterface;
 
 public class InMemoryUserPreferenceDataAccessObject implements StartNewGameDataAccessInterface, CreateQuizDataAccessInterface {
-    private final Map<String, Integer> headers = new LinkedHashMap<>();
-
     private Language preferredLanguage;
     private DifficultyLevel preferredDifficultyLevel;
     private ReadingType preferredReadingType;
