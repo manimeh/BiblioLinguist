@@ -99,12 +99,13 @@ public class Main
         views.add(createQuizViewUseCaseViews.first(), CreateQuizView.VIEW_NAME);
         views.add(createQuizViewUseCaseViews.second(), LoadingScreenView.VIEW_NAME);
 
-        GameView gameView = SubmitQuizUseCaseFactory.create(viewModelManager, submitQuizViewModel, userScoresDataAccessObject);
+        GameView gameView = SubmitQuizUseCaseFactory.create(viewModelManager, submitQuizViewModel, returnHomeViewModel,
+                userScoresDataAccessObject);
         views.add(gameView, GameView.VIEW_NAME);
 
         ResultsView resultsView = ReturnHomeUseCaseFactory.create(viewModelManager, returnHomeViewModel,
                 startNewGameViewModel);
-        views.add(resultsView);
+        views.add(resultsView, ResultsView.VIEW_NAME);
 
         viewModelManager.setActiveView(HomePageView.VIEW_NAME);
         viewModelManager.firePropertyChanged();
