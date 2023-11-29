@@ -76,6 +76,10 @@ public class ResultsView extends JScrollPane implements ActionListener, Property
 
         clearPreviousGame();
 
+        JLabel overallScore = new JLabel("Overall Score: " + Math.round(quizDisplay.score()) + "%");
+        overallScore.setFont(new Font(overallScore.getFont().getName(), Font.BOLD, 17));
+        questionsPanel.add(overallScore);
+
         // Add each button group and question label to the view
         for (int i = 0; i < quizDisplay.questions().length; i++) {
             QuestionPanel questionPanel = QuestionPanel.Builder.createSubmittedQuizPanel(quizDisplay.questions()[i],
