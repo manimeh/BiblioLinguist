@@ -1,7 +1,7 @@
 package app;
 
-import data_access.api_accessors.ChatGPTRetriever;
-import data_access.api_accessors.FactoryBuilders.ReadingFactoryBuilder;
+import data_access.api_accessors.ChatGPTRetrieverInterface;
+import data_access.api_accessors.FactoryBuilders.ReadingFactoryProvider;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.quiz.MCQuiz;
@@ -19,7 +19,7 @@ public class Demo
     {
         ReadingType readingType = ReadingType.AI_GENERATED_STORY;
 
-        Optional<? extends Reading> readingOptional = new ReadingFactoryBuilder().getReadingFactory(readingType).
+        Optional<? extends Reading> readingOptional = new ReadingFactoryProvider().getReadingFactory(readingType).
                 create(Language.FRENCH, DifficultyLevel.BEGINNER);
         Reading reading;
 
@@ -33,7 +33,7 @@ public class Demo
 
             System.out.println("\n");
 
-            MCQuizFactory quizFactory = new MCQuizFactory(new ChatGPTRetriever());
+            MCQuizFactory quizFactory = new MCQuizFactory(new ChatGPTRetrieverInterface());
             MCQuiz quiz = quizFactory.create(reading, DifficultyLevel.BEGINNER, Language.ENGLISH, 5);
             ActiveQuizDisplay quizDisplay = quiz.activeDisplay();
 

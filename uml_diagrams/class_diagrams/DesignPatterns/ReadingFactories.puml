@@ -42,32 +42,10 @@ interface Reading
 +display(): ReadingDisplay
 }
 
-enum DifficultyLevel
-{
-BEGINNER
-INTERMEDIATE
-ADVANCED
-
-DifficultyLevel(name: String, minReadRange: Integer, maxReadRange: Integer)
-}
-
-enum Language
-{
-ENGLISH
-FRENCH
-SPANISH
-GERMAN
-
-Language(name: String, code: String, syllableCalculator: SyllableCalculator)
-}
-
 ReadingFactory <|-- DifficultyReadingFactory
 DifficultyReadingFactory <|.. NewsReadingFactory
 DifficultyReadingFactory <|.. WikiArticleReadingFactory
 DifficultyReadingFactory <|.. AIGeneratedStoryReadingFactory
-
-DifficultyLevel <.. DifficultyReadingFactory: <<uses as param>>
-Language <.. ReadingFactory: <<uses as param>>
 
 Reading <.. ReadingFactory: <<creates>>
 @enduml
