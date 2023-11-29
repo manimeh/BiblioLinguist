@@ -15,10 +15,7 @@ import interface_adapter.loading_screen.LoadingScreenViewModel;
 import interface_adapter.start_new_game.StartNewGameViewModel;
 import interface_adapter.submit_quiz.SubmitQuizViewModel;
 import interface_adapter.view_scores.ViewScoresViewModel;
-import view.CreateQuizView;
-import view.HomePageView;
-import view.LoadingScreenView;
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,6 +96,9 @@ public class Main
                         graphicsAccessObject);
         views.add(createQuizViewUseCaseViews.first(), CreateQuizView.VIEW_NAME);
         views.add(createQuizViewUseCaseViews.second(), LoadingScreenView.VIEW_NAME);
+
+        GameView gameView = SubmitQuizUseCaseFactory.create(viewManagerModel, submitQuizViewModel, userScoresDataAccessObject);
+        views.add(gameView, GameView.VIEW_NAME);
 
         viewManagerModel.setActiveView(HomePageView.VIEW_NAME);
         viewManagerModel.firePropertyChanged();

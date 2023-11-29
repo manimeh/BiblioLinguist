@@ -49,7 +49,7 @@ public class MCQuiz implements MCQuizInterface
         {
             throw new IndexOutOfBoundsException("Invalid number of answers");
         }
-        else if (Set.of(answers).contains(null))
+        else if (Arrays.asList(answers).contains(null))
         {
             return false;
         }
