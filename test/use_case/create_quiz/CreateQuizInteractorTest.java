@@ -129,8 +129,8 @@ class CreateQuizInteractorTest {
         };
     }
 
-    private FactoryRetriever createReadingFailedFactoryRetriever() {
-        return new FactoryRetriever(
+    private FactoryProvider createReadingFailedFactoryRetriever() {
+        return new FactoryProvider(
                 readingType -> new DifficultyReadingFactory() {
                     @Override
                     public Optional<? extends Reading> create(Language language, DifficultyLevel difficulty) {
@@ -141,15 +141,15 @@ class CreateQuizInteractorTest {
                     public Reading create(Language language) {
                         return null;
                     }
-                }, new QuizFactoryBuilder());
+                }, new QuizFactoryProvider());
     }
 
-    private FactoryRetriever createQuizFailedFactoryRetriever() {
-        return new FactoryRetriever(new ReadingFactoryBuilder(),
+    private FactoryProvider createQuizFailedFactoryRetriever() {
+        return new FactoryProvider(new ReadingFactoryProvider(),
                 () -> (reading, difficulty, language, numOfQuestions) -> null);
     }
 
-    private FactoryRetriever createSuccessfulFactoryRetriever() {
-        return new FactoryRetriever(new ReadingFactoryBuilder(), new QuizFactoryBuilder());
+    private FactoryProvider createSuccessfulFactoryRetriever() {
+        return new FactoryProvider(new ReadingFactoryProvider(), new QuizFactoryProvider());
     }
 }
