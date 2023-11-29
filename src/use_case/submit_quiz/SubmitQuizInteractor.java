@@ -1,6 +1,5 @@
 package use_case.submit_quiz;
 
-import entity.quiz.MCQuiz;
 import entity.quiz.MCQuizInterface;
 import entity.quiz.SubmittedQuizDisplay;
 import entity.user.User;

@@ -9,6 +9,7 @@ public class SubmitQuizState {
     private User user;
     private MCQuizInterface quiz;
     private Reading reading;
+    private Integer[] answers;
 
     private String submitQuizError = null;
 
@@ -16,7 +17,6 @@ public class SubmitQuizState {
         this.user = user;
         this.quiz = quiz;
     }
-
     public SubmitQuizState() {}
 
     // Getting functions
@@ -36,6 +36,10 @@ public class SubmitQuizState {
         return reading;
     }
 
+    public Integer[] getAnswers() {
+        return answers;
+    }
+
     // Setting functions
     public void setUser(User user) {
         this.user = user;
@@ -43,6 +47,7 @@ public class SubmitQuizState {
 
     public void setQuiz(MCQuizInterface quiz) {
         this.quiz = quiz;
+        this.answers = new Integer[quiz.activeDisplay().choices().length];
     }
 
 
@@ -52,5 +57,9 @@ public class SubmitQuizState {
 
     public void setReading(Reading reading) {
         this.reading = reading;
+    }
+
+    public void setAnswers(Integer[] answers) {
+        this.answers = answers;
     }
 }

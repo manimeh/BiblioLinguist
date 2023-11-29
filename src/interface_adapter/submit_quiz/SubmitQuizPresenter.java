@@ -5,6 +5,7 @@ import entity.user.User;
 import interface_adapter.ViewManagerModel;
 import use_case.submit_quiz.SubmitQuizOutputBoundary;
 import use_case.submit_quiz.SubmitQuizOutputData;
+import view.ResultsView;
 
 public class SubmitQuizPresenter implements SubmitQuizOutputBoundary {
     private final SubmitQuizViewModel quizViewModel;
@@ -21,13 +22,13 @@ public class SubmitQuizPresenter implements SubmitQuizOutputBoundary {
 
         // Update state with the given output data
         SubmittedQuizDisplay quizDisplay = outputData.quizDisplay();
-        User user = quizState.getUser();
+//        User user = quizState.getUser();
+//
+//        user.addScore(quizDisplay.score());
+//        this.quizViewModel.setState(quizState);
 
-        user.addScore(quizDisplay.score());
-        this.quizViewModel.setState(quizState);
-
-        viewManager.setActiveView("Results View");
-        quizViewModel.firePropertyChanged();
+        viewManager.setActiveView(ResultsView.VIEW_NAME);
+        viewManager.firePropertyChanged();
     }
 
     @Override

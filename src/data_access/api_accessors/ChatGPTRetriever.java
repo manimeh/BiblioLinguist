@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 
 public class ChatGPTRetriever implements MCQuizRetrieverInterface, AIGeneratedStoryRetriever
 {
-    private static final String OPEN_API_TOKEN = System.getenv("OPEN_AI_API_TOKEN");
+    private static final String OPEN_AI_API_TOKEN = System.getenv("OPEN_AI_API_TOKEN");
 
     @Override
     public MCQuiz getQuizFromAPI(Reading reading, DifficultyLevel difficulty, Language language, Integer numOfQuestions)
@@ -79,7 +79,7 @@ public class ChatGPTRetriever implements MCQuizRetrieverInterface, AIGeneratedSt
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.openai.com/v1/chat/completions"))
                 .header("Content-Type", "application/json")
-                .header("Authorization", String.format("Bearer %s", OPEN_API_TOKEN))
+                .header("Authorization", String.format("Bearer %s", OPEN_AI_API_TOKEN))
                 .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(chatRequest)))
                 .build();
         HttpClient client = HttpClient.newHttpClient();
