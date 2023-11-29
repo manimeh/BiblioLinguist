@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class ReadingGenerator extends Thread
 {
-    private final CreateQuizFactoryRetrieverInterface factoryRetriever;
+    private final CreateQuizFactoryProviderInterface factoryRetriever;
     private final ReadingType readingType;
     private final Language language;
     private final DifficultyLevel difficultyLevel;
@@ -20,8 +20,8 @@ public class ReadingGenerator extends Thread
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    private ReadingGenerator(CreateQuizFactoryRetrieverInterface factoryRetriever, ReadingType readingType,
-                            Language language, DifficultyLevel difficultyLevel) {
+    private ReadingGenerator(CreateQuizFactoryProviderInterface factoryRetriever, ReadingType readingType,
+                             Language language, DifficultyLevel difficultyLevel) {
         this.factoryRetriever = factoryRetriever;
         this.readingType = readingType;
         this.language = language;
@@ -70,12 +70,12 @@ public class ReadingGenerator extends Thread
 
     public static class Builder
     {
-        private CreateQuizFactoryRetrieverInterface factoryRetriever;
+        private CreateQuizFactoryProviderInterface factoryRetriever;
         private ReadingType readingType;
         private Language language;
         private DifficultyLevel difficultyLevel;
 
-        public Builder setFactoryRetriever(CreateQuizFactoryRetrieverInterface factoryRetriever) {
+        public Builder setFactoryRetriever(CreateQuizFactoryProviderInterface factoryRetriever) {
             this.factoryRetriever = factoryRetriever;
             return this;
         }

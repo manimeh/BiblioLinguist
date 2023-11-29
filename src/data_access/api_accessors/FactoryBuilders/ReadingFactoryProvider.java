@@ -1,13 +1,13 @@
 package data_access.api_accessors.FactoryBuilders;
 
-import data_access.api_accessors.ChatGPTRetriever;
+import data_access.api_accessors.ChatGPTRetrieverInterface;
 import data_access.api_accessors.WorldNewsRetriever;
 import entity.reading.ReadingType;
 import entity.reading.factory.AIGeneratedStoryReadingFactory;
 import entity.reading.factory.DifficultyReadingFactory;
 import entity.reading.factory.NewsReadingFactory;
 
-public class ReadingFactoryBuilder implements ReadingFactoryBuilderInterface
+public class ReadingFactoryProvider implements ReadingFactoryProviderInterface
 {
     @Override
     public DifficultyReadingFactory getReadingFactory(ReadingType readingType)
@@ -20,7 +20,7 @@ public class ReadingFactoryBuilder implements ReadingFactoryBuilderInterface
             }
             case AI_GENERATED_STORY ->
             {
-                return new AIGeneratedStoryReadingFactory(new ChatGPTRetriever());
+                return new AIGeneratedStoryReadingFactory(new ChatGPTRetrieverInterface());
             }
 
             default -> throw new UnsupportedOperationException("There are no API retrievers implemented for this reading type");

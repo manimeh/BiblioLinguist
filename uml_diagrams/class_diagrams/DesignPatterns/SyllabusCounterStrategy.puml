@@ -1,0 +1,26 @@
+@startuml
+enum Language
+{
+ENGLISH
+FRENCH
+SPANISH
+GERMAN
++Language(name: String, code: String, syllableCalculator: SyllableCalculatorInterface)
++getName(): String
++getCode(): String
++getSyllableCalculator(): SyllableCalculatorInterface
+}
+
+interface SyllableCalculatorInterface
+{
++calculate(word: String): Integer
+}
+
+class LatinSyllableCalculator
+{
++calculate(word: String): Integer
+}
+
+SyllableCalculatorInterface <|.. LatinSyllableCalculator
+SyllableCalculatorInterface --* Language
+@enduml

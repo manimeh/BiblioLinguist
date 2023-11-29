@@ -19,7 +19,7 @@ public class CreateQuizUseCaseFactory {
 
     public static Pair<CreateQuizView, LoadingScreenView> create(
             CreateQuizDataAccessInterface createQuizDataAccessInterface,
-            CreateQuizFactoryRetrieverInterface createQuizFactoryRetrieverInterface,
+            CreateQuizFactoryProviderInterface createQuizFactoryProviderInterface,
             ViewModelManager viewModelManager,
             CreateQuizViewModel createQuizViewModel,
             LoadingScreenViewModel loadingScreenViewModel,
@@ -28,7 +28,7 @@ public class CreateQuizUseCaseFactory {
             LoadingScreenGraphicsAccessInterface loadingScreenGraphicsAccessInterface) {
 
         CreateQuizController createQuizController = createCreateQuizController(createQuizDataAccessInterface,
-                createQuizFactoryRetrieverInterface, viewModelManager, createQuizViewModel, loadingScreenViewModel,
+                createQuizFactoryProviderInterface, viewModelManager, createQuizViewModel, loadingScreenViewModel,
                 submitQuizViewModel);
 
         return new Pair<>(new CreateQuizView(createQuizController, createQuizViewModel,
@@ -39,7 +39,7 @@ public class CreateQuizUseCaseFactory {
     }
 
     private static CreateQuizController createCreateQuizController(CreateQuizDataAccessInterface createQuizDataAccessInterface,
-                                                                   CreateQuizFactoryRetrieverInterface createQuizFactoryRetrieverInterface,
+                                                                   CreateQuizFactoryProviderInterface createQuizFactoryProviderInterface,
                                                                    ViewModelManager viewModelManager,
                                                                    CreateQuizViewModel createQuizViewModel,
                                                                    LoadingScreenViewModel loadingScreenViewModel,
@@ -48,7 +48,7 @@ public class CreateQuizUseCaseFactory {
         CreateQuizOutputBoundary createQuizOutputBoundary = new CreateQuizPresenter(viewModelManager,
                 createQuizViewModel, loadingScreenViewModel, submitQuizViewModel);
         CreateQuizInputBoundary createQuizInputBoundary = new CreateQuizInteractor(createQuizDataAccessInterface,
-                createQuizFactoryRetrieverInterface, createQuizOutputBoundary);
+                createQuizFactoryProviderInterface, createQuizOutputBoundary);
         return new CreateQuizController(createQuizInputBoundary);
     }
 }
