@@ -65,7 +65,7 @@ public class GraphicsAccessObject implements ApplicationGraphicsAccessInterface,
             return this;
         }
 
-        public GraphicsAccessObject Build()
+        public GraphicsAccessObject build()
         {
             return new GraphicsAccessObject(images, loadingAnimations);
         }
