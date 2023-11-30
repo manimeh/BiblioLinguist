@@ -1,7 +1,5 @@
 package entity.reading;
 
-import entity.reading.factory.*;
-
 public enum ReadingType
 {
     NEWS("News"),
