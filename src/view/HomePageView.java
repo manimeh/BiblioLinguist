@@ -55,7 +55,7 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
                 evt -> {
                     if (evt.getSource().equals(viewScores)) {
                         HomePageView.this.viewScoresController.execute();
-                        JOptionPane.showMessageDialog(this,viewScoresViewModel.getState().getViewScoresMessage());
+                        // JOptionPane.showMessageDialog(this,viewScoresViewModel.getState().getViewScoresMessage());
                     }
                 }
         );
@@ -99,5 +99,6 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
     }
 
     private void viewScoresPropertyChange(PropertyChangeEvent evt) {
+        JOptionPane.showMessageDialog(this, viewScoresViewModel.getState().getViewScoresMessage());
     }
 }

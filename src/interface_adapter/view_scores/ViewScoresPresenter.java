@@ -31,8 +31,9 @@ public class ViewScoresPresenter implements ViewScoresOutputBoundary {
             viewScoresState.setViewScoresMessage(
                     "Your last 10 scores: " + scoresArray.stream().map(String::valueOf).collect(Collectors.joining("%, "))
                     + "%\nAverage from your last 10 scores: " + String.format("%.2f", sumOfScores/scoresArray.size()) + "%"
-                    + "\nYour last score: " + String.format("%.2f", scoresArray.get(scoresArray.size() - 1))
+                    + "\nYour last score: " + String.format("%.2f", scoresArray.get(scoresArray.size() - 1)) + "%"
             );
         }
+        viewScoresViewModel.firePropertyChanged();
     }
 }
