@@ -10,7 +10,7 @@ public class ViewScoresViewModel extends ViewModel {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public ViewScoresViewModel() {
-        super("scores");
+        super("Home Page");
     }
 
     public ViewScoresState getState() {

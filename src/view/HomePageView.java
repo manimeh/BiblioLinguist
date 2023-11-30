@@ -13,14 +13,11 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class HomePageView extends BackgroundImagePanel implements ActionListener, PropertyChangeListener {
-    public final static String VIEW_NAME = "home page";
+    public final static String VIEW_NAME = "Home Page";
 
     private final StartNewGameController startNewGameController;
     private final ViewScoresController viewScoresController;
     private final ViewScoresViewModel viewScoresViewModel;
-
-    private final JButton newGame;
-    private final JButton viewScores;
 
     public HomePageView(StartNewGameViewModel startNewGameViewModel, ViewScoresViewModel viewScoresViewModel,
                         StartNewGameController startNewGameController, ViewScoresController viewScoresController,
@@ -33,14 +30,14 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
         startNewGameViewModel.addPropertyChangeListener(this);
         viewScoresViewModel.addPropertyChangeListener(this);
 
-        ButtonsPanel buttonsPanel = new ButtonsPanel();
+        ButtonsPanel buttonsPanel = new ButtonsPanel(BoxLayout.Y_AXIS);
         Color buttonBackgroundColor1 = new Color(228, 215, 159);
         Color buttonBackgroundColor2 = new Color(215, 159, 228);
 
-        newGame = buttonsPanel.addGradientButton(StartNewGameViewModel.NEW_GAME_BUTTON_LABEL,
+        JButton newGame = buttonsPanel.addGradientButton(StartNewGameViewModel.NEW_GAME_BUTTON_LABEL,
                 ViewManager.BUTTON_FONT, buttonBackgroundColor1, Color.BLACK, ViewManager.BUTTON_CURVATURE);
         buttonsPanel.addSpacer();
-        viewScores = buttonsPanel.addGradientButton(StartNewGameViewModel.VIEW_SCORES_BUTTON_LABEL,
+        JButton viewScores = buttonsPanel.addGradientButton(StartNewGameViewModel.VIEW_SCORES_BUTTON_LABEL,
                 ViewManager.BUTTON_FONT, buttonBackgroundColor2, Color.BLACK, ViewManager.BUTTON_CURVATURE);
 
         newGame.addActionListener(
@@ -55,7 +52,7 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
                 evt -> {
                     if (evt.getSource().equals(viewScores)) {
                         HomePageView.this.viewScoresController.execute();
-                        JOptionPane.showMessageDialog(this,viewScoresViewModel.getState().getViewScoresMessage());
+                        // JOptionPane.showMessageDialog(this,viewScoresViewModel.getState().getViewScoresMessage());
                     }
                 }
         );
@@ -99,5 +96,6 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
     }
 
     private void viewScoresPropertyChange(PropertyChangeEvent evt) {
+        JOptionPane.showMessageDialog(this, viewScoresViewModel.getState().getViewScoresMessage());
     }
 }
