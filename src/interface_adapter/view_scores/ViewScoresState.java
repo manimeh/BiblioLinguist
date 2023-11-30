@@ -1,7 +1,5 @@
 package interface_adapter.view_scores;
 
-import entity.user.User;
-
 public class ViewScoresState {
     private String viewScoresMessage = null;
 
