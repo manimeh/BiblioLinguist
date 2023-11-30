@@ -67,7 +67,7 @@ public class Main
                             "./src/graphics/LoadingAnimation1.gif",
                             "./src/graphics/LoadingAnimation3.gif",
                             "./src/graphics/LoadingAnimation4.gif"})
-                    .Build();
+                    .build();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
