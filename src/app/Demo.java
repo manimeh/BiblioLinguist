@@ -1,6 +1,6 @@
 package app;
 
-import data_access.api_accessors.ChatGPTRetrieverInterface;
+import data_access.api_accessors.ChatGPTRetriever;
 import data_access.api_accessors.FactoryBuilders.ReadingFactoryProvider;
 import entity.DifficultyLevel;
 import entity.language.Language;
@@ -33,7 +33,7 @@ public class Demo
 
             System.out.println("\n");
 
-            MCQuizFactory quizFactory = new MCQuizFactory(new ChatGPTRetrieverInterface());
+            MCQuizFactory quizFactory = new MCQuizFactory(new ChatGPTRetriever());
             MCQuiz quiz = quizFactory.create(reading, DifficultyLevel.BEGINNER, Language.ENGLISH, 5);
             ActiveQuizDisplay quizDisplay = quiz.activeDisplay();
 

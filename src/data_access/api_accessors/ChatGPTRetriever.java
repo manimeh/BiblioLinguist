@@ -16,7 +16,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class ChatGPTRetrieverInterface implements MCQuizRetrieverInterface, AIGeneratedStoryRetrieverInterface
+public class ChatGPTRetriever implements MCQuizRetrieverInterface, AIGeneratedStoryRetrieverInterface
 {
     private static final String OPEN_AI_API_TOKEN = System.getenv("OPEN_AI_API_TOKEN");
 
