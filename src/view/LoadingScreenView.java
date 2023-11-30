@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Queue;
 
 public class LoadingScreenView extends BackgroundImagePanel implements ActionListener, PropertyChangeListener {
-    public static final String VIEW_NAME = "loading screen";
+    public static final String VIEW_NAME = "Loading Screen";
 
     public LoadingScreenView(LoadingScreenViewModel loadingScreenViewModel,
                              Queue<Image> loadingAnimations) {

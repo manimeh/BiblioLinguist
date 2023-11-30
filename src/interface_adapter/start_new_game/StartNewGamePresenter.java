@@ -1,6 +1,6 @@
 package interface_adapter.start_new_game;
 
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import interface_adapter.create_quiz.CreateQuizState;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import use_case.start_new_game.StartNewGameOutputBoundary;
@@ -9,11 +9,11 @@ import use_case.start_new_game.StartNewGameOutputData;
 public class StartNewGamePresenter implements StartNewGameOutputBoundary
 {
     private final CreateQuizViewModel createQuizViewModel;
-    private final ViewManagerModel viewManagerModel;
+    private final ViewModelManager viewModelManager;
 
-    public StartNewGamePresenter(ViewManagerModel viewManagerModel,
+    public StartNewGamePresenter(ViewModelManager viewModelManager,
                                  CreateQuizViewModel createQuizViewModel) {
-        this.viewManagerModel = viewManagerModel;
+        this.viewModelManager = viewModelManager;
         this.createQuizViewModel = createQuizViewModel;
     }
 
@@ -26,7 +26,7 @@ public class StartNewGamePresenter implements StartNewGameOutputBoundary
         createQuizStateState.setReadingType(outputData.defaultReadingType());
         createQuizViewModel.firePropertyChanged();
 
-        viewManagerModel.setActiveView(createQuizViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+        viewModelManager.setActiveView(createQuizViewModel.getViewName());
+        viewModelManager.firePropertyChanged();
     }
 }

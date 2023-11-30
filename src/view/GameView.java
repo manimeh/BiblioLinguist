@@ -23,9 +23,7 @@ public class GameView extends JSplitPane implements ActionListener, PropertyChan
 
     private final SubmitQuizViewModel submitQuizViewModel;
 
-    private JButton submitQuiz = null;
-
-    private final JPanel view1;
+    private final JPanel readingPanel;
     private final JPanel questionsPanel;
 
     public GameView(SubmitQuizViewModel submitQuizViewModel, SubmitQuizController submitQuizController) {
@@ -33,13 +31,17 @@ public class GameView extends JSplitPane implements ActionListener, PropertyChan
         this.submitQuizViewModel.addPropertyChangeListener(this);
 
         // Left half of panel
-        view1 = new JPanel();
+        JPanel view1 = new JPanel();
         view1.setLayout(new BoxLayout(view1, BoxLayout.Y_AXIS));
 
         JLabel header1 = new JLabel("Reading");
         header1.setAlignmentX(Component.CENTER_ALIGNMENT);
         header1.setFont(new Font(header1.getFont().getFontName(), Font.PLAIN, 25));
         view1.add(header1);
+
+        readingPanel = new JPanel();
+        readingPanel.setLayout(new BoxLayout(readingPanel, BoxLayout.Y_AXIS));
+        view1.add(readingPanel);
 
         // Right half of panel
         JPanel view2 = new JPanel();
@@ -64,17 +66,14 @@ public class GameView extends JSplitPane implements ActionListener, PropertyChan
         questionsPanelContainer.add(questionPanelWithSpace, BorderLayout.WEST);
         view2.add(questionsPanelContainer);
 
-        ButtonsPanel buttonsPanel = new ButtonsPanel();
+        ButtonsPanel buttonsPanel = new ButtonsPanel(BoxLayout.X_AXIS);
         Color buttonBackgroundColor2 = new Color(69, 196, 174);
 
         // Add submit quiz button to right view
-        submitQuiz = buttonsPanel.addGradientButton("Submit", ViewManager.BUTTON_FONT, buttonBackgroundColor2,
+        JButton submitQuiz = buttonsPanel.addGradientButton("Submit", ViewManager.BUTTON_FONT, buttonBackgroundColor2,
                 Color.BLACK, ViewManager.BUTTON_CURVATURE);
         submitQuiz.setMaximumSize(new Dimension(100, 30));
-
-        JPanel buttonsPanelContainer = new JPanel();
-        buttonsPanelContainer.add(buttonsPanel);
-        view2.add(buttonsPanelContainer);
+        view2.add(buttonsPanel);
 
         // Handle submit quiz button click
         submitQuiz.addActionListener(
@@ -106,12 +105,13 @@ public class GameView extends JSplitPane implements ActionListener, PropertyChan
 
         if (submitQuizState.getSubmitQuizError() != null)
         {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(this,
                     submitQuizState.getSubmitQuizError(), "Error", JOptionPane.ERROR_MESSAGE);
             submitQuizState.setSubmitQuizError(null);
         }
         else
         {
+            clearPreviousGame();
             ActiveQuizDisplay quizDisplay = submitQuizState.getQuiz().activeDisplay();
             updateLeftPanel(submitQuizState);
             updateRightPanel(quizDisplay);
@@ -132,9 +132,9 @@ public class GameView extends JSplitPane implements ActionListener, PropertyChan
         readingText.setWrapStyleWord(true);
         readingText.setEditable(false);
 
-        view1.add(title);
-        view1.add(author);
-        view1.add(readingText);
+        readingPanel.add(title);
+        readingPanel.add(author);
+        readingPanel.add(readingText);
     }
 
     private void updateRightPanel(ActiveQuizDisplay quizDisplay) {
@@ -143,11 +143,20 @@ public class GameView extends JSplitPane implements ActionListener, PropertyChan
 
         // Add each button group and question label to the view
         for (int i = 0; i < questions.length; i++) {
-            QuestionPanel questionPanel = new QuestionPanel(questions[i], choices[i], submitQuizViewModel, i);
+            QuestionPanel questionPanel = QuestionPanel.Builder.createActiveQuizPanel(questions[i], choices[i],
+                    submitQuizViewModel.getState().getAnswers(), i);
             questionsPanel.add(questionPanel);
             questionsPanel.add(Box.createVerticalGlue());
             questionPanel.add(createSpacer(PREF_SPACE_BETWEEN_QUESTION, MAX_SPACE_BETWEEN_QUESTION));
         }
+    }
+
+    private void clearPreviousGame()
+    {
+        questionsPanel.removeAll();
+        readingPanel.removeAll();
+        revalidate();
+        repaint();
     }
 
     private Box.Filler createSpacer(Dimension prefSize, Dimension maxSize)

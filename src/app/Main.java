@@ -9,9 +9,10 @@ import data_access.file_accessors.UserPreferenceDataAccessObject;
 import data_access.file_accessors.UserScoresDataAccessObject;
 import data_access.file_accessors.graphics.ImageType;
 import entity.Pair;
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.loading_screen.LoadingScreenViewModel;
+import interface_adapter.return_home.ReturnHomeViewModel;
 import interface_adapter.start_new_game.StartNewGameViewModel;
 import interface_adapter.submit_quiz.SubmitQuizViewModel;
 import interface_adapter.view_scores.ViewScoresViewModel;
@@ -34,14 +35,15 @@ public class Main
         JPanel views = new JPanel(cardLayout);
         application.add(views);
 
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
+        ViewModelManager viewModelManager = new ViewModelManager();
+        new ViewManager(views, cardLayout, viewModelManager);
 
         StartNewGameViewModel startNewGameViewModel = new StartNewGameViewModel();
         ViewScoresViewModel viewScoresViewModel = new ViewScoresViewModel();
         CreateQuizViewModel createQuizViewModel = new CreateQuizViewModel();
         LoadingScreenViewModel loadingScreenViewModel = new LoadingScreenViewModel();
         SubmitQuizViewModel submitQuizViewModel = new SubmitQuizViewModel();
+        ReturnHomeViewModel returnHomeViewModel = new ReturnHomeViewModel();
 
         GraphicsAccessObject graphicsAccessObject;
         UserScoresDataAccessObject userScoresDataAccessObject;
@@ -85,23 +87,28 @@ public class Main
 
         application.setIconImage(graphicsAccessObject.getLogoImage());
 
-        HomePageView homePageView = HomePageUseCaseFactory.create(viewManagerModel, startNewGameViewModel,
+        HomePageView homePageView = HomePageUseCaseFactory.create(viewModelManager, startNewGameViewModel,
                 viewScoresViewModel, createQuizViewModel, graphicsAccessObject, userPreferenceDataAccessObject,
                 userScoresDataAccessObject);
         views.add(homePageView, HomePageView.VIEW_NAME);
 
         Pair<CreateQuizView, LoadingScreenView> createQuizViewUseCaseViews =
-                CreateQuizUseCaseFactory.create(userPreferenceDataAccessObject, factoryRetriever, viewManagerModel,
+                CreateQuizUseCaseFactory.create(userPreferenceDataAccessObject, factoryRetriever, viewModelManager,
                         createQuizViewModel, loadingScreenViewModel, submitQuizViewModel, graphicsAccessObject,
                         graphicsAccessObject);
         views.add(createQuizViewUseCaseViews.first(), CreateQuizView.VIEW_NAME);
         views.add(createQuizViewUseCaseViews.second(), LoadingScreenView.VIEW_NAME);
 
-        GameView gameView = SubmitQuizUseCaseFactory.create(viewManagerModel, submitQuizViewModel, userScoresDataAccessObject);
+        GameView gameView = SubmitQuizUseCaseFactory.create(viewModelManager, submitQuizViewModel, returnHomeViewModel,
+                userScoresDataAccessObject);
         views.add(gameView, GameView.VIEW_NAME);
 
-        viewManagerModel.setActiveView(HomePageView.VIEW_NAME);
-        viewManagerModel.firePropertyChanged();
+        ResultsView resultsView = ReturnHomeUseCaseFactory.create(viewModelManager, returnHomeViewModel,
+                startNewGameViewModel);
+        views.add(resultsView, ResultsView.VIEW_NAME);
+
+        viewModelManager.setActiveView(HomePageView.VIEW_NAME);
+        viewModelManager.firePropertyChanged();
 
         application.pack();
         application.setVisible(true);

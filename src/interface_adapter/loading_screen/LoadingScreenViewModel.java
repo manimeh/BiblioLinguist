@@ -11,7 +11,7 @@ public class LoadingScreenViewModel extends ViewModel {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public LoadingScreenViewModel() {
-        super("loading screen");
+        super("Loading Screen");
     }
 
     @Override
