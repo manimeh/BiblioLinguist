@@ -5,7 +5,7 @@ import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.News;
 
-import java.util.*;
+import java.util.Optional;
 
 public class NewsReadingFactory implements DifficultyReadingFactory
 {
