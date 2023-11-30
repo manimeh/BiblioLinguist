@@ -17,7 +17,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 
 public class CreateQuizView extends BackgroundImagePanel implements ActionListener, PropertyChangeListener {
-    public static final String VIEW_NAME = "create quiz";
+    public static final String VIEW_NAME = "Create Quiz";
 
     private final CreateQuizController createQuizController;
     private final CreateQuizViewModel createQuizViewModel;
@@ -26,8 +26,6 @@ public class CreateQuizView extends BackgroundImagePanel implements ActionListen
     private final JComboBox<String> difficultyDropdown;
     private final JComboBox<String> readingTypeDropdown;
 
-    private final JButton takeQuiz;
-
     public CreateQuizView(CreateQuizController createQuizController, CreateQuizViewModel createQuizViewModel,
                           Image backgroundImage, Image headerImage) {
         super(backgroundImage);
@@ -35,7 +33,7 @@ public class CreateQuizView extends BackgroundImagePanel implements ActionListen
         this.createQuizViewModel = createQuizViewModel;
         createQuizViewModel.addPropertyChangeListener(this);
 
-        ButtonsPanel buttonPanel = new ButtonsPanel();
+        ButtonsPanel buttonPanel = new ButtonsPanel(BoxLayout.Y_AXIS);
         Color buttonBackgroundColor = new Color(144, 172, 245);
 
         JLabel title = new JLabel(new ImageIcon(headerImage));
@@ -56,7 +54,7 @@ public class CreateQuizView extends BackgroundImagePanel implements ActionListen
         LabeledDropdownPanel readingTypeInfo = new LabeledDropdownPanel(createJLabel(CreateQuizViewModel.READING_TYPE_DROPDOWN_LABEL),
                 readingTypeDropdown);
 
-        takeQuiz = buttonPanel.addGradientButton(CreateQuizViewModel.TAKE_QUIZ_BUTTON_LABEL,
+        JButton takeQuiz = buttonPanel.addGradientButton(CreateQuizViewModel.TAKE_QUIZ_BUTTON_LABEL,
                 ViewManager.BUTTON_FONT, buttonBackgroundColor, Color.BLACK, ViewManager.BUTTON_CURVATURE);
         buttonPanel.addSpacer();
         buttonPanel.addSpacer();
