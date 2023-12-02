@@ -62,7 +62,7 @@ public class SubmitQuizInteractorTest {
 
 
     @Test
-    public void submitQuiz() {
+    public void submitQuizTest() {
         clearCSV();
 
         User user = new UserFactory().createUser("test", new float[][]{new float[]{}, new float[]{}, new float[]{}});
