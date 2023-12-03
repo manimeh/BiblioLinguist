@@ -9,7 +9,7 @@ import data_access.file_accessors.UserPreferenceDataAccessObject;
 import data_access.file_accessors.UserScoresDataAccessObject;
 import data_access.file_accessors.graphics.ImageType;
 import entity.Pair;
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.loading_screen.LoadingScreenViewModel;
 import interface_adapter.start_new_game.StartNewGameViewModel;
@@ -37,7 +37,7 @@ public class Main
         JPanel views = new JPanel(cardLayout);
         application.add(views);
 
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        ViewModelManager viewManagerModel = new ViewModelManager();
         new ViewManager(views, cardLayout, viewManagerModel);
 
         StartNewGameViewModel startNewGameViewModel = new StartNewGameViewModel();

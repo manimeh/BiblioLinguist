@@ -3,7 +3,7 @@ package app;
 import data_access.file_accessors.graphics.CreateQuizGraphicsAccessInterface;
 import data_access.file_accessors.graphics.LoadingScreenGraphicsAccessInterface;
 import entity.Pair;
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import interface_adapter.create_quiz.CreateQuizController;
 import interface_adapter.create_quiz.CreateQuizPresenter;
 import interface_adapter.create_quiz.CreateQuizViewModel;
@@ -20,7 +20,7 @@ public class CreateQuizUseCaseFactory {
     public static Pair<CreateQuizView, LoadingScreenView> create(
             CreateQuizDataAccessInterface createQuizDataAccessInterface,
             CreateQuizFactoryRetrieverInterface createQuizFactoryRetrieverInterface,
-            ViewManagerModel viewManagerModel,
+            ViewModelManager viewManagerModel,
             CreateQuizViewModel createQuizViewModel,
             LoadingScreenViewModel loadingScreenViewModel,
             SubmitQuizViewModel submitQuizViewModel,
@@ -40,7 +40,7 @@ public class CreateQuizUseCaseFactory {
 
     private static CreateQuizController createCreateQuizController(CreateQuizDataAccessInterface createQuizDataAccessInterface,
                                                                    CreateQuizFactoryRetrieverInterface createQuizFactoryRetrieverInterface,
-                                                                   ViewManagerModel viewManagerModel,
+                                                                   ViewModelManager viewManagerModel,
                                                                    CreateQuizViewModel createQuizViewModel,
                                                                    LoadingScreenViewModel loadingScreenViewModel,
                                                                    SubmitQuizViewModel submitQuizViewModel)

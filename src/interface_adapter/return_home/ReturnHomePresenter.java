@@ -1,14 +1,14 @@
 package interface_adapter.return_home;
 
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import use_case.return_home.ReturnHomeOutputBoundary;
 import use_case.return_home.ReturnHomeOutputData;
 
 public class ReturnHomePresenter implements ReturnHomeOutputBoundary {
     private final ReturnHomeViewModel returnHomeViewModel;
-    private final ViewManagerModel viewManagerModel;
+    private final ViewModelManager viewManagerModel;
 
-    public ReturnHomePresenter(ViewManagerModel viewManagerModel, ReturnHomeViewModel returnHomeViewModel) {
+    public ReturnHomePresenter(ViewModelManager viewManagerModel, ReturnHomeViewModel returnHomeViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.returnHomeViewModel = returnHomeViewModel;
     }

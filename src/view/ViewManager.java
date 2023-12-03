@@ -1,6 +1,6 @@
 package view;
 
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public class ViewManager implements PropertyChangeListener {
     private final CardLayout cardLayout;
     private final JPanel views;
 
-    public ViewManager(JPanel views, CardLayout cardLayout, ViewManagerModel viewManagerModel) {
+    public ViewManager(JPanel views, CardLayout cardLayout, ViewModelManager viewManagerModel) {
         this.views = views;
         this.cardLayout = cardLayout;
         viewManagerModel.addPropertyChangeListener(this);

@@ -1,7 +1,7 @@
 package app;
 
 import data_access.file_accessors.graphics.HomePageGraphicsAccessInterface;
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.start_new_game.StartNewGameController;
 import interface_adapter.start_new_game.StartNewGamePresenter;
@@ -25,7 +25,7 @@ public class HomePageUseCaseFactory
     private HomePageUseCaseFactory() {}
 
     public static HomePageView create(
-            ViewManagerModel viewManagerModel, StartNewGameViewModel startNewGameViewModel, ViewScoresViewModel viewScoresViewModel,
+            ViewModelManager viewManagerModel, StartNewGameViewModel startNewGameViewModel, ViewScoresViewModel viewScoresViewModel,
             CreateQuizViewModel createQuizViewModel, HomePageGraphicsAccessInterface graphicsAccessInterface,
             StartNewGameDataAccessInterface startNewGameDataAccessObject, ViewScoresDataAccessInterface viewScoresDataAccessObject) {
 
@@ -37,7 +37,7 @@ public class HomePageUseCaseFactory
                 graphicsAccessInterface.getHomePageBackgroundImage());
     }
 
-    private static StartNewGameController createStartNewGameUseCase(ViewManagerModel viewManagerModel,
+    private static StartNewGameController createStartNewGameUseCase(ViewModelManager viewManagerModel,
                                                                     CreateQuizViewModel createQuizViewModel,
                                                                     StartNewGameDataAccessInterface startNewGameDataAccessObject)
     {
@@ -46,7 +46,7 @@ public class HomePageUseCaseFactory
         return new StartNewGameController(startNewGameInputBoundary);
     }
 
-    private static ViewScoresController createViewScoresUseCase(ViewManagerModel viewManagerModel,
+    private static ViewScoresController createViewScoresUseCase(ViewModelManager viewManagerModel,
                                                                 ViewScoresViewModel viewScoresViewModel,
                                                                 ViewScoresDataAccessInterface viewScoresDataAccessObject) {
         ViewScoresOutputBoundary viewScoresOutputBoundary = new ViewScoresPresenter(viewManagerModel, viewScoresViewModel);
