@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 
 public class WorldNewsRetriever implements NewsRetrieverInterface
 {
-    private static final String NEWS_API_TOKEN = "af13d29843d140a69fa46c50a5a545ad";
+    private static final String NEWS_API_TOKEN = System.getenv("NEWS_API_TOKEN");;
 
     @Override
     public News[] getNewsListFromAPI(Language language, int numOfNews)
