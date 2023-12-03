@@ -1,0 +1,55 @@
+@startuml
+interface PropertyChangeListener
+{
++propertyChange(evt: PropertyChangeEvent): void
+}
+
+interface CreateQuizInputBoundary
+{
++execute(inputData: CreateQuizInputData): void
+}
+
+interface CreateQuizOutputBoundary
+{
++prepareLoadView(): void
++prepareSuccessView(outputData: CreateQuizOutputData): void
++prepareLoadView(error: String): void
+}
+
+class CreateQuizInteractor
+{
+-presenter: CreateQuizOutputBoundary
+-readingGenerator: ReadingGenerator
+-quizGenerator: QuizGenerator
++execute(inputData: CreateQuizInputData): void
++propertyChange(evt: PropertyChangeEvent): void
+}
+
+class ReadingGenerator
+{
+-support: PropertyChangeSupport
+-state: State
++run(): void
++firePropertyChanged(): void
++addPropertyChangeListener(listener: PropertyChangeListener): void
+}
+
+class State
+{
+}
+
+interface Thread
+{
++start(): void
++run(): void
+}
+
+PropertyChangeListener <|.. CreateQuizInteractor
+CreateQuizInputBoundary <|.. CreateQuizInteractor
+CreateQuizInteractor *-- CreateQuizOutputBoundary
+CreateQuizInteractor *-- ReadingGenerator
+
+Thread <|.. ReadingGenerator
+ReadingGenerator *-- State: inner class
+CreateQuizInteractor ..> State
+@enduml

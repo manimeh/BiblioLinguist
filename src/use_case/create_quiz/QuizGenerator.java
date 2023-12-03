@@ -9,7 +9,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class QuizGenerator extends Thread {
-    private final CreateQuizFactoryRetrieverInterface factoryRetriever;
+    private final CreateQuizFactoryProviderInterface factoryRetriever;
     private final Reading reading;
     private final Language language;
     private final DifficultyLevel difficultyLevel;
@@ -19,8 +19,8 @@ public class QuizGenerator extends Thread {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    private QuizGenerator(CreateQuizFactoryRetrieverInterface factoryRetriever, Reading reading,
-                             Language language, DifficultyLevel difficultyLevel, int numOfQuestions) {
+    private QuizGenerator(CreateQuizFactoryProviderInterface factoryRetriever, Reading reading,
+                          Language language, DifficultyLevel difficultyLevel, int numOfQuestions) {
         this.factoryRetriever = factoryRetriever;
         this.reading = reading;
         this.language = language;
@@ -67,13 +67,13 @@ public class QuizGenerator extends Thread {
 
     public static class Builder
     {
-        private CreateQuizFactoryRetrieverInterface factoryRetriever;
+        private CreateQuizFactoryProviderInterface factoryRetriever;
         private Reading reading;
         private Language language;
         private DifficultyLevel difficultyLevel;
         private int numOfQuestions;
 
-        public Builder setFactoryRetriever(CreateQuizFactoryRetrieverInterface factoryRetriever) {
+        public Builder setFactoryRetriever(CreateQuizFactoryProviderInterface factoryRetriever) {
             this.factoryRetriever = factoryRetriever;
             return this;
         }
