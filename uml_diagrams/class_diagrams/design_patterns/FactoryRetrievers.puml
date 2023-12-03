@@ -1,0 +1,44 @@
+@startuml
+interface CreateQuizFactoryProviderInterface
+{
++getReadingFactory(readingType: ReadingType): DifficultyReadingFactory
++getQuizFactory(): MCQuizFactoryInterface
+}
+
+interface QuizFactoryProviderInterface
+{
++getQuizFactory(): MCQuizFactoryInterface
+}
+
+interface ReadingFactoryProviderInterface
+{
++getReadingFactory(readingType: ReadingType): DifficultyReadingFactory
+}
+
+class FactoryProvider
+{
+-readingFactoryBuilder: ReadingFactoryProviderInterface
+-quizFactoryBuilder: QuizFactoryProviderInterface
+
++FactoryProvider(readingFactoryBuilder: ReadingFactoryProviderInterface, quizFactoryBuilder: QuizFactoryProviderInterface)
++getReadingFactory(readingType: ReadingType): DifficultyReadingFactory
++getQuizFactory(): MCQuizFactoryInterface
+}
+
+class ReadingFactoryProvider
+{
++getReadingFactory(readingType: ReadingType): DifficultyReadingFactory
+}
+
+class QuizFactoryProvider
+{
++getQuizFactory(): MCQuizFactoryInterface
+}
+
+CreateQuizFactoryProviderInterface <|.. FactoryProvider
+ReadingFactoryProviderInterface <|.. ReadingFactoryProvider
+QuizFactoryProviderInterface <|.. QuizFactoryProvider
+
+ReadingFactoryProviderInterface --* FactoryProvider
+QuizFactoryProviderInterface --* FactoryProvider
+@enduml

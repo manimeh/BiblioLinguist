@@ -3,13 +3,13 @@ package data_access.api_accessors.FactoryBuilders;
 import entity.quiz.factory.MCQuizFactoryInterface;
 import entity.reading.ReadingType;
 import entity.reading.factory.DifficultyReadingFactory;
-import use_case.create_quiz.CreateQuizFactoryRetrieverInterface;
+import use_case.create_quiz.CreateQuizFactoryProviderInterface;
 
-public class FactoryRetriever implements CreateQuizFactoryRetrieverInterface {
-    private final ReadingFactoryBuilderInterface readingFactoryBuilder;
-    private final QuizFactoryBuilderInterface quizFactoryBuilder;
+public class FactoryProvider implements CreateQuizFactoryProviderInterface {
+    private final ReadingFactoryProviderInterface readingFactoryBuilder;
+    private final QuizFactoryProviderInterface quizFactoryBuilder;
 
-    public FactoryRetriever(ReadingFactoryBuilderInterface readingFactoryBuilder, QuizFactoryBuilderInterface quizFactoryBuilder) {
+    public FactoryProvider(ReadingFactoryProviderInterface readingFactoryBuilder, QuizFactoryProviderInterface quizFactoryBuilder) {
         this.readingFactoryBuilder = readingFactoryBuilder;
         this.quizFactoryBuilder = quizFactoryBuilder;
     }

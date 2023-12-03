@@ -51,7 +51,7 @@ public class GraphicsAccessObject implements ApplicationGraphicsAccessInterface,
         private final Map<ImageType, Image> images = new HashMap<>();
         private final Queue<Image> loadingAnimations = new LinkedList<>();
 
-        public Builder(){};
+        public Builder(){}
 
         public Builder setImage(ImageType imageType, String fileName) throws IOException {
             images.put(imageType, ImageIO.read(new File(fileName)));
@@ -65,7 +65,7 @@ public class GraphicsAccessObject implements ApplicationGraphicsAccessInterface,
             return this;
         }
 
-        public GraphicsAccessObject Build()
+        public GraphicsAccessObject build()
         {
             return new GraphicsAccessObject(images, loadingAnimations);
         }

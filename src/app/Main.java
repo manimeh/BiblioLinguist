@@ -1,12 +1,12 @@
 package app;
 
-import data_access.api_accessors.FactoryBuilders.FactoryRetriever;
-import data_access.api_accessors.FactoryBuilders.QuizFactoryBuilder;
-import data_access.api_accessors.FactoryBuilders.ReadingFactoryBuilder;
+import data_access.api_accessors.FactoryBuilders.FactoryProvider;
+import data_access.api_accessors.FactoryBuilders.QuizFactoryProvider;
+import data_access.api_accessors.FactoryBuilders.ReadingFactoryProvider;
 import data_access.file_accessors.InvalidHeaderException;
-import data_access.file_accessors.graphics.GraphicsAccessObject;
 import data_access.file_accessors.UserPreferenceDataAccessObject;
 import data_access.file_accessors.UserScoresDataAccessObject;
+import data_access.file_accessors.graphics.GraphicsAccessObject;
 import data_access.file_accessors.graphics.ImageType;
 import entity.Pair;
 import interface_adapter.ViewModelManager;
@@ -48,7 +48,7 @@ public class Main
         GraphicsAccessObject graphicsAccessObject;
         UserScoresDataAccessObject userScoresDataAccessObject;
         UserPreferenceDataAccessObject userPreferenceDataAccessObject;
-        FactoryRetriever factoryRetriever = new FactoryRetriever(new ReadingFactoryBuilder(), new QuizFactoryBuilder());
+        FactoryProvider factoryProvider = new FactoryProvider(new ReadingFactoryProvider(), new QuizFactoryProvider());
 
         //TODO (At the end): Handle the exceptions in a more user friendly way. So, instead of throwing a RuntimeException(e),
         // we can maybe do a pop-up window
@@ -67,7 +67,7 @@ public class Main
                             "./src/graphics/LoadingAnimation1.gif",
                             "./src/graphics/LoadingAnimation3.gif",
                             "./src/graphics/LoadingAnimation4.gif"})
-                    .Build();
+                    .build();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -93,7 +93,7 @@ public class Main
         views.add(homePageView, HomePageView.VIEW_NAME);
 
         Pair<CreateQuizView, LoadingScreenView> createQuizViewUseCaseViews =
-                CreateQuizUseCaseFactory.create(userPreferenceDataAccessObject, factoryRetriever, viewModelManager,
+                CreateQuizUseCaseFactory.create(userPreferenceDataAccessObject, factoryProvider, viewModelManager,
                         createQuizViewModel, loadingScreenViewModel, submitQuizViewModel, graphicsAccessObject,
                         graphicsAccessObject);
         views.add(createQuizViewUseCaseViews.first(), CreateQuizView.VIEW_NAME);

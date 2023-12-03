@@ -33,18 +33,20 @@ public interface DifficultyReadingFactory extends ReadingFactory
         T suitableReading = null;
 
         double readingDifficulty;
-        double bestLength = Double.MAX_VALUE;
+        int distance;
+        int bestDistance = Integer.MAX_VALUE;
 
         for (T reading: listOfReading)
         {
             readingDifficulty = getReadingDifficulty(language, reading);
+            distance = distanceFromIdealLength(Reading.wordCount(reading.display().text()));
 
             if ((difficulty.getMinReadRange() <= readingDifficulty) && (readingDifficulty <= difficulty.getMaxReadRange()))
             {
-                if (distanceFromIdealLength(Reading.wordCount(reading.display().text())) < bestLength)
+                if (distance < bestDistance)
                 {
                     suitableReading = reading;
-                    bestLength = readingDifficulty;
+                    bestDistance = distance;
                 }
             }
         }
@@ -52,8 +54,8 @@ public interface DifficultyReadingFactory extends ReadingFactory
         return Optional.ofNullable(suitableReading);
     }
 
-    static double distanceFromIdealLength(double length)
+    static int distanceFromIdealLength(int wordCount)
     {
-        return Math.abs(length - Reading.IDEAL_WORD_COUNT);
+        return Math.abs(wordCount - Reading.IDEAL_WORD_COUNT);
     }
 }

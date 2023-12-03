@@ -4,7 +4,7 @@ import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.AIGeneratedStory;
 
-public interface AIGeneratedStoryRetriever extends ReadingRetrieverInterface
+public interface AIGeneratedStoryRetrieverInterface extends ReadingRetrieverInterface
 {
     @Override
     AIGeneratedStory retrieveReadingFromAPI(Language language);

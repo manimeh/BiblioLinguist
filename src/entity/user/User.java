@@ -4,9 +4,9 @@ import entity.DifficultyLevel;
 
 public class User
 {
-    private int id;
-    private String name;
-    private float[][] scores;
+    private final int id;
+    private final String name;
+    private final float[][] scores;
 
     public User(int id, String name, float[][] scores) {
         if (scores.length != DifficultyLevel.values().length)
