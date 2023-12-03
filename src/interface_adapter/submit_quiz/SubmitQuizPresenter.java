@@ -2,15 +2,15 @@ package interface_adapter.submit_quiz;
 
 import entity.quiz.SubmittedQuizDisplay;
 import entity.user.User;
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import use_case.submit_quiz.SubmitQuizOutputBoundary;
 import use_case.submit_quiz.SubmitQuizOutputData;
 
 public class SubmitQuizPresenter implements SubmitQuizOutputBoundary {
     private final SubmitQuizViewModel quizViewModel;
-    private final ViewManagerModel viewManager;
+    private final ViewModelManager viewManager;
 
-    public SubmitQuizPresenter(ViewManagerModel viewManager, SubmitQuizViewModel quizViewModel) {
+    public SubmitQuizPresenter(ViewModelManager viewManager, SubmitQuizViewModel quizViewModel) {
         this.viewManager = viewManager;
         this.quizViewModel = quizViewModel;
     }

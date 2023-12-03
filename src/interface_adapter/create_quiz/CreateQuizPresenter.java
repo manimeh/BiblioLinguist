@@ -1,6 +1,6 @@
 package interface_adapter.create_quiz;
 
-import interface_adapter.ViewManagerModel;
+import interface_adapter.ViewModelManager;
 import interface_adapter.loading_screen.LoadingScreenViewModel;
 import interface_adapter.submit_quiz.SubmitQuizState;
 import interface_adapter.submit_quiz.SubmitQuizViewModel;
@@ -12,9 +12,9 @@ public class CreateQuizPresenter implements CreateQuizOutputBoundary {
     private final LoadingScreenViewModel loadingScreenViewModel;
     private final SubmitQuizViewModel submitQuizViewModel;
 
-    private final ViewManagerModel viewManagerModel;
+    private final ViewModelManager viewManagerModel;
 
-    public CreateQuizPresenter(ViewManagerModel viewManagerModel, CreateQuizViewModel createQuizViewModel,
+    public CreateQuizPresenter(ViewModelManager viewManagerModel, CreateQuizViewModel createQuizViewModel,
                                LoadingScreenViewModel loadingScreenViewModel, SubmitQuizViewModel submitQuizViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.createQuizViewModel = createQuizViewModel;
