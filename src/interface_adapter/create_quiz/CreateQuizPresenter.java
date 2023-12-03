@@ -12,11 +12,11 @@ public class CreateQuizPresenter implements CreateQuizOutputBoundary {
     private final LoadingScreenViewModel loadingScreenViewModel;
     private final SubmitQuizViewModel submitQuizViewModel;
 
-    private final ViewModelManager viewManagerModel;
+    private final ViewModelManager viewModelManager;
 
-    public CreateQuizPresenter(ViewModelManager viewManagerModel, CreateQuizViewModel createQuizViewModel,
+    public CreateQuizPresenter(ViewModelManager viewModelManager, CreateQuizViewModel createQuizViewModel,
                                LoadingScreenViewModel loadingScreenViewModel, SubmitQuizViewModel submitQuizViewModel) {
-        this.viewManagerModel = viewManagerModel;
+        this.viewModelManager = viewModelManager;
         this.createQuizViewModel = createQuizViewModel;
         this.loadingScreenViewModel = loadingScreenViewModel;
         this.submitQuizViewModel = submitQuizViewModel;
@@ -24,8 +24,8 @@ public class CreateQuizPresenter implements CreateQuizOutputBoundary {
 
     @Override
     public void prepareLoadView() {
-        viewManagerModel.setActiveView(loadingScreenViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+        viewModelManager.setActiveView(loadingScreenViewModel.getViewName());
+        viewModelManager.firePropertyChanged();
     }
 
     @Override
@@ -35,8 +35,8 @@ public class CreateQuizPresenter implements CreateQuizOutputBoundary {
         submitQuizState.setReading(outputData.reading());
         submitQuizViewModel.firePropertyChanged();
 
-        viewManagerModel.setActiveView(submitQuizViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+        viewModelManager.setActiveView(submitQuizViewModel.getViewName());
+        viewModelManager.firePropertyChanged();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CreateQuizPresenter implements CreateQuizOutputBoundary {
         createQuizStateState.setErrorMessage(error);
         createQuizViewModel.firePropertyChanged();
 
-        viewManagerModel.setActiveView(createQuizViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+        viewModelManager.setActiveView(createQuizViewModel.getViewName());
+        viewModelManager.firePropertyChanged();
     }
 }

@@ -1,0 +1,51 @@
+@startuml
+interface ReadingFactory
+{
++create(language: Language): Reading
+}
+
+interface DifficultyReadingFactory
+{
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel, numOfTries: Integer): Optional<Reading>
++{static} getReadingDifficulty(language: Language, reading: Reading): Double
++{static} standardDifficultyReadingCreator(language: Language, difficulty: DifficultyLevel, listOfReading: T[]): <T extends Reading> Optional<T>
++{static} distanceFromIdealLength(wordCount: Integer): Integer
+}
+
+class NewsReadingFactory
+{
+-newsRetriever: NewsRetrieverInterface
+
++NewsReadingFactory(newsRetriever: NewsRetrieverInterface)
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel): Optional<Reading>
+}
+
+class WikiArticleReadingFactory
+{
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel): Optional<Reading>
+}
+
+class AIGeneratedStoryReadingFactory
+{
+-storyRetriever: AIGeneratedStoryRetrieverInterface
+
++AIGeneratedStoryReadingFactory(storyRetriever: AIGeneratedStoryRetrieverInterface)
++create(language: Language): Reading
++create(language: Language, difficulty: DifficultyLevel): Optional<Reading>
+}
+
+interface Reading
+{
++display(): ReadingDisplay
+}
+
+ReadingFactory <|-- DifficultyReadingFactory
+DifficultyReadingFactory <|.. NewsReadingFactory
+DifficultyReadingFactory <|.. WikiArticleReadingFactory
+DifficultyReadingFactory <|.. AIGeneratedStoryReadingFactory
+
+Reading <.. ReadingFactory: <<creates>>
+@enduml

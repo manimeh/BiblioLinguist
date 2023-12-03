@@ -21,7 +21,7 @@ public class CreateQuizInteractor implements CreateQuizInputBoundary, PropertyCh
     private Reading reading;
 
     public CreateQuizInteractor(CreateQuizDataAccessInterface dataAccessor,
-                                CreateQuizFactoryRetrieverInterface factoryRetriever,
+                                CreateQuizFactoryProviderInterface factoryRetriever,
                                 CreateQuizOutputBoundary createQuizPresenter) {
         this.dataAccessor = dataAccessor;
         this.presenter = createQuizPresenter;

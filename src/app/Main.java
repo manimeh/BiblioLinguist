@@ -1,24 +1,22 @@
 package app;
 
-import data_access.api_accessors.FactoryBuilders.FactoryRetriever;
-import data_access.api_accessors.FactoryBuilders.QuizFactoryBuilder;
-import data_access.api_accessors.FactoryBuilders.ReadingFactoryBuilder;
+import data_access.api_accessors.FactoryBuilders.FactoryProvider;
+import data_access.api_accessors.FactoryBuilders.QuizFactoryProvider;
+import data_access.api_accessors.FactoryBuilders.ReadingFactoryProvider;
 import data_access.file_accessors.InvalidHeaderException;
-import data_access.file_accessors.graphics.GraphicsAccessObject;
 import data_access.file_accessors.UserPreferenceDataAccessObject;
 import data_access.file_accessors.UserScoresDataAccessObject;
+import data_access.file_accessors.graphics.GraphicsAccessObject;
 import data_access.file_accessors.graphics.ImageType;
 import entity.Pair;
 import interface_adapter.ViewModelManager;
 import interface_adapter.create_quiz.CreateQuizViewModel;
 import interface_adapter.loading_screen.LoadingScreenViewModel;
+import interface_adapter.return_home.ReturnHomeViewModel;
 import interface_adapter.start_new_game.StartNewGameViewModel;
 import interface_adapter.submit_quiz.SubmitQuizViewModel;
 import interface_adapter.view_scores.ViewScoresViewModel;
-import view.CreateQuizView;
-import view.HomePageView;
-import view.LoadingScreenView;
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,19 +35,20 @@ public class Main
         JPanel views = new JPanel(cardLayout);
         application.add(views);
 
-        ViewModelManager viewManagerModel = new ViewModelManager();
-        new ViewManager(views, cardLayout, viewManagerModel);
+        ViewModelManager viewModelManager = new ViewModelManager();
+        new ViewManager(views, cardLayout, viewModelManager);
 
         StartNewGameViewModel startNewGameViewModel = new StartNewGameViewModel();
         ViewScoresViewModel viewScoresViewModel = new ViewScoresViewModel();
         CreateQuizViewModel createQuizViewModel = new CreateQuizViewModel();
         LoadingScreenViewModel loadingScreenViewModel = new LoadingScreenViewModel();
         SubmitQuizViewModel submitQuizViewModel = new SubmitQuizViewModel();
+        ReturnHomeViewModel returnHomeViewModel = new ReturnHomeViewModel();
 
         GraphicsAccessObject graphicsAccessObject;
         UserScoresDataAccessObject userScoresDataAccessObject;
         UserPreferenceDataAccessObject userPreferenceDataAccessObject;
-        FactoryRetriever factoryRetriever = new FactoryRetriever(new ReadingFactoryBuilder(), new QuizFactoryBuilder());
+        FactoryProvider factoryProvider = new FactoryProvider(new ReadingFactoryProvider(), new QuizFactoryProvider());
 
         //TODO (At the end): Handle the exceptions in a more user friendly way. So, instead of throwing a RuntimeException(e),
         // we can maybe do a pop-up window
@@ -68,7 +67,7 @@ public class Main
                             "./src/graphics/LoadingAnimation1.gif",
                             "./src/graphics/LoadingAnimation3.gif",
                             "./src/graphics/LoadingAnimation4.gif"})
-                    .Build();
+                    .build();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -88,20 +87,28 @@ public class Main
 
         application.setIconImage(graphicsAccessObject.getLogoImage());
 
-        HomePageView homePageView = HomePageUseCaseFactory.create(viewManagerModel, startNewGameViewModel,
+        HomePageView homePageView = HomePageUseCaseFactory.create(viewModelManager, startNewGameViewModel,
                 viewScoresViewModel, createQuizViewModel, graphicsAccessObject, userPreferenceDataAccessObject,
                 userScoresDataAccessObject);
         views.add(homePageView, HomePageView.VIEW_NAME);
 
         Pair<CreateQuizView, LoadingScreenView> createQuizViewUseCaseViews =
-                CreateQuizUseCaseFactory.create(userPreferenceDataAccessObject, factoryRetriever, viewManagerModel,
+                CreateQuizUseCaseFactory.create(userPreferenceDataAccessObject, factoryProvider, viewModelManager,
                         createQuizViewModel, loadingScreenViewModel, submitQuizViewModel, graphicsAccessObject,
                         graphicsAccessObject);
         views.add(createQuizViewUseCaseViews.first(), CreateQuizView.VIEW_NAME);
         views.add(createQuizViewUseCaseViews.second(), LoadingScreenView.VIEW_NAME);
 
-        viewManagerModel.setActiveView(HomePageView.VIEW_NAME);
-        viewManagerModel.firePropertyChanged();
+        GameView gameView = SubmitQuizUseCaseFactory.create(viewModelManager, submitQuizViewModel, returnHomeViewModel,
+                userScoresDataAccessObject);
+        views.add(gameView, GameView.VIEW_NAME);
+
+        ResultsView resultsView = ReturnHomeUseCaseFactory.create(viewModelManager, returnHomeViewModel,
+                startNewGameViewModel);
+        views.add(resultsView, ResultsView.VIEW_NAME);
+
+        viewModelManager.setActiveView(HomePageView.VIEW_NAME);
+        viewModelManager.firePropertyChanged();
 
         application.pack();
         application.setVisible(true);

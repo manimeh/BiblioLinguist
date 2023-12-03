@@ -4,13 +4,16 @@ import interface_adapter.loading_screen.LoadingScreenViewModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Queue;
 
 public class LoadingScreenView extends BackgroundImagePanel implements ActionListener, PropertyChangeListener {
-    public static final String VIEW_NAME = "loading screen";
+    public static final String VIEW_NAME = "Loading Screen";
 
     public LoadingScreenView(LoadingScreenViewModel loadingScreenViewModel,
                              Queue<Image> loadingAnimations) {

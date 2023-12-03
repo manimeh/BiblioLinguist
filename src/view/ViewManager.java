@@ -14,10 +14,10 @@ public class ViewManager implements PropertyChangeListener {
     private final CardLayout cardLayout;
     private final JPanel views;
 
-    public ViewManager(JPanel views, CardLayout cardLayout, ViewModelManager viewManagerModel) {
+    public ViewManager(JPanel views, CardLayout cardLayout, ViewModelManager viewModelManager) {
         this.views = views;
         this.cardLayout = cardLayout;
-        viewManagerModel.addPropertyChangeListener(this);
+        viewModelManager.addPropertyChangeListener(this);
     }
 
     @Override

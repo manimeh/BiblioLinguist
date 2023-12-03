@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class ViewScoresPresenter implements ViewScoresOutputBoundary {
     private final ViewScoresViewModel viewScoresViewModel;
-    private final ViewModelManager viewManagerModel;
+    private final ViewModelManager viewModelManager;
 
-    public ViewScoresPresenter(ViewModelManager viewManagerModel, ViewScoresViewModel viewScoresViewModel) {
+    public ViewScoresPresenter(ViewModelManager viewModelManager, ViewScoresViewModel viewScoresViewModel) {
         this.viewScoresViewModel = viewScoresViewModel;
-        this.viewManagerModel = viewManagerModel;
+        this.viewModelManager = viewModelManager;
     }
 
     @Override
