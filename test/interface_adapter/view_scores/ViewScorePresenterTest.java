@@ -2,7 +2,6 @@ package interface_adapter.view_scores;
 
 import data_access.file_accessors.UserScoresDataAccessObject;
 import entity.DifficultyLevel;
-
 import entity.user.User;
 import interface_adapter.ViewModelManager;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ViewScorePresenterTest {
     /**

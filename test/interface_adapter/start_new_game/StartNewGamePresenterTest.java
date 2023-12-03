@@ -5,11 +5,11 @@ import entity.language.Language;
 import entity.reading.ReadingType;
 import interface_adapter.ViewModelManager;
 import interface_adapter.create_quiz.CreateQuizViewModel;
-import use_case.start_new_game.*;
-
 import org.junit.jupiter.api.Test;
+import use_case.start_new_game.StartNewGameOutputBoundary;
+import use_case.start_new_game.StartNewGameOutputData;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StartNewGamePresenterTest {
     @Test
