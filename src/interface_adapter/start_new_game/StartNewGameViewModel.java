@@ -11,7 +11,7 @@ public class StartNewGameViewModel extends ViewModel
     public static final String VIEW_SCORES_BUTTON_LABEL = "View Scores";
 
     public StartNewGameViewModel() {
-        super("new game");
+        super("Home Page");
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);

@@ -4,7 +4,7 @@ import entity.quiz.factory.MCQuizFactoryInterface;
 import entity.reading.ReadingType;
 import entity.reading.factory.DifficultyReadingFactory;
 
-public interface CreateQuizFactoryRetrieverInterface {
+public interface CreateQuizFactoryProviderInterface {
     DifficultyReadingFactory getReadingFactory(ReadingType readingType);
     MCQuizFactoryInterface getQuizFactory();
 }

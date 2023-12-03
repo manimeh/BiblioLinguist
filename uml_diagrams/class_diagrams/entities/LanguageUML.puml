@@ -20,5 +20,5 @@ class LatinSyllableCalculator
 }
 
 SyllableCalculator <|.. LatinSyllableCalculator
-SyllableCalculator <.. Language: <<uses as param>>
+SyllableCalculator --* Language
 @enduml

@@ -29,7 +29,7 @@ public class MCQuiz implements MCQuizInterface
     {
         if ((questions != null) && (submitted))
         {
-            return new SubmittedQuizDisplay((float) score/questions.length,
+            return new SubmittedQuizDisplay((float) score/questions.length * 100f,
                     getQuestionsArray(MCQuestion::getQuery, String[]::new),
                     getQuestionsArray(MCQuestion::getChoices, String[][]::new),
                     getQuestionsArray(MCQuestion::getAnswer, Integer[]::new),
@@ -49,7 +49,7 @@ public class MCQuiz implements MCQuizInterface
         {
             throw new IndexOutOfBoundsException("Invalid number of answers");
         }
-        else if (Set.of(answers).contains(null))
+        else if (Arrays.asList(answers).contains(null))
         {
             return false;
         }

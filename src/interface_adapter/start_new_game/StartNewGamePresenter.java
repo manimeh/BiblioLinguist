@@ -9,11 +9,11 @@ import use_case.start_new_game.StartNewGameOutputData;
 public class StartNewGamePresenter implements StartNewGameOutputBoundary
 {
     private final CreateQuizViewModel createQuizViewModel;
-    private final ViewModelManager viewManagerModel;
+    private final ViewModelManager viewModelManager;
 
-    public StartNewGamePresenter(ViewModelManager viewManagerModel,
+    public StartNewGamePresenter(ViewModelManager viewModelManager,
                                  CreateQuizViewModel createQuizViewModel) {
-        this.viewManagerModel = viewManagerModel;
+        this.viewModelManager = viewModelManager;
         this.createQuizViewModel = createQuizViewModel;
     }
 
@@ -26,7 +26,7 @@ public class StartNewGamePresenter implements StartNewGameOutputBoundary
         createQuizStateState.setReadingType(outputData.defaultReadingType());
         createQuizViewModel.firePropertyChanged();
 
-        viewManagerModel.setActiveView(createQuizViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+        viewModelManager.setActiveView(createQuizViewModel.getViewName());
+        viewModelManager.firePropertyChanged();
     }
 }

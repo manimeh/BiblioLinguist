@@ -7,7 +7,7 @@ import entity.reading.factory.AIGeneratedStoryReadingFactory;
 import entity.reading.factory.DifficultyReadingFactory;
 import entity.reading.factory.NewsReadingFactory;
 
-public class ReadingFactoryBuilder implements ReadingFactoryBuilderInterface
+public class ReadingFactoryProvider implements ReadingFactoryProviderInterface
 {
     @Override
     public DifficultyReadingFactory getReadingFactory(ReadingType readingType)

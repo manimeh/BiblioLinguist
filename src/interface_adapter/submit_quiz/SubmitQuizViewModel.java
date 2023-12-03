@@ -11,7 +11,7 @@ public class SubmitQuizViewModel extends ViewModel {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public SubmitQuizViewModel() {
-        super("submit quiz");
+        super("Game View");
     }
 
     public SubmitQuizState getState() {

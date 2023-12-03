@@ -1,6 +1,6 @@
 package entity.reading.factory;
 
-import data_access.api_accessors.AIGeneratedStoryRetriever;
+import data_access.api_accessors.AIGeneratedStoryRetrieverInterface;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.AIGeneratedStory;
@@ -11,22 +11,22 @@ public class AIGeneratedStoryReadingFactory implements DifficultyReadingFactory
 {
     public static final int NUM_OF_TRIES = 10;
 
-    private AIGeneratedStoryRetriever storyRetriever;
+    private AIGeneratedStoryRetrieverInterface storyRetriever;
 
     private AIGeneratedStoryReadingFactory() {
         //Prevent initialization without a newsRetriever
     }
 
-    public AIGeneratedStoryReadingFactory(AIGeneratedStoryRetriever storyRetriever)
+    public AIGeneratedStoryReadingFactory(AIGeneratedStoryRetrieverInterface storyRetriever)
     {
         this.storyRetriever = storyRetriever;
     }
 
-    public AIGeneratedStoryRetriever getStoryRetriever() {
+    public AIGeneratedStoryRetrieverInterface getStoryRetriever() {
         return storyRetriever;
     }
 
-    public void setStoryRetriever(AIGeneratedStoryRetriever storyRetriever) {
+    public void setStoryRetriever(AIGeneratedStoryRetrieverInterface storyRetriever) {
         this.storyRetriever = storyRetriever;
     }
 
