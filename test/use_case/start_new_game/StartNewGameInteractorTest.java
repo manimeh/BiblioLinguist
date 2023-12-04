@@ -3,11 +3,10 @@ package use_case.start_new_game;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.ReadingType;
-
 import org.junit.jupiter.api.Test;
 import use_case.InMemoryUserPreferenceDataAccessObject;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StartNewGameInteractorTest {
     @Test
