@@ -1,4 +1,4 @@
-package CATest;
+package ca_test;
 
 public enum CAClass {
     VIEW("View"),

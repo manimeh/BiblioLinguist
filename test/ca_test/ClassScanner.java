@@ -1,4 +1,4 @@
-package CATest;
+package ca_test;
 
 import java.io.File;
 import java.io.IOException;

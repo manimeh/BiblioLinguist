@@ -1,4 +1,4 @@
-package CATest;
+package ca_test;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
