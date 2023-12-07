@@ -1,7 +1,6 @@
 package entity.quiz;
 
 import java.util.Arrays;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 
