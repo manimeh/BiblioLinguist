@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import javax.swing.*;
 import java.awt.*;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class HomePageViewTest {
     private Component getActiveView()
@@ -84,6 +83,6 @@ class HomePageViewTest {
         Main.main(null);
         JButton startNewGameButton = getButton(0);
         startNewGameButton.doClick();
-        assertTrue(getActiveView() instanceof CreateQuizView);
+        assertInstanceOf(CreateQuizView.class, getActiveView());
     }
 }
