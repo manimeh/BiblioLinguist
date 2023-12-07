@@ -27,10 +27,6 @@ public class SubmitQuizPresenter implements SubmitQuizOutputBoundary {
 
         // Update state with the given output data
         SubmittedQuizDisplay quizDisplay = outputData.quizDisplay();
-//        User user = quizState.getUser();
-//
-//        user.addScore(quizDisplay.score());
-//        this.quizViewModel.setState(quizState);
 
         ReturnHomeState returnHomeState = returnHomeViewModel.getState();
         returnHomeState.setQuizDisplay(outputData.quizDisplay());
