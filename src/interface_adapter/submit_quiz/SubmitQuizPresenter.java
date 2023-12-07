@@ -22,10 +22,8 @@ public class SubmitQuizPresenter implements SubmitQuizOutputBoundary {
 
     @Override
     public void prepareSuccessView(SubmitQuizOutputData outputData) {
-        SubmitQuizState quizState = quizViewModel.getState();
 
         // Update state with the given output data
-        SubmittedQuizDisplay quizDisplay = outputData.quizDisplay();
 
         ReturnHomeState returnHomeState = returnHomeViewModel.getState();
         returnHomeState.setQuizDisplay(outputData.quizDisplay());
