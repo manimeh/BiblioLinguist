@@ -42,7 +42,7 @@ public class ButtonsPanel extends JPanel
     }
 
     public static class GradientButton extends JButton {
-        int curvature;
+        final int curvature;
 
         public GradientButton(String text, int curvature)
         {
