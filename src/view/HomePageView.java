@@ -57,8 +57,13 @@ public class HomePageView extends BackgroundImagePanel implements ActionListener
                 }
         );
 
-        this.setLayout(new GridLayout(5, 3));
-        setupGrid(5, 3, 4, 2, buttonsPanel);
+        final int ROWS = 5;
+        final int COLS = 3;
+        final int COMPONENT_ROWS = 4;
+        final int COMPONENT_COLS = 2;
+
+        this.setLayout(new GridLayout(ROWS, COLS));
+        setupGrid(ROWS, COLS, COMPONENT_ROWS, COMPONENT_COLS, buttonsPanel);
     }
 
     private void setupGrid(int rows, int cols, int componentRow, int componentCol, Component component)
