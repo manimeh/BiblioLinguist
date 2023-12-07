@@ -1,7 +1,6 @@
 package interface_adapter.submit_quiz;
 
 import entity.quiz.SubmittedQuizDisplay;
-import entity.user.User;
 import interface_adapter.ViewModelManager;
 import interface_adapter.return_home.ReturnHomeState;
 import interface_adapter.return_home.ReturnHomeViewModel;
