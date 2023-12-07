@@ -1,4 +1,4 @@
-package data_access.api_accessors.FactoryBuilders;
+package data_access.api_accessors.factory_builders;
 
 import data_access.api_accessors.ChatGPTRetriever;
 import data_access.api_accessors.WorldNewsRetriever;

@@ -1,8 +1,8 @@
 package use_case.create_quiz;
 
-import data_access.api_accessors.FactoryBuilders.FactoryProvider;
-import data_access.api_accessors.FactoryBuilders.QuizFactoryProvider;
-import data_access.api_accessors.FactoryBuilders.ReadingFactoryProvider;
+import data_access.api_accessors.factory_builders.FactoryProvider;
+import data_access.api_accessors.factory_builders.QuizFactoryProvider;
+import data_access.api_accessors.factory_builders.ReadingFactoryProvider;
 import entity.DifficultyLevel;
 import entity.language.Language;
 import entity.reading.Reading;

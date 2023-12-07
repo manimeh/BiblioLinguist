@@ -1,8 +1,8 @@
 package app;
 
-import data_access.api_accessors.FactoryBuilders.FactoryProvider;
-import data_access.api_accessors.FactoryBuilders.QuizFactoryProvider;
-import data_access.api_accessors.FactoryBuilders.ReadingFactoryProvider;
+import data_access.api_accessors.factory_builders.FactoryProvider;
+import data_access.api_accessors.factory_builders.QuizFactoryProvider;
+import data_access.api_accessors.factory_builders.ReadingFactoryProvider;
 import data_access.file_accessors.InvalidHeaderException;
 import data_access.file_accessors.UserPreferenceDataAccessObject;
 import data_access.file_accessors.UserScoresDataAccessObject;
