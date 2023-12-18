@@ -31,8 +31,7 @@ public class HomePageUseCaseFactory
 
         StartNewGameController startNewGameController = createStartNewGameUseCase(viewModelManager, createQuizViewModel,
                 startNewGameDataAccessObject);
-        ViewScoresController viewScoresController = createViewScoresUseCase(viewModelManager, viewScoresViewModel,
-                viewScoresDataAccessObject);
+        ViewScoresController viewScoresController = createViewScoresUseCase(viewScoresViewModel, viewScoresDataAccessObject);
         return new HomePageView(startNewGameViewModel, viewScoresViewModel, startNewGameController, viewScoresController,
                 graphicsAccessInterface.getHomePageBackgroundImage());
     }
@@ -46,10 +45,9 @@ public class HomePageUseCaseFactory
         return new StartNewGameController(startNewGameInputBoundary);
     }
 
-    private static ViewScoresController createViewScoresUseCase(ViewModelManager viewModelManager,
-                                                                ViewScoresViewModel viewScoresViewModel,
+    private static ViewScoresController createViewScoresUseCase(ViewScoresViewModel viewScoresViewModel,
                                                                 ViewScoresDataAccessInterface viewScoresDataAccessObject) {
-        ViewScoresOutputBoundary viewScoresOutputBoundary = new ViewScoresPresenter(viewModelManager, viewScoresViewModel);
+        ViewScoresOutputBoundary viewScoresOutputBoundary = new ViewScoresPresenter(viewScoresViewModel);
         ViewScoresInputBoundary viewScoresInputBoundary = new ViewScoresInteractor(viewScoresDataAccessObject, viewScoresOutputBoundary);
         return new ViewScoresController(viewScoresInputBoundary);
     }

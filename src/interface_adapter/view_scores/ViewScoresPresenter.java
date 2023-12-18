@@ -1,6 +1,5 @@
 package interface_adapter.view_scores;
 
-import interface_adapter.ViewModelManager;
 import use_case.view_scores.ViewScoresOutputBoundary;
 import use_case.view_scores.ViewScoresOutputData;
 
@@ -10,11 +9,9 @@ import java.util.stream.Collectors;
 
 public class ViewScoresPresenter implements ViewScoresOutputBoundary {
     private final ViewScoresViewModel viewScoresViewModel;
-    private final ViewModelManager viewModelManager;
 
-    public ViewScoresPresenter(ViewModelManager viewModelManager, ViewScoresViewModel viewScoresViewModel) {
+    public ViewScoresPresenter(ViewScoresViewModel viewScoresViewModel) {
         this.viewScoresViewModel = viewScoresViewModel;
-        this.viewModelManager = viewModelManager;
     }
 
     @Override
