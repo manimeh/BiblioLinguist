@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class LatinSyllableCalculator implements SyllableCalculatorInterface
 {
     @Override
-    public int calculate(String word)
+    public int calculateSyllables(String word)
     {
         word = word.toLowerCase();
 

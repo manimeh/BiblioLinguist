@@ -2,5 +2,5 @@ package entity.language;
 
 public interface SyllableCalculatorInterface
 {
-    int calculate(String word);
+    int calculateSyllables(String word);
 }

@@ -2,19 +2,19 @@ package entity.language;
 
 public enum Language
 {
-    ENGLISH("English", "en", new LatinSyllableCalculator()),
-    FRENCH("French", "fr", new LatinSyllableCalculator()),
-    SPANISH("Spanish", "es", new LatinSyllableCalculator()),
-    GERMAN("German", "de", new LatinSyllableCalculator());
+    ENGLISH("English", "en", new FKReadingDifficultyCalculator(new LatinSyllableCalculator())),
+    FRENCH("French", "fr", new FKReadingDifficultyCalculator(new LatinSyllableCalculator())),
+    SPANISH("Spanish", "es", new FKReadingDifficultyCalculator(new LatinSyllableCalculator())),
+    GERMAN("German", "de", new FKReadingDifficultyCalculator(new LatinSyllableCalculator()));
 
     private final String name;
     private final String code;
-    private final SyllableCalculatorInterface syllableCalculator;
+    private final ReadingDifficultyCalculatorInterface difficultyCalculator;
 
-    Language(String name, String code, SyllableCalculatorInterface syllableCalculator) {
+    Language(String name, String code, ReadingDifficultyCalculatorInterface difficultyCalculator) {
         this.name = name;
         this.code = code;
-        this.syllableCalculator = syllableCalculator;
+        this.difficultyCalculator = difficultyCalculator;
     }
 
     public String getName() {
@@ -25,7 +25,7 @@ public enum Language
         return code;
     }
 
-    public SyllableCalculatorInterface getSyllableCalculator() {
-        return syllableCalculator;
+    public ReadingDifficultyCalculatorInterface getDifficultyCalculator() {
+        return difficultyCalculator;
     }
 }
