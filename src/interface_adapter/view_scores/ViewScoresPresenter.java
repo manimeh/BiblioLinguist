@@ -28,10 +28,16 @@ public class ViewScoresPresenter implements ViewScoresOutputBoundary {
         }
         else {
             float sumOfScores = (float) scoresArray.stream().mapToDouble(Float::floatValue).sum();
-            viewScoresState.setViewScoresMessage(
-                    "Your last 10 scores: " + scoresArray.stream().map(String::valueOf).collect(Collectors.joining("%, "))
-                    + "%\nAverage from your last 10 scores: " + String.format("%.1f", sumOfScores/scoresArray.size()) + "%"
-                    + "\nYour last score: " + String.format("%.1f", scoresArray.get(0)) + "%"
+
+            viewScoresState.setViewScoresMessage(String.format("""
+                            Your last %s scores: %s%%
+                            Average from your last %s scores: %s%%
+                            Your last score: %s%%""",
+                    scoresArray.size(),
+                    scoresArray.stream().map(String::valueOf).collect(Collectors.joining("%, ")),
+                    String.format("%.1f", sumOfScores/scoresArray.size()),
+                    scoresArray.size(),
+                    String.format("%.1f", scoresArray.get(0)))
             );
         }
         viewScoresViewModel.firePropertyChanged();

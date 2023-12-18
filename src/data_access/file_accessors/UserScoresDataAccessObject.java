@@ -12,8 +12,10 @@ import java.util.stream.Collectors;
 public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface, SubmitQuizDataAccessInterface {
     private final File csvFile;
     private final Queue<Float> queueOfScores = new LinkedList<>();
+    private int maxNumOfScores;
 
-    public UserScoresDataAccessObject(String csvPath) throws IOException {
+    public UserScoresDataAccessObject(String csvPath, int maxNumOfScores) throws IOException {
+        this.maxNumOfScores = maxNumOfScores;
         csvFile = new File(csvPath);
 
         if (isEmpty())
@@ -37,7 +39,7 @@ public class UserScoresDataAccessObject implements ViewScoresDataAccessInterface
 
     @Override
     public void saveScore(Float score, User user) {
-        if (queueOfScores.size() != 10) {
+        if (queueOfScores.size() != maxNumOfScores) {
             queueOfScores.offer(score);
         } else {
             queueOfScores.poll();

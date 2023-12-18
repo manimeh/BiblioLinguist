@@ -73,7 +73,7 @@ public class Main
         }
 
         try {
-            userScoresDataAccessObject = new UserScoresDataAccessObject("./UserScores.csv");
+            userScoresDataAccessObject = new UserScoresDataAccessObject("./UserScores.csv", 5);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
